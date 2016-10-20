@@ -1,4 +1,4 @@
 package com.demo.mvp;
 
 
-public   interface BasePresenter {}
+public interface BasePresenter {}

@@ -16,15 +16,15 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 public final class FindLocationPresenter implements FindLocationContract.Presenter,
                                                     LocationListener,
                                                     ResultCallback<LocationSettingsResult> {
-	private final static int REQUEST_CHECK_SETTINGS = 0x0000009;
 	final static int REQUEST_INTERVAL = 1000;
-
+	private final static int REQUEST_CHECK_SETTINGS = 0x0000009;
 	private final FindLocationContract.Viewer mViewer;
-	private final LocationRequest mLocationRequest;
+	private LocationRequest mLocationRequest;
 	private LocationSettingsRequest.Builder mSettingApiBuilder;
 
 	private volatile boolean mLocatingInProgress;
 	private volatile boolean mLocationProviderDialogIsShown;
+
 
 	public FindLocationPresenter(FindLocationContract.Viewer viewer) {
 		mViewer = viewer;
@@ -34,13 +34,11 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		setupRequest();
 	}
 
-
 	@Override
 	public void findLocation() {
 		locating();
 		showLocationProviderDialogIfNecessary();
 	}
-
 
 	@Override
 	public void afterLocationPermissionGranted() {
@@ -50,6 +48,19 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	@Override
 	public void afterLocationPermissionDenied() {
 		mViewer.setCurrentLocation(null);
+	}
+
+	@Override
+	public void release() {
+		if (mLocationRequest != null) {
+			if(mViewer.getGoogleApiClient().isConnected()) {
+				LocationServices.FusedLocationApi.removeLocationUpdates(mViewer.getGoogleApiClient(), this);
+				LocationServices.FusedLocationApi.flushLocations(mViewer.getGoogleApiClient());
+			}
+			mLocationRequest = null;
+			mSettingApiBuilder = null;
+			mLocatingInProgress = false;
+		}
 	}
 
 	@Override

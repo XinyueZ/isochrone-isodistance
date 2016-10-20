@@ -30,25 +30,10 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public final class MainFragment extends Fragment implements FindLocationContract.Viewer,
                                                             EasyPermissions.PermissionCallbacks {
+	private static final int PRQ_FINE_LOCATION = 0x0000002;
 	private TextView mLocationTv;
 	private FindLocationContract.Presenter mFindLocationPresenter;
-
-
 	private GoogleApiClient mGoogleApiClient;
-	private static final int PRQ_FINE_LOCATION = 0x0000002;
-
-
-	@Nullable
-	@Override
-	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.content_main, container, false);
-	}
-
-	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		onViewCreated(view);
-	}
 
 	private void onViewCreated(View view) {
 		mLocationTv = (TextView) view.findViewById(R.id.location_tv);
@@ -82,23 +67,6 @@ public final class MainFragment extends Fragment implements FindLocationContract
 	}
 
 	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-
-		if (mGoogleApiClient != null) {
-			mGoogleApiClient.stopAutoManage(getActivity());
-			mGoogleApiClient.disconnect();
-		}
-		mGoogleApiClient = null;
-	}
-
-	@Nullable
-	@Override
-	public GoogleApiClient getGoogleApiClient() {
-		return mGoogleApiClient;
-	}
-
-	@Override
 	public void setCurrentLocation(@Nullable Location location) {
 		if (location != null) {
 			mLocationTv.setText("Current location: " + location.getLatitude() + ", " + location.getLongitude());
@@ -112,13 +80,6 @@ public final class MainFragment extends Fragment implements FindLocationContract
 			        .show();
 		}
 	}
-
-
-	@Override
-	public void setPresenter(@Nullable BasePresenter presenter) {
-		mFindLocationPresenter = (FindLocationContract.Presenter) presenter;
-	}
-
 
 	@Override
 	public void solveSettingDialogProblem(@NonNull Status status, int reqCode) {
@@ -138,12 +99,24 @@ public final class MainFragment extends Fragment implements FindLocationContract
 		     .show();
 	}
 
+	@Nullable
+	@Override
+	public GoogleApiClient getGoogleApiClient() {
+		return mGoogleApiClient;
+	}
+
+	@Override
+	public void setPresenter(@Nullable BasePresenter presenter) {
+		mFindLocationPresenter = (FindLocationContract.Presenter) presenter;
+	}
 
 	@Override
 	public void onPermissionsGranted(int requestCode, List<String> perms) {
 		switch (requestCode) {
 			case PRQ_FINE_LOCATION:
-				mFindLocationPresenter.afterLocationPermissionGranted();
+				if (mFindLocationPresenter != null) {
+					mFindLocationPresenter.afterLocationPermissionGranted();
+				}
 				break;
 		}
 	}
@@ -152,15 +125,43 @@ public final class MainFragment extends Fragment implements FindLocationContract
 	public void onPermissionsDenied(int requestCode, List<String> perms) {
 		switch (requestCode) {
 			case PRQ_FINE_LOCATION:
-				mFindLocationPresenter.afterLocationPermissionDenied();
+				if (mFindLocationPresenter != null) {
+					mFindLocationPresenter.afterLocationPermissionDenied();
+				}
 				break;
 		}
 	}
-
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+	}
+
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.content_main, container, false);
+	}
+
+	@Override
+	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		onViewCreated(view);
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+
+		if (mFindLocationPresenter != null) {
+			mFindLocationPresenter.release();
+		}
+
+		if (mGoogleApiClient != null) {
+			mGoogleApiClient.stopAutoManage(getActivity());
+			mGoogleApiClient.disconnect();
+		}
+		mGoogleApiClient = null;
 	}
 }

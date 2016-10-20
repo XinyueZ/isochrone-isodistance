@@ -12,16 +12,24 @@ import com.google.android.gms.common.api.Status;
 public interface FindLocationContract {
 	interface Viewer extends BaseViewer {
 		void findLocation();
+
 		void setCurrentLocation(@Nullable Location location);
-		void solveSettingDialogProblem(@NonNull  Status status,  int reqCode);
+
+		void solveSettingDialogProblem(@NonNull Status status, int reqCode);
+
 		void canNotShowSettingDialog();
+
 		@Nullable
 		GoogleApiClient getGoogleApiClient();
 	}
 
-	interface Presenter extends BasePresenter{
+	interface Presenter extends BasePresenter {
 		void findLocation();
+
 		void afterLocationPermissionGranted();
+
 		void afterLocationPermissionDenied();
+
+		void release();
 	}
 }
