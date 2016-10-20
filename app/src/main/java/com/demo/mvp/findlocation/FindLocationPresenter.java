@@ -34,15 +34,6 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		setupRequest();
 	}
 
-	private void setupRequest() {
-		mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-		mLocationRequest.setInterval(REQUEST_INTERVAL);
-		mLocationRequest.setFastestInterval(REQUEST_INTERVAL);
-
-
-		mSettingApiBuilder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
-		mSettingApiBuilder.setAlwaysShow(true);
-	}
 
 	@Override
 	public void findLocation() {
@@ -84,6 +75,16 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		}
 	}
 
+
+	private void setupRequest() {
+		mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+		mLocationRequest.setInterval(REQUEST_INTERVAL);
+		mLocationRequest.setFastestInterval(REQUEST_INTERVAL);
+
+
+		mSettingApiBuilder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
+		mSettingApiBuilder.setAlwaysShow(true);
+	}
 
 	private void locating() {
 		if (mLocatingInProgress) {
