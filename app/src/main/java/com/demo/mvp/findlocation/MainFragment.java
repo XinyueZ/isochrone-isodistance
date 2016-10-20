@@ -76,7 +76,7 @@ public final class MainFragment extends Fragment implements FindLocationContract
 
 		View view = getView();
 		if (view != null && location != null) {
-			Snackbar.make(view, String.format("Refresh pro about %d second(s).", FindLocationPresenter.REQUEST_INTERVAL), Snackbar.LENGTH_SHORT)
+			Snackbar.make(view, String.format("Refresh location pro about %d second(s).", FindLocationPresenter.REQUEST_INTERVAL / 1000), Snackbar.LENGTH_SHORT)
 			        .show();
 		}
 	}

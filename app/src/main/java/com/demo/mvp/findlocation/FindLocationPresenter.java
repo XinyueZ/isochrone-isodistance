@@ -22,7 +22,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	private LocationRequest mLocationRequest;
 	private LocationSettingsRequest.Builder mSettingApiBuilder;
 
-	private volatile boolean mLocatingInProgress;
+	private volatile boolean mLocatingStarted;
 	private volatile boolean mLocationProviderDialogIsShown;
 
 
@@ -59,13 +59,12 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 			}
 			mLocationRequest = null;
 			mSettingApiBuilder = null;
-			mLocatingInProgress = false;
+			mLocatingStarted = false;
 		}
 	}
 
 	@Override
 	public void onLocationChanged(Location location) {
-		mLocatingInProgress = false;
 		mViewer.setCurrentLocation(location);
 	}
 
@@ -98,11 +97,11 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	}
 
 	private void locating() {
-		if (mLocatingInProgress) {
+		if (mLocatingStarted) {
 			return;
 		}
 
-		mLocatingInProgress = true;
+		mLocatingStarted = true;
 		LocationServices.FusedLocationApi.requestLocationUpdates(mViewer.getGoogleApiClient(), mLocationRequest, this);
 	}
 
