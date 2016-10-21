@@ -57,7 +57,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	@Override
 	public void release() {
 		if (mLocationRequest != null) {
-			if (mGoogleApiClient.isConnected()) {
+			if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
 				LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
 				LocationServices.FusedLocationApi.flushLocations(mGoogleApiClient);
 			}
@@ -102,7 +102,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	}
 
 	private void locating() {
-		if (mLocatingStarted) {
+		if (mLocatingStarted || mGoogleApiClient == null) {
 			return;
 		}
 
@@ -111,7 +111,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	}
 
 	private void showLocationProviderDialogIfNecessary() {
-		if (mLocationProviderDialogIsShown) {
+		if (mLocationProviderDialogIsShown || mGoogleApiClient == null) {
 			return;
 		}
 
