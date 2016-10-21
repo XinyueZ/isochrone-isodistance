@@ -6,7 +6,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -17,10 +16,7 @@ import android.widget.Toast;
 
 import com.demo.mvp.BasePresenter;
 import com.demo.mvp.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
 
@@ -33,30 +29,15 @@ public final class MainFragment extends Fragment implements FindLocationContract
 	private static final int PRQ_FINE_LOCATION = 0x0000002;
 	private TextView mLocationTv;
 	private FindLocationContract.Presenter mFindLocationPresenter;
-	private GoogleApiClient mGoogleApiClient;
+
 
 	private void onViewCreated(View view) {
 		mLocationTv = (TextView) view.findViewById(R.id.location_tv);
-
-		FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-		fab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				findLocation();
-			}
-		});
-		mGoogleApiClient = new GoogleApiClient.Builder(getContext()).addApi(LocationServices.API)
-		                                                            .enableAutoManage(getActivity(), new GoogleApiClient.OnConnectionFailedListener() {
-			                                                            @Override
-			                                                            public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-			                                                            }
-		                                                            })
-		                                                            .build();
 	}
 
 	@AfterPermissionGranted(PRQ_FINE_LOCATION)
 	@Override
-	public void findLocation() {
+	public void showLocation() {
 		if (EasyPermissions.hasPermissions(getContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
 			if (mFindLocationPresenter != null) {
 				mFindLocationPresenter.findLocation();
@@ -99,11 +80,6 @@ public final class MainFragment extends Fragment implements FindLocationContract
 		     .show();
 	}
 
-	@Nullable
-	@Override
-	public GoogleApiClient getGoogleApiClient() {
-		return mGoogleApiClient;
-	}
 
 	@Override
 	public void setPresenter(@Nullable BasePresenter presenter) {
@@ -158,10 +134,6 @@ public final class MainFragment extends Fragment implements FindLocationContract
 			mFindLocationPresenter.release();
 		}
 
-		if (mGoogleApiClient != null) {
-			mGoogleApiClient.stopAutoManage(getActivity());
-			mGoogleApiClient.disconnect();
-		}
-		mGoogleApiClient = null;
+
 	}
 }

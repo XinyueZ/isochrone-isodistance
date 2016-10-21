@@ -3,6 +3,7 @@ package com.demo.mvp.findlocation;
 
 import android.location.Location;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
@@ -25,9 +26,12 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	private volatile boolean mLocatingStarted;
 	private volatile boolean mLocationProviderDialogIsShown;
 
+	private GoogleApiClient mGoogleApiClient;
 
-	public FindLocationPresenter(FindLocationContract.Viewer viewer) {
+	public FindLocationPresenter(FindLocationContract.Viewer viewer, GoogleApiClient googleApiClient) {
 		mViewer = viewer;
+		mGoogleApiClient = googleApiClient;
+
 		mViewer.setPresenter(this);
 		mLocationRequest = LocationRequest.create();
 
@@ -53,13 +57,14 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	@Override
 	public void release() {
 		if (mLocationRequest != null) {
-			if(mViewer.getGoogleApiClient().isConnected()) {
-				LocationServices.FusedLocationApi.removeLocationUpdates(mViewer.getGoogleApiClient(), this);
-				LocationServices.FusedLocationApi.flushLocations(mViewer.getGoogleApiClient());
+			if (mGoogleApiClient.isConnected()) {
+				LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+				LocationServices.FusedLocationApi.flushLocations(mGoogleApiClient);
 			}
+			mLocatingStarted = false;
 			mLocationRequest = null;
 			mSettingApiBuilder = null;
-			mLocatingStarted = false;
+			mGoogleApiClient = null;
 		}
 	}
 
@@ -102,7 +107,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		}
 
 		mLocatingStarted = true;
-		LocationServices.FusedLocationApi.requestLocationUpdates(mViewer.getGoogleApiClient(), mLocationRequest, this);
+		LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 	}
 
 	private void showLocationProviderDialogIfNecessary() {
@@ -111,7 +116,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		}
 
 		mLocationProviderDialogIsShown = true;
-		PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mViewer.getGoogleApiClient(), mSettingApiBuilder.build());
+		PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, mSettingApiBuilder.build());
 		result.setResultCallback(this);
 	}
 }

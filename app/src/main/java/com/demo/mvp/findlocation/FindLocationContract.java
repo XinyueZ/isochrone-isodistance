@@ -6,12 +6,11 @@ import android.support.annotation.Nullable;
 
 import com.demo.mvp.BasePresenter;
 import com.demo.mvp.BaseViewer;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 
 public interface FindLocationContract {
 	interface Viewer extends BaseViewer {
-		void findLocation();
+		void showLocation();
 
 		void setCurrentLocation(@Nullable Location location);
 
@@ -19,8 +18,7 @@ public interface FindLocationContract {
 
 		void canNotShowSettingDialog();
 
-		@Nullable
-		GoogleApiClient getGoogleApiClient();
+
 	}
 
 	interface Presenter extends BasePresenter {
