@@ -18,20 +18,17 @@ public final class MainActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		onActivityCreated();
+		onActivityCreate();
 	}
 
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		if (mGoogleApiClient != null) {
-			mGoogleApiClient.stopAutoManage(this);
-			mGoogleApiClient.disconnect();
-		}
-		mGoogleApiClient = null;
+		onActivityDestroy();
 	}
 
-	private void onActivityCreated() {
+
+	private void onActivityCreate() {
 		mGoogleApiClient = Injection.createLocationDataProvider(this);
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -47,4 +44,13 @@ public final class MainActivity extends AppCompatActivity {
 			}
 		});
 	}
+
+	private void onActivityDestroy() {
+		if (mGoogleApiClient != null) {
+			mGoogleApiClient.stopAutoManage(this);
+			mGoogleApiClient.disconnect();
+		}
+		mGoogleApiClient = null;
+	}
+
 }
