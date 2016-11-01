@@ -13,8 +13,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
-
-public final class FindLocationPresenter implements FindLocationContract.Presenter,
+final class FindLocationPresenter implements FindLocationContract.Presenter,
                                                     LocationListener,
                                                     ResultCallback<LocationSettingsResult> {
 	final static int REQUEST_INTERVAL = 1000;
@@ -40,7 +39,6 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 
 	@Override
 	public void findLocation() {
-		locating();
 		showLocationProviderDialogIfNecessary();
 	}
 
@@ -59,7 +57,6 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		if (mLocationRequest != null) {
 			if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
 				LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-				LocationServices.FusedLocationApi.flushLocations(mGoogleApiClient);
 			}
 			mLocatingStarted = false;
 			mLocationRequest = null;
@@ -79,7 +76,7 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		final Status status = locationSettingsResult.getStatus();
 		switch (status.getStatusCode()) {
 			case LocationSettingsStatusCodes.SUCCESS:
-				findLocation();
+				locating();
 				break;
 			case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
 				mViewer.solveSettingDialogProblem(status, REQUEST_CHECK_SETTINGS);
@@ -97,12 +94,13 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 		mLocationRequest.setFastestInterval(REQUEST_INTERVAL);
 
 
-		mSettingApiBuilder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest);
-		mSettingApiBuilder.setAlwaysShow(true);
+		mSettingApiBuilder = new LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest)
+		                                                          .setAlwaysShow(true)
+		                                                          .setNeedBle(true);
 	}
 
 	private void locating() {
-		if (mLocatingStarted || mGoogleApiClient == null) {
+		if (mLocatingStarted || mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
 			return;
 		}
 
@@ -111,12 +109,31 @@ public final class FindLocationPresenter implements FindLocationContract.Present
 	}
 
 	private void showLocationProviderDialogIfNecessary() {
-		if (mLocationProviderDialogIsShown || mGoogleApiClient == null) {
+		if (mLocationProviderDialogIsShown || mGoogleApiClient == null || !mGoogleApiClient.isConnected()) {
 			return;
 		}
 
 		mLocationProviderDialogIsShown = true;
+		mLocatingStarted = false;
 		PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, mSettingApiBuilder.build());
 		result.setResultCallback(this);
+	}
+
+	@Override
+	public Location getLastLocation() {
+		if (mGoogleApiClient != null &&  mGoogleApiClient.isConnected()) {
+			return LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		}
+		return null;
+	}
+
+	@Override
+	public void stopFindingLocation() {
+		if (mLocationRequest != null) {
+			if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+				LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+			}
+			mLocatingStarted = false;
+		}
 	}
 }

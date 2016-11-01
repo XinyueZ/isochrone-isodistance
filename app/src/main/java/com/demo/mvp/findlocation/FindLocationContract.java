@@ -8,7 +8,7 @@ import com.demo.mvp.BasePresenter;
 import com.demo.mvp.BaseViewer;
 import com.google.android.gms.common.api.Status;
 
-public interface FindLocationContract {
+interface FindLocationContract {
 	interface Viewer extends BaseViewer {
 		void showLocation();
 
@@ -29,5 +29,9 @@ public interface FindLocationContract {
 		void afterLocationPermissionDenied();
 
 		void release();
+
+		Location getLastLocation();
+
+		void stopFindingLocation();
 	}
 }

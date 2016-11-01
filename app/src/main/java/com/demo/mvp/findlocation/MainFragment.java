@@ -60,6 +60,8 @@ public final class MainFragment extends Fragment implements FindLocationContract
 			Snackbar.make(view, String.format("Refresh location pro about %d second(s).", FindLocationPresenter.REQUEST_INTERVAL / 1000), Snackbar.LENGTH_SHORT)
 			        .show();
 		}
+
+		mFindLocationPresenter.stopFindingLocation();
 	}
 
 	@Override
