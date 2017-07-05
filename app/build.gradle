@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
     defaultConfig {
         applicationId "com.demo.mvp"
-        minSdkVersion 9
-        targetSdkVersion 24
+        minSdkVersion 14
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -27,15 +27,16 @@ android {
 }
 
 ext {
-    appCompat = "24.2.1"
-    playService = "9.6.1"
-    easyPermissions="0.2.0"
+    appCompat = "26.0.0-beta2"
+    playService = "11.0.2"
+    easyPermissions="0.4.2"
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:appcompat-v7:${appCompat}"
-    compile "com.android.support:design:${appCompat}"
-    compile "com.google.android.gms:play-services-location:${playService}"
-    compile "pub.devrel:easypermissions:${easyPermissions}"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "com.android.support:appcompat-v7:${appCompat}"
+    implementation "com.android.support:design:${appCompat}"
+    implementation "com.google.android.gms:play-services-location:${playService}"
+    implementation "pub.devrel:easypermissions:${easyPermissions}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin_version}"
 }
