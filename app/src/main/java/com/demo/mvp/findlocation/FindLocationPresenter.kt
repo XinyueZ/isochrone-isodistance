@@ -1,8 +1,8 @@
 package com.demo.mvp.findlocation
 
 import android.annotation.SuppressLint
-import android.location.Location
 import android.os.Looper
+import android.util.Log
 import com.google.android.gms.location.*
 
 /**
@@ -25,8 +25,9 @@ private const val MAX_WAIT_TIME = UPDATE_INTERVAL * 5 // Every 5 minutes.
 class FindLocationPresenter(private val view: FindLocationContract.Viewer,
                             private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view.getContext()),
                             private val localReq: LocationRequest = LocationRequest.create(),
-                            private val callback: LocationCallback = FindCallback()) : FindLocationContract.Presenter {
+                            private val callback: LocationCallback = FindCallback(view)) : FindLocationContract.Presenter {
     init {
+        view.setPresenter(this)
         localReq.interval = UPDATE_INTERVAL
         localReq.fastestInterval = FASTEST_UPDATE_INTERVAL
         localReq.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
@@ -34,9 +35,9 @@ class FindLocationPresenter(private val view: FindLocationContract.Viewer,
     }
 
     @SuppressLint("MissingPermission")
-    override fun findLocation(): Location? {
+    override fun findLocation() {
         localClient.requestLocationUpdates(localReq, callback, Looper.getMainLooper())
-        return localClient.lastLocation.result
+        localClient.lastLocation.addOnSuccessListener {  view.showCurrentLocation(it)  }
     }
 
     override fun release() {
@@ -45,12 +46,15 @@ class FindLocationPresenter(private val view: FindLocationContract.Viewer,
     }
 }
 
-private class FindCallback : LocationCallback() {
+private class FindCallback(private val view: FindLocationContract.Viewer) : LocationCallback() {
     override fun onLocationResult(p0: LocationResult?) {
         super.onLocationResult(p0)
+        view.showCurrentLocation(p0?.let { p0.locations[0] })
+        Log.d("FindLocationPresenter", "onLocationResult $p0")
     }
 
     override fun onLocationAvailability(p0: LocationAvailability?) {
         super.onLocationAvailability(p0)
+        Log.d("FindLocationPresenter", "onLocationAvailability $p0")
     }
 }

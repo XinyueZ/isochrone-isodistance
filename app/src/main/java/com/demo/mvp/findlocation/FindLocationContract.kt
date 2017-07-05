@@ -17,7 +17,7 @@ interface FindLocationContract {
     }
 
     interface Presenter : BasePresenter {
-        fun findLocation(): Location?
+        fun findLocation()
 
         fun release()
     }

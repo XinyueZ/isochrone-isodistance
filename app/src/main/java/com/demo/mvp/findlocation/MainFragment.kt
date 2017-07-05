@@ -73,7 +73,7 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {
         when (requestCode) {
             PRQ_FINE_LOCATION -> {
-                showCurrentLocation(presenter?.findLocation())
+                presenter?.findLocation()
             }
         }
     }
