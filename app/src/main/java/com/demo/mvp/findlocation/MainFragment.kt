@@ -8,9 +8,8 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
-import com.demo.mvp.R
+import com.demo.mvp.databinding.ContentMainBinding
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -18,14 +17,12 @@ private const val PRQ_FINE_LOCATION = 0x0000002
 
 class MainFragment : Fragment(), FindLocationContract.Viewer,
         EasyPermissions.PermissionCallbacks {
-    private lateinit var localTv: TextView
+    private var binding: ContentMainBinding? = null
     private var presenter: FindLocationContract.Presenter? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater.inflate(R.layout.content_main, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        localTv = view.findViewById<TextView>(R.id.location_tv)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = ContentMainBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onDestroyView() {
@@ -44,9 +41,9 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
 
     override fun showCurrentLocation(location: Location?) {
         if (location != null) {
-            localTv.text = "Current location -> $location.latitude, $location.longitude"
+            binding?.locationTv?.text = "Current location -> $location.latitude, $location.longitude"
         } else {
-            localTv.text = "No location was found ."
+            binding?.locationTv?.text = "No location was found ."
         }
 
         val view = view

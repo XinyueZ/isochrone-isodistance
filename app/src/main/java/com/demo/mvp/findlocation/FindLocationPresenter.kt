@@ -1,5 +1,6 @@
 package com.demo.mvp.findlocation
 
+import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Looper
 import com.google.android.gms.location.*
@@ -32,9 +33,10 @@ class FindLocationPresenter(private val view: FindLocationContract.Viewer,
         localReq.maxWaitTime = MAX_WAIT_TIME
     }
 
+    @SuppressLint("MissingPermission")
     override fun findLocation(): Location? {
         localClient.requestLocationUpdates(localReq, callback, Looper.getMainLooper())
-        localClient.lastLocation
+        return localClient.lastLocation.result
     }
 
     override fun release() {
