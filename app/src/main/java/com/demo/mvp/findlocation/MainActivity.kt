@@ -2,7 +2,6 @@ package com.demo.mvp.findlocation
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.demo.mvp.R
@@ -13,13 +12,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        val view = supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener({ view.showLocation() })
-        inject(view)
+        binding.view = supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
+        inject(binding.view)
     }
 }

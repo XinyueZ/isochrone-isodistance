@@ -5,6 +5,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.demo.mvp.findlocation.MainActivity">
 
+    <data>
+
+        <variable
+            name="view"
+            type="com.demo.mvp.findlocation.FindLocationContract.Viewer"/>
+    </data>
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -38,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
             android:layout_margin="@dimen/fab_margin"
+            android:onClick="@{view.showLocation()}"
             app:srcCompat="@android:drawable/ic_dialog_map"
             app:useCompatPadding="true"/>
 
