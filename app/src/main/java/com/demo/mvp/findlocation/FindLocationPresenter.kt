@@ -26,7 +26,7 @@ private const val FASTEST_UPDATE_INTERVAL: Long = 30000 / 2 // Every 15 seconds
 private const val MAX_WAIT_TIME = UPDATE_INTERVAL * 3 // Every 3 minutes.
 
 /**
- * Should be handled in one @{Activity} of this app.
+ * Should be handled in one @{link Activity} of this app.
  */
 const val REQUEST_CHECK_SETTINGS = 0x0000009
 
