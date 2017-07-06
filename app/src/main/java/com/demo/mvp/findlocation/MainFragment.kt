@@ -56,7 +56,7 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
     }
 
     @AfterPermissionGranted(PRQ_FINE_LOCATION)
-    override fun showLocation() {
+    override fun getCurrentLocation() {
         if (EasyPermissions.hasPermissions(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
             presenter?.findLocation()
         } else {
