@@ -1,6 +1,6 @@
-# Connect with play-service
+# Connect with play-service and show map
 
->Play-service after v11.0.1
+> Use Map to to current location with Play-service after v11.0.1
 
 Great progress is that we don't need Google GoogleApiClient explict to initilize the location-service.
 
