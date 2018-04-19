@@ -12,3 +12,4 @@ gradle/*.*
 gradle/
 gradle*
 !gradle.properties
+map_key.xml
