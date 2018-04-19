@@ -1,36 +1,37 @@
 package com.demo.mvp.findlocation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.location.Location
-import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import com.demo.mvp.databinding.ContentMainBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
 private const val PRQ_FINE_LOCATION = 0x0000002
 
-class MainFragment : Fragment(), FindLocationContract.Viewer,
-        EasyPermissions.PermissionCallbacks {
-    private var binding: ContentMainBinding? = null
+class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
+    EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ContentMainBinding.inflate(inflater, container, false)
-        return binding?.root
-    }
+    private lateinit var map: GoogleMap
 
     override fun onDestroyView() {
         super.onDestroyView()
         presenter?.release()
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
@@ -41,15 +42,15 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
 
     override fun showCurrentLocation(location: Location?) {
         if (location != null) {
-            binding?.locationTv?.text = "Current location -> $location.latitude, $location.longitude"
-        } else {
-            binding?.locationTv?.text = "No location was found ."
+            map.moveToMarker(LatLng(location.latitude, location.longitude))
+            Toast.makeText(context, "Updated current location.", Toast.LENGTH_SHORT)
+                .show()
         }
 
         val view = view
         if (view != null && location != null) {
             Snackbar.make(view, "Refresh location after second(s).", Snackbar.LENGTH_SHORT)
-                    .show()
+                .show()
         }
 
         presenter?.release()
@@ -57,20 +58,35 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
 
     @AfterPermissionGranted(PRQ_FINE_LOCATION)
     override fun getCurrentLocation() {
-        if (EasyPermissions.hasPermissions(context, Manifest.permission.ACCESS_FINE_LOCATION)) {
+        if (EasyPermissions.hasPermissions(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
+        ) {
+            getMapAsync(this)
             presenter?.findLocation()
         } else {
-            EasyPermissions.requestPermissions(this, "This demo needs location permission.", PRQ_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION);
+            EasyPermissions.requestPermissions(
+                this,
+                "This demo needs location permission.",
+                PRQ_FINE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            )
         }
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onMapReady(googleMap: GoogleMap) {
+        map = googleMap
     }
 
     override fun canNotShowSettingDialog() {
         //For demo, I ignore here.
         Toast.makeText(context, "Can not show setting dialog.", Toast.LENGTH_LONG)
-                .show()
+            .show()
     }
 
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>?) {
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         when (requestCode) {
             PRQ_FINE_LOCATION -> {
                 presenter?.findLocation()
@@ -78,7 +94,7 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
         }
     }
 
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>?) {
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         when (requestCode) {
             PRQ_FINE_LOCATION -> {
                 //permission is not allowed.
@@ -86,4 +102,16 @@ class MainFragment : Fragment(), FindLocationContract.Viewer,
         }
     }
 
+    override fun getViewContext() = requireContext()
+
+    override fun getViewActivity() = requireActivity()
+
+    private fun GoogleMap.moveToMarker(latLng: LatLng, zoom: Float = 13f, anim: Boolean = true) {
+        addMarker(
+            MarkerOptions().position(latLng)
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+        )
+        if (anim) animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
+        else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
+    }
 }

@@ -50,6 +50,7 @@ dependencies {
     implementation "com.android.support:multidex:${multidexVersion}"
     implementation "com.android.support:design:${appCompat}"
     implementation "com.google.android.gms:play-services-location:${playService}"
+    implementation "com.google.android.gms:play-services-maps:${playService}"
     implementation "pub.devrel:easypermissions:${easyPermissions}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:${kotlin_version}"
     implementation "com.android.support:design:${appCompat}"
