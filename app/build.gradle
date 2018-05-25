@@ -12,7 +12,7 @@ android {
 
 
     compileSdkVersion 27
-    buildToolsVersion "28.0.0-rc1"
+    buildToolsVersion "28.0.0-rc2"
     defaultConfig {
         applicationId "com.demo.mvp"
         minSdkVersion 23
