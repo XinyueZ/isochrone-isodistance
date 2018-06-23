@@ -12,7 +12,7 @@ android {
 
 
     compileSdkVersion 28
-    buildToolsVersion "28.0.0-rc2"
+    buildToolsVersion "28.0.0"
     defaultConfig {
         applicationId "com.demo.mvp"
         minSdkVersion 23
@@ -38,10 +38,10 @@ android {
 }
 
 ext {
-    appCompat = "27.1.1"
-    playService = "15+"
+    appCompat = "+"
+    playService = "+"
     easyPermissions = "+"
-    multidexVersion = "1+"
+    multidexVersion = "+"
 }
 
 dependencies {
