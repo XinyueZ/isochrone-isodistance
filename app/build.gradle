@@ -37,12 +37,6 @@ android {
     }
 }
 
-ext {
-    appCompat = "+"
-    playService = "+"
-    easyPermissions = "+"
-    multidexVersion = "+"
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
