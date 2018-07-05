@@ -2,20 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
 android {
-
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-
     compileSdkVersion 28
     buildToolsVersion "28.0.0"
     defaultConfig {
         applicationId "com.demo.mvp"
-        minSdkVersion 23
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -35,19 +33,34 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    lintOptions {
+        warningsAsErrors true
+    }
+}
+
+configurations.all { configuration ->
+    resolutionStrategy {
+        force "com.android.support:support-v4:$supportLib4",
+                "com.android.support:appcompat-v7:$supportLib7"
+    }
 }
 
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:${appCompat}"
+    implementation "com.android.support:support-core-utils:$supportLib4"
+    implementation "com.android.support:support-core-ui:$supportLib4"
+    implementation "com.android.support:support-media-compat:$supportLib4"
+    implementation ("com.android.support:appcompat-v7:$supportLib7") {
+        exclude module: 'support-v4'
+    }
     implementation "com.android.support:multidex:${multidexVersion}"
-    implementation "com.android.support:design:${appCompat}"
+    implementation "com.android.support:design:${design}"
     implementation "com.google.android.gms:play-services-location:${playService}"
     implementation "com.google.android.gms:play-services-maps:${playService}"
     implementation "pub.devrel:easypermissions:${easyPermissions}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
-    implementation "com.android.support:design:${appCompat}"
 }
 
 

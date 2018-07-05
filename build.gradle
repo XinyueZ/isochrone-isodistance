@@ -3,13 +3,17 @@
 buildscript {
 
     ext {
-        appCompat = "+"
+        supportLib4 = "28+"
+        supportLib7 = "28+"
+        design = "28+"
+
         playService = "+"
         easyPermissions = "+"
-        multidexVersion = "+"
+        multidexVersion = "1.0.3"
 
-        kotlin_version = "1.2.50"
-        gradle_version = "3.3.0-alpha01"
+        kotlin_version = "1.2.51"
+        ktlintVersion = '0.24.0'
+        gradle_version = "3.3.0-alpha02"
     }
 
     repositories {
@@ -24,13 +28,20 @@ buildscript {
     }
 }
 
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.13.0"
+}
+
 allprojects {
     repositories {
-        jcenter()
         google()
+        jcenter()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint(ktlintVersion)
+    }
 }

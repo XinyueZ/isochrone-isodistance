@@ -32,7 +32,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
     }
 
@@ -81,7 +81,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     }
 
     override fun canNotShowSettingDialog() {
-        //For demo, I ignore here.
+        // For demo, I ignore here.
         Toast.makeText(context, "Can not show setting dialog.", Toast.LENGTH_LONG)
             .show()
     }
@@ -97,7 +97,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         when (requestCode) {
             PRQ_FINE_LOCATION -> {
-                //permission is not allowed.
+                // permission is not allowed.
             }
         }
     }
