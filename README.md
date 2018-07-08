@@ -1,5 +1,7 @@
 # Connect with play-service and show map
 
+[![Build Status](https://travis-ci.org/XinyueZ/FusedLocationWithMVP.svg?branch=feature%2Fwith-mapview)](https://travis-ci.org/XinyueZ/FusedLocationWithMVP)
+
 > Use Map to show current location with Play-service after v11.0.1
 
 Great progress is that we don't need Google GoogleApiClient explict to initilize the location-service.
