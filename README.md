@@ -1,6 +1,26 @@
+Isochrone and Isodistance with Google Maps
+====
+
+
+[![Build Status](https://travis-ci.org/XinyueZ/FusedLocationWithMVP.svg?branch=feature%2isochrone-isodistance)](https://travis-ci.org/XinyueZ/FusedLocationWithMVP)
+
+> Isochrone is a polygon representing how far you would go from a single point in every direction, following each road in a given timeframe. It's the best way to find out where you should live if you want to be «at most 5 minutes away from a tube station». Isodistance is similar, but ignores duration taken for traveling. For example by car you would go faster on highways, but with isodistance highways and sidewalks are the same.
+
+### Glossary
+
+isochrone = same duration from one start point
+isodistance = same distance from one start point
+
+### Reference
+
+https://isochrone.dugwood.com/index.html 
+
+https://github.com/dugwood/isochrone-isodistance-with-google-maps
+
+http://drewfustin.com/isochrones/
+
 # Connect with play-service and show map
 
-[![Build Status](https://travis-ci.org/XinyueZ/FusedLocationWithMVP.svg?branch=feature%2Fwith-mapview)](https://travis-ci.org/XinyueZ/FusedLocationWithMVP)
 
 > Use Map to show current location with Play-service after v11.0.1
 
