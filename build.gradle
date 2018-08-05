@@ -11,9 +11,9 @@ buildscript {
         easyPermissions = "+"
         multidexVersion = "1.0.3"
 
-        kotlin_version = "1.2.51"
+        kotlin_version = "1.2.60"
         ktlintVersion = '0.24.0'
-        gradle_version = "3.3.0-alpha02"
+        gradle_version = "3.3.0-alpha04"
     }
 
     repositories {
