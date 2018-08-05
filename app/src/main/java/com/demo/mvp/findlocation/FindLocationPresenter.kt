@@ -63,7 +63,7 @@ class FindLocationPresenter(
                     true
                 ).addLocationRequest(localReq).build()
             )
-            .addOnFailureListener({
+            .addOnFailureListener {
                 val exp = it as ApiException
                 when (exp.statusCode) {
                     CommonStatusCodes.RESOLUTION_REQUIRED -> {
@@ -77,7 +77,7 @@ class FindLocationPresenter(
                         view.canNotShowSettingDialog()
                     }
                 }
-            })
+            }
     }
 
     @SuppressLint("MissingPermission")

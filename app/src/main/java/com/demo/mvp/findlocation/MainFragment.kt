@@ -20,7 +20,7 @@ private const val PRQ_FINE_LOCATION = 0x0000002
 class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
-    private lateinit var map: GoogleMap
+    private var map: GoogleMap? = null
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -41,18 +41,16 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     }
 
     override fun showCurrentLocation(location: Location?) {
-        if (location != null) {
-            map.moveToMarker(LatLng(location.latitude, location.longitude))
+        location?.let {
+            map?.moveToMarker(LatLng(it.latitude, it.longitude))
             Toast.makeText(context, "Updated current location.", Toast.LENGTH_SHORT)
                 .show()
-        }
 
-        val view = view
-        if (view != null && location != null) {
-            Snackbar.make(view, "Refresh location after second(s).", Snackbar.LENGTH_SHORT)
-                .show()
+            view?.let { view ->
+                Snackbar.make(view, "Refresh location after second(s).", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
         }
-
         presenter?.release()
     }
 
