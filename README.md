@@ -31,7 +31,8 @@ Info:
 2. https://developer.android.com/training/location/receive-location-updates.html
 3. https://github.com/codepath/android_guides/wiki/Retrieving-Location-with-LocationServices-API
 
-# Don't forget map-key, this repo doesn't contain.
+# Don't forget map-key, this repo doesn't contain: google_maps_key(string res)
+# Don't forget gcp-key for Map-API: gcp_key(string res)
 
 # Android Studio IDE setup 
 
