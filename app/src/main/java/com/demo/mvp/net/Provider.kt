@@ -9,15 +9,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private fun OkHttpClient.Builder.addDebugInterceptors(): OkHttpClient.Builder {
-    addInterceptor(CurlLoggerInterceptor("#!#!"))
+    addInterceptor(CurlLoggerInterceptor("algorithm"))
     return this
 }
 
-private val retrofitBuilder: Retrofit.Builder by lazy {
+internal val retrofitBuilder: Retrofit.Builder by lazy {
     Retrofit.Builder()
-        .client(
-            OkHttpClient.Builder().addDebugInterceptors().build()
-        )
+        .client(OkHttpClient.Builder().addDebugInterceptors().build())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .addConverterFactory(
             GsonConverterFactory.create(
@@ -29,6 +27,6 @@ private val retrofitBuilder: Retrofit.Builder by lazy {
 
 fun provideApi(): GoogleApi =
     retrofitBuilder
-        .baseUrl("https://api.shopstyle.com/api/v2/")
+        .baseUrl("https://maps.googleapis.com/maps/api/")
         .build()
         .create(GoogleApi::class.java)

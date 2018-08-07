@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import com.demo.mvp.R
+import com.demo.mvp.algorithm.getIsochrone
 import com.demo.mvp.databinding.ActivityMainBinding
 import com.demo.mvp.inject
+import com.demo.mvp.provideGoogleApiKey
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,5 +31,10 @@ class MainActivity : AppCompatActivity() {
             REQUEST_CHECK_SETTINGS -> binding?.view?.getCurrentLocation()
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getIsochrone(provideGoogleApiKey(this), "Große Elbstraße 39", 60)
     }
 }
