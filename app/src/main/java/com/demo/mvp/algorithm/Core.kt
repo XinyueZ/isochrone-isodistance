@@ -75,7 +75,7 @@ private suspend fun queryGeocodeAddress(address: String, key: String): Result {
     }
 }
 
-//private fun selectDestination(origin: String, angle: Float, radius: Float): Array<LatLng> {
+// private fun selectDestination(origin: String, angle: Float, radius: Float): Array<LatLng> {
 //    val bearing = Math.toRadians(angle.toDouble())
 //    lat1 = radians(origin_geocode[0])
 //    lng1 = radians(origin_geocode[1])
@@ -84,7 +84,7 @@ private suspend fun queryGeocodeAddress(address: String, key: String): Result {
 //    lat2 = degrees(lat2)
 //    lng2 = degrees(lng2)
 //    return [lat2, lng2]
-//}
+// }
 
 private fun <T> Array<T>.output() = Arrays.toString(this)
 
