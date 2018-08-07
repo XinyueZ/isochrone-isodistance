@@ -4,11 +4,14 @@ import android.util.Log
 import com.demo.mvp.net.CoroutinesContextProvider
 import com.demo.mvp.net.Result
 import com.demo.mvp.net.provideApi
+import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.withContext
 import retrofit2.Response
 import java.io.IOException
 import java.util.Arrays
+
+const val earthRadius: Float = 3963.1676f
 
 fun getIsochrone(key: String, origin: String, duration: Int, numberOfAngles: Int = 12, tolerance: Float = 0.1f) =
     launch(CoroutinesContextProvider.io) {
@@ -33,11 +36,18 @@ fun getIsochrone(key: String, origin: String, duration: Int, numberOfAngles: Int
         val iso = Array(numberOfAngles) { Pair(0f, 0f) }
         Log.d("algorithm", "iso: ${iso.output()}")
 
-        val matrix = queryMatrix("Spaldingstraße 64 Hamburg", arrayOf("Große Elbstraße 39"), key)
+        val matrisToAdr = queryMatrix("Spaldingstraße 64 Hamburg", arrayOf("Große Elbstraße 39"), key)
+        val matrisToLatLng = queryMatrix(
+            "Spaldingstraße 64 Hamburg",
+            arrayOf(LatLng(53.6720115, 9.998081), LatLng(53.6735999, 10.0070511)),
+            key
+        )
         val geocode = queryGeocodeAddress("Große Elbstraße 39", key)
         withContext(CoroutinesContextProvider.main) {
-            Log.d("algorithm", "matrix: $matrix")
+            Log.d("algorithm", "matrix: $matrisToAdr")
+            Log.d("algorithm", "matrix: $matrisToLatLng")
             Log.d("algorithm", "geocode: $geocode")
+            Unit
         }
     }
 
@@ -51,6 +61,11 @@ private suspend fun queryMatrix(origin: String, destinations: Array<String>, key
     }
 }
 
+private suspend fun queryMatrix(origin: String, destinations: Array<LatLng>, key: String): Result {
+    val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
+    return queryMatrix(origin, destinationsStringList.toTypedArray(), key)
+}
+
 private suspend fun queryGeocodeAddress(address: String, key: String): Result {
     val response = provideApi().getGeocode(address, key).await()
     return response.getResult {
@@ -59,6 +74,17 @@ private suspend fun queryGeocodeAddress(address: String, key: String): Result {
         )
     }
 }
+
+//private fun selectDestination(origin: String, angle: Float, radius: Float): Array<LatLng> {
+//    val bearing = Math.toDegrees(angle.toDouble())
+//    lat1 = radians(origin_geocode[0])
+//    lng1 = radians(origin_geocode[1])
+//    lat2 = asin(sin(lat1) * cos(radius / r) + cos(lat1) * sin(radius / r) * cos(bearing))
+//    lng2 = lng1 + atan2(sin(bearing) * sin(radius / r) * cos(lat1), cos(radius / r) - sin(lat1) * sin(lat2))
+//    lat2 = degrees(lat2)
+//    lng2 = degrees(lng2)
+//    return [lat2, lng2]
+//}
 
 private fun <T> Array<T>.output() = Arrays.toString(this)
 
