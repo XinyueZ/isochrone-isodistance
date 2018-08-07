@@ -76,7 +76,7 @@ private suspend fun queryGeocodeAddress(address: String, key: String): Result {
 }
 
 //private fun selectDestination(origin: String, angle: Float, radius: Float): Array<LatLng> {
-//    val bearing = Math.toDegrees(angle.toDouble())
+//    val bearing = Math.toRadians(angle.toDouble())
 //    lat1 = radians(origin_geocode[0])
 //    lng1 = radians(origin_geocode[1])
 //    lat2 = asin(sin(lat1) * cos(radius / r) + cos(lat1) * sin(radius / r) * cos(bearing))
