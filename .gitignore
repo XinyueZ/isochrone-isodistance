@@ -14,3 +14,4 @@ gradle/
 gradle*
 !gradle.properties
 map_key.xml
+gcp_key.xml
