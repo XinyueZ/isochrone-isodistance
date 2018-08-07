@@ -63,6 +63,7 @@ dependencies {
 
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutine}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine}"
 
     implementation "com.google.code.gson:gson:${gson}"
     implementation "com.squareup.retrofit2:retrofit:${retrofit}"
