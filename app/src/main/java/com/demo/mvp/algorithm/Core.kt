@@ -11,6 +11,7 @@ import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.withContext
 import retrofit2.Response
 import java.io.IOException
+import java.lang.Math.PI
 import java.lang.Math.asin
 import java.lang.Math.atan2
 import java.lang.Math.toDegrees
@@ -83,24 +84,34 @@ private suspend fun queryGeocodeAddress(address: String, key: String): Result<Ge
     }
 }
 
-private suspend fun selectDestination(origin: String, angle: Double, radius: Double, key: String): LatLng? {
-    val geocode = queryGeocodeAddress(origin, key)
-    if (geocode is Result.Success) {
-        val bearing = toRadians(angle)
-        val latLng: LatLng? = geocode.data.toLatLng()
-        if (latLng != null) {
-            val lat1 = toRadians((latLng.latitude))
-            val lng1 = toRadians((latLng.longitude))
-            val lat2 =
-                asin(sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(bearing))
-            val lng2 = lng1 + atan2(
-                sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
-                cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
-            )
-            return LatLng(toDegrees(lat2), toDegrees(lng2))
-        }
-    }
-    return null
+private fun selectDestination(origin: LatLng, angle: Double, radius: Double): LatLng {
+    val bearing = toRadians(angle)
+    val lat1 = toRadians((origin.latitude))
+    val lng1 = toRadians((origin.longitude))
+    val lat2 =
+        asin(sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(bearing))
+    val lng2 = lng1 + atan2(
+        sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
+        cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
+    )
+    return LatLng(toDegrees(lat2), toDegrees(lng2))
+}
+
+private fun getBearing(origin: LatLng, destination: LatLng): Double {
+    var bearing = atan2(
+        sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180),
+        cos(origin.latitude * PI / 180) * sin(destination.latitude * PI / 180) -
+            sin(origin.latitude * PI / 180) * cos(destination.latitude * PI / 180) * cos((destination.longitude - origin.longitude) * PI / 180)
+    )
+    bearing = bearing * 180 / PI
+    bearing = (bearing + 360) % 360
+    return bearing
+}
+
+private fun sortPoints(origin: LatLng, iso: Array<LatLng>): Array<LatLng> {
+    val sortedIso = iso.map { oneIso -> Pair(getBearing(origin, oneIso), oneIso) }
+    sortedIso.sortedBy { it.first }
+    return sortedIso.map { it.second }.toTypedArray()
 }
 
 private fun <T> Array<T>.output() = Arrays.toString(this)
