@@ -6,13 +6,13 @@ package com.demo.mvp.net
  */
 sealed class Result<out T : Any> {
 
-    data class Success<out T : Any>(val data: T) : Result<T>()
+    data class Success<out T : Any>(val content: T) : Result<T>()
     data class Error(val exception: Exception) : Result<Nothing>()
     object Loading : Result<Nothing>()
 
     override fun toString(): String {
         return when (this) {
-            is Success<*> -> "Success[data=$data]"
+            is Success<*> -> "Success[content=$content]"
             is Error -> "Error[exception=$exception]"
             Loading -> "Loading"
         }

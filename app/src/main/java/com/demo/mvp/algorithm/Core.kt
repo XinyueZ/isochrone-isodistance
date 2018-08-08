@@ -7,8 +7,7 @@ import com.demo.mvp.net.CoroutinesContextProvider
 import com.demo.mvp.net.Result
 import com.demo.mvp.net.provideApi
 import com.google.android.gms.maps.model.LatLng
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.experimental.channels.produce
 import retrofit2.Response
 import java.io.IOException
 import java.lang.Math.PI
@@ -22,55 +21,113 @@ import kotlin.math.sin
 
 private const val EARTH_RADIUS: Double = 3963.1676
 
-fun getIsochrone(key: String, origin: String, duration: Int, numberOfAngles: Int = 12, tolerance: Double = 0.1) =
-    launch(CoroutinesContextProvider.io) {
-        val rad1 = Array(numberOfAngles) { duration / 12f }
-        Log.d("algorithm", "rad1: ${rad1.output()}")
+fun getIsochrone(key: String, originAddress: String, duration: Int, numberOfAngles: Int = 15, tolerance: Double = 0.1) =
+    produce(CoroutinesContextProvider.io) {
+        var rad1 = Array(numberOfAngles) { duration / 12f.toDouble() }
+        Log.d("algorithm", "rad1: ${rad1.pretty()}")
 
-        val phi1 = Array(numberOfAngles) { it * 360f / numberOfAngles }
-        Log.d("algorithm", "phi1: ${phi1.output()}")
+        val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
+        Log.d("algorithm", "phi1: ${phi1.pretty()}")
 
-        val data0 = Array(numberOfAngles) { 0f }
-        Log.d("algorithm", "data0: ${data0.output()}")
+        val data0 = Array(numberOfAngles) { "" }
+        Log.d("algorithm", "data0: ${data0.pretty()}")
 
-        val rad0 = Array(numberOfAngles) { 0f }
-        Log.d("algorithm", "rad0: ${rad0.output()}")
+        var rad0 = Array(numberOfAngles) { 0f.toDouble() }
+        Log.d("algorithm", "rad0: ${rad0.pretty()}")
 
-        val rmin = Array(numberOfAngles) { 0f }
-        Log.d("algorithm", "rmin: ${rmin.output()}")
+        val rmin = Array(numberOfAngles) { 0f.toDouble() }
+        Log.d("algorithm", "rmin: ${rmin.pretty()}")
 
-        val rmax = Array(numberOfAngles) { 1.25f * duration }
-        Log.d("algorithm", "rmax: ${rmax.output()}")
+        val rmax = Array(numberOfAngles) { 1.25f.toDouble() * duration }
+        Log.d("algorithm", "rmax: ${rmax.pretty()}")
 
-        val iso = Array(numberOfAngles) { Pair(0f, 0f) }
-        Log.d("algorithm", "iso: ${iso.output()}")
+        val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
+        Log.d("algorithm", "iso: ${iso.pretty()}")
 
-        val matrisToAdr = queryMatrix("Spaldingstraße 64 Hamburg", arrayOf("Große Elbstraße 39"), key)
-        val matrisToLatLng = queryMatrix(
-            "Spaldingstraße 64 Hamburg",
-            arrayOf(LatLng(53.6720115, 9.998081), LatLng(53.6735999, 10.0070511)),
-            key
-        )
-        val geocode = queryGeocodeAddress("Große Elbstraße 39", key)
-        withContext(CoroutinesContextProvider.main) {
-            Log.d("algorithm", "matrix: $matrisToAdr")
-            Log.d("algorithm", "matrix: $matrisToLatLng")
-            Log.d("algorithm", "geocode: $geocode")
-            Unit
+        val originGeocode = queryGeocodeAddress(originAddress, key)
+        if (originGeocode is Result.Success) {
+            val origin = originGeocode.content.toLatLng()
+            origin?.let {
+                var isoData: Pair<Array<String>, Array<Double>>? = null
+
+                while (rad0.zip(rad1).map { it.first - it.second }.sum() != 0f.toDouble()) {
+                    val rad2 = Array(numberOfAngles) { 0f.toDouble() }
+                    Log.d("algorithm", "rad2: ${rad2.pretty()}")
+
+                    (0 until numberOfAngles).forEach { i ->
+                        iso[i] = selectDestination(it, phi1[i], rad1[i])
+                    }
+
+                    with(queryMatrix(origin, iso, key)) {
+                        if (this is Result.Success) {
+                            getAddressesDurations(this.content)?.let { data ->
+                                isoData = data
+                                (0 until numberOfAngles).forEach { i ->
+                                    if ((data.second[i] < (duration - tolerance)) && (!data0[i].contentEquals(data.first[i]))) {
+                                        rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
+                                        rmin[i] = rad1[i]
+                                    } else if ((data.second[i] > (duration + tolerance)) && (!data0[i].contentEquals(
+                                            data.first[i]
+                                        ))
+                                    ) {
+                                        rad2[i] = (rmin[i] + rad1[i]) / 2f.toDouble()
+                                        rmax[i] = rad1[i]
+                                    } else {
+                                        rad2[i] = rad1[i]
+                                    }
+                                    data0[i] = data.first[i]
+                                }
+                                rad0 = rad1
+                                rad1 = rad2
+                            }
+                        }
+                    }
+                }
+                isoData?.let { isoD ->
+                    (0 until numberOfAngles).forEach {
+                        val result = queryGeocodeAddress(isoD.first[it], key)
+                        if (result is Result.Success) {
+                            iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
+                        }
+                    }
+                    send(sortPoints(origin, iso))
+                }
+            }
         }
     }
 
-private suspend fun queryMatrix(origin: String, destinations: Array<String>, key: String): Result<Matrix> {
+private fun getAddressesDurations(matrix: Matrix): Pair<Array<String>, Array<Double>>? {
+    matrix.destinationAddresses?.let {
+        val addresses = it.toTypedArray()
+
+        var i = 0
+        val durations = Array(it.size) { 0f.toDouble() }
+
+        matrix.rows?.get(0)?.elements?.forEach {
+            when {
+                it.status.contentEquals("OK") -> durations[i] = 9999f.toDouble()
+                it.durationInTraffic != null -> durations[i] = it.durationInTraffic.value / 60f.toDouble()
+                else -> durations[i] = it.duration.value / 60f.toDouble()
+            }
+            i++
+        }
+
+        return Pair(addresses, durations)
+    } ?: run { return null }
+}
+
+private suspend fun queryMatrix(origin: LatLng, destinations: Array<String>, key: String): Result<Matrix> {
     val destinationsString = destinations.joinToString("|")
-    val response = provideApi().getMatrix(origin, destinationsString, key).await()
+    val originString = "${origin.latitude}, ${origin.longitude}"
+    val response = provideApi().getMatrix(originString, destinationsString, key).await()
     return response.getResult {
         Result.Error(
-            IOException("Error query matrix: $origin ====> ${destinations.output()}")
+            IOException("Error query matrix: $origin ====> ${destinations.pretty()}")
         )
     }
 }
 
-private suspend fun queryMatrix(origin: String, destinations: Array<LatLng>, key: String): Result<Matrix> {
+private suspend fun queryMatrix(origin: LatLng, destinations: Array<LatLng>, key: String): Result<Matrix> {
     val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
     return queryMatrix(origin, destinationsStringList.toTypedArray(), key)
 }
@@ -99,22 +156,19 @@ private fun selectDestination(origin: LatLng, angle: Double, radius: Double): La
 
 private fun getBearing(origin: LatLng, destination: LatLng): Double {
     var bearing = atan2(
-        sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180),
-        cos(origin.latitude * PI / 180) * sin(destination.latitude * PI / 180) -
-            sin(origin.latitude * PI / 180) * cos(destination.latitude * PI / 180) * cos((destination.longitude - origin.longitude) * PI / 180)
+        sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180f),
+        cos(origin.latitude * PI / 180f) * sin(destination.latitude * PI / 180f) -
+            sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
     )
-    bearing = bearing * 180 / PI
-    bearing = (bearing + 360) % 360
+    bearing = bearing * 180f / PI
+    bearing = (bearing + 360f) % 360f
     return bearing
 }
 
-private fun sortPoints(origin: LatLng, iso: Array<LatLng>): Array<LatLng> {
-    val sortedIso = iso.map { oneIso -> Pair(getBearing(origin, oneIso), oneIso) }
-    sortedIso.sortedBy { it.first }
-    return sortedIso.map { it.second }.toTypedArray()
-}
+private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
+    iso.map { getBearing(origin, it) }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
-private fun <T> Array<T>.output() = Arrays.toString(this)
+internal fun <T> Array<T>.pretty() = Arrays.toString(this)
 
 private inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error): Result<E> {
     if (isSuccessful) {

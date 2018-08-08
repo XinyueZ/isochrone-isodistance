@@ -3,6 +3,8 @@ package com.demo.mvp.domain.matrix import com.google.gson.annotations.Serialized
 data class ElementsItem(
     @SerializedName("duration")
     val duration: Duration,
+    @SerializedName("duration_in_traffic")
+    val durationInTraffic: Duration?,
     @SerializedName("distance")
     val distance: Distance,
     @SerializedName("status")
