@@ -48,6 +48,7 @@ const val REQUEST_CHECK_SETTINGS = 0x0000009
 
 class FindLocationPresenter(
     private val view: FindLocationContract.Viewer,
+    private val mainPresenter: MainPresenter,
     private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
         view.getViewContext()
     ),
@@ -66,7 +67,12 @@ class FindLocationPresenter(
 
     @SuppressLint("MissingPermission")
     override fun findLocation() {
-        localClient.lastLocation.addOnSuccessListener { view.showCurrentLocation(it) }
+        mainPresenter.runFindLocationProgress()
+        localClient.lastLocation.addOnSuccessListener {
+            view.showCurrentLocation(it)
+            mainPresenter.finishFindLocationProgress()
+        }
+
         requestLocation()
         LocationServices.getSettingsClient(view.getViewActivity())
             .checkLocationSettings(
@@ -104,11 +110,13 @@ class FindLocationPresenter(
 
     override fun findIsochrone(context: Context, target: LatLng) {
         launch(CoroutinesContextProvider.main) {
+            mainPresenter.runFindLocationProgress()
             getIsochrone(provideGoogleApiKey(context), target, 120)?.let {
                 channel = it
                 channel?.consumeEach {
                     Log.d("algorithm", "rad1: ${it.pretty()}")
                     view.showPolygon(it)
+                    mainPresenter.finishFindLocationProgress()
                 }
             }
         }
