@@ -14,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -24,6 +25,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
+    private var polyDriving: Polygon? = null
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -131,7 +133,8 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     }
 
     override fun showPolygon(points: Array<LatLng>) {
-        map?.addPolygon(
+        polyDriving?.remove()
+        polyDriving = map?.addPolygon(
             PolygonOptions()
                 .addAll(points.asList())
                 .fillColor(Color.BLUE - ALPHA_ADJUSTMENT)
