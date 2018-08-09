@@ -70,6 +70,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${retrofit}"
     implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofit_coroutine}"
     implementation "com.github.grapesnberries:curlloggerinterceptor:${curl}"
+
+    implementation "com.google.maps.android:android-maps-utils:${maps_utils}"
 }
 
 kotlin {

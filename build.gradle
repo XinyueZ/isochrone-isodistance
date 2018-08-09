@@ -22,6 +22,8 @@ buildscript {
 
         coroutine = "0.+"
         retrofit_coroutine = "1.0.0"
+
+        maps_utils = "0.5"
     }
 
     repositories {
