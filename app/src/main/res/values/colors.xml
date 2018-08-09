@@ -6,6 +6,6 @@
 
     <color name="c_driving">#0091EA</color>
     <color name="c_transit">#1B5E20</color>
-    <color name="c_bicycling">#8D6E63</color>
-    <color name="c_walking">#E65100</color>
+    <color name="c_bicycling">#D50000</color>
+    <color name="c_walking">#D500F9</color>
 </resources>
