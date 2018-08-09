@@ -2,11 +2,12 @@ package com.demo.mvp.findlocation
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.location.Location
 import android.support.design.widget.Snackbar
+import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.widget.Toast
+import com.demo.mvp.R
 import com.demo.mvp.algorithm.TravelMode
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -146,46 +147,55 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     override fun showPolygon(travelMode: TravelMode, points: Array<LatLng>) {
         when (travelMode) {
             TravelMode.DRIVING -> {
+                val c = ContextCompat.getColor(requireContext(), R.color.c_driving)
                 polyDriving = map?.addPolygon(
                     PolygonOptions()
                         .addAll(points.asList())
-                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT)
-                        .strokeColor(Color.BLUE)
+                        .fillColor(c - ALPHA_ADJUSTMENT)
+                        .strokeColor(c)
                         .strokeWidth(5f)
                 )
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT + 1))
             }
             TravelMode.TRANSIT -> {
+                val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
                 polyTransit = map?.addPolygon(
                     PolygonOptions()
                         .addAll(points.asList())
-                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 2)
-                        .strokeColor(Color.BLUE)
+                        .fillColor(c - ALPHA_ADJUSTMENT)
+                        .strokeColor(c)
                         .strokeWidth(5f)
                 )
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT + 1))
             }
             TravelMode.BICYCLING -> {
+                val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)
                 polyBicycling = map?.addPolygon(
                     PolygonOptions()
                         .addAll(points.asList())
-                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 3)
-                        .strokeColor(Color.BLUE)
+                        .fillColor(c - ALPHA_ADJUSTMENT)
+                        .strokeColor(c)
                         .strokeWidth(5f)
                 )
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.WALKING -> {
+                val c = ContextCompat.getColor(requireContext(), R.color.c_walking)
                 polyWalking = map?.addPolygon(
                     PolygonOptions()
                         .addAll(points.asList())
-                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 4)
-                        .strokeColor(Color.BLUE)
+                        .fillColor(c - ALPHA_ADJUSTMENT)
+                        .strokeColor(c)
                         .strokeWidth(5f)
                 )
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
         }
     }
 
     companion object {
-        private const val ALPHA_ADJUSTMENT = 0x77000000
-        private const val DEFAULT_ZOOM = 12f
+        private const val ALPHA_ADJUSTMENT = 0x77000000 * 4
+        private const val DEFAULT_ZOOM = 14f
+        private const val DEFAULT_ZOOM_OUT = -2.5f
     }
 }
