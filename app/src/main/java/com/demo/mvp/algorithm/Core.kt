@@ -21,8 +21,9 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 private const val EARTH_RADIUS: Double = 3963.1676
+private const val DEFAULT_NUMBER_OF_ANGLES = 12
 
-fun getIsochrone(key: String, origin: LatLng, duration: Int, numberOfAngles: Int = 12, tolerance: Double = 0.1) =
+fun getIsochrone(key: String, origin: LatLng, duration: Int, numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES, tolerance: Double = 0.1) =
     produce(CoroutinesContextProvider.io) {
         getIsochrone(origin, numberOfAngles, duration, key, tolerance)
     }

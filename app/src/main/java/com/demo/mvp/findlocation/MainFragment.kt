@@ -2,6 +2,7 @@ package com.demo.mvp.findlocation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.location.Location
 import android.support.design.widget.Snackbar
 import android.util.Log
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.PolygonOptions
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -52,7 +54,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                     .show()
             }
         }
-        presenter?.release()
     }
 
     @AfterPermissionGranted(PRQ_FINE_LOCATION)
@@ -77,6 +78,10 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
+        with(googleMap.uiSettings) {
+            isZoomControlsEnabled = true
+            isZoomGesturesEnabled = true
+        }
     }
 
     override fun canNotShowSettingDialog() {
@@ -105,10 +110,17 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
 
     override fun getViewActivity() = requireActivity()
 
-    private fun GoogleMap.moveToMarker(latLng: LatLng, zoom: Float = 13f, anim: Boolean = true) {
+    private fun GoogleMap.moveToMarker(latLng: LatLng, zoom: Float = DEFAULT_ZOOM, anim: Boolean = true) {
         map?.setOnCameraIdleListener {
             Log.d("algorithm", "current camera: ${map?.cameraPosition?.target}, moved geo: $latLng")
             map?.setOnCameraIdleListener(null)
+
+            map?.cameraPosition?.target?.let { target ->
+                presenter?.let {
+                    it.findIsochrone(requireContext(), target)
+                    it.release()
+                }
+            }
         }
         addMarker(
             MarkerOptions().position(latLng)
@@ -116,5 +128,20 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         )
         if (anim) animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
+    }
+
+    override fun showPolygon(points: Array<LatLng>) {
+        map?.addPolygon(
+            PolygonOptions()
+                .addAll(points.asList())
+                .fillColor(Color.BLUE - ALPHA_ADJUSTMENT)
+                .strokeColor(Color.BLUE)
+                .strokeWidth(5f)
+        )
+    }
+
+    companion object {
+        private const val ALPHA_ADJUSTMENT = 0x77000000
+        private const val DEFAULT_ZOOM = 17f
     }
 }

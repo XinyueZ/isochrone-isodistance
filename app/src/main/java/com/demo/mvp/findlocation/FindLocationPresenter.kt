@@ -1,8 +1,13 @@
 package com.demo.mvp.findlocation
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Looper
 import android.util.Log
+import com.demo.mvp.algorithm.getIsochrone
+import com.demo.mvp.algorithm.pretty
+import com.demo.mvp.net.CoroutinesContextProvider
+import com.demo.mvp.provideGoogleApiKey
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.ResolvableApiException
@@ -14,6 +19,10 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
+import com.google.android.gms.maps.model.LatLng
+import kotlinx.coroutines.experimental.channels.ReceiveChannel
+import kotlinx.coroutines.experimental.channels.consumeEach
+import kotlinx.coroutines.experimental.launch
 
 /**
  * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -53,6 +62,8 @@ class FindLocationPresenter(
         localReq.maxWaitTime = MAX_WAIT_TIME
     }
 
+    private var channel: ReceiveChannel<Array<LatLng>>? = null
+
     @SuppressLint("MissingPermission")
     override fun findLocation() {
         localClient.lastLocation.addOnSuccessListener { view.showCurrentLocation(it) }
@@ -86,8 +97,21 @@ class FindLocationPresenter(
     }
 
     override fun release() {
+        channel?.cancel()
         localClient.flushLocations()
         localClient.removeLocationUpdates(localCallback)
+    }
+
+    override fun findIsochrone(context: Context, target: LatLng) {
+        launch(CoroutinesContextProvider.main) {
+            getIsochrone(provideGoogleApiKey(context), target, 120)?.let {
+                channel = it
+                channel?.consumeEach {
+                    Log.d("algorithm", "rad1: ${it.pretty()}")
+                    view.showPolygon(it)
+                }
+            }
+        }
     }
 }
 
