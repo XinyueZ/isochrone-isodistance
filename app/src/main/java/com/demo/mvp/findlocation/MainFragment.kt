@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import android.support.design.widget.Snackbar
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -105,6 +106,10 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     override fun getViewActivity() = requireActivity()
 
     private fun GoogleMap.moveToMarker(latLng: LatLng, zoom: Float = 13f, anim: Boolean = true) {
+        map?.setOnCameraIdleListener {
+            Log.d("algorithm", "current camera: ${map?.cameraPosition?.target}, moved geo: $latLng")
+            map?.setOnCameraIdleListener(null)
+        }
         addMarker(
             MarkerOptions().position(latLng)
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
