@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">FusedLocationWithMVP</string>
+    <string name="app_name">Demo of Isochrone, Isodistance</string>
+    <string name="travel_mode_driving">driving</string>
+    <string name="travel_mode_transit">transit</string>
+    <string name="travel_mode_bicycling">bicycling</string>
+    <string name="travel_mode_walking">walking</string>
 </resources>

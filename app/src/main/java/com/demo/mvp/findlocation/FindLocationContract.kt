@@ -5,6 +5,7 @@ import android.location.Location
 import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
+import com.demo.mvp.algorithm.TravelMode
 import com.google.android.gms.maps.model.LatLng
 
 interface FindLocationContract {
@@ -19,7 +20,7 @@ interface FindLocationContract {
 
         fun getViewActivity(): FragmentActivity
 
-        fun showPolygon(points: Array<LatLng>)
+        fun showPolygon(travelMode: TravelMode, points: Array<LatLng>)
     }
 
     interface Presenter : BasePresenter {

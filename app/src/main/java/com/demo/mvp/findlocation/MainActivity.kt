@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.demo.mvp.R
+import com.demo.mvp.algorithm.TravelMode
 import com.demo.mvp.databinding.ActivityMainBinding
 import com.demo.mvp.inject
 
@@ -18,7 +19,9 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.appbar))
-        binding?.findLocationViewer = supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
+        binding?.mainViewer = this
+        binding?.findLocationViewer =
+            supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
         inject(this).also { it?.let { inject(binding?.findLocationViewer, it) } }
     }
 
@@ -47,5 +50,25 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
 
     override fun setPresenter(presenter: MainContract.Presenter) {
         this.presenter = presenter
+    }
+
+    override fun turnDrivingMode() {
+        if (binding?.drivingMode?.isChecked == true) presenter?.travelModes?.add(TravelMode.DRIVING)
+        else presenter?.travelModes?.remove(TravelMode.DRIVING)
+    }
+
+    override fun turnTransitMode() {
+        if (binding?.transitMode?.isChecked == true) presenter?.travelModes?.add(TravelMode.TRANSIT)
+        else presenter?.travelModes?.remove(TravelMode.TRANSIT)
+    }
+
+    override fun turnBicyclingMode() {
+        if (binding?.bicyclingMode?.isChecked == true) presenter?.travelModes?.add(TravelMode.BICYCLING)
+        else presenter?.travelModes?.remove(TravelMode.BICYCLING)
+    }
+
+    override fun turnWalkingMode() {
+        if (binding?.walkingMode?.isChecked == true) presenter?.travelModes?.add(TravelMode.WALKING)
+        else presenter?.travelModes?.remove(TravelMode.WALKING)
     }
 }

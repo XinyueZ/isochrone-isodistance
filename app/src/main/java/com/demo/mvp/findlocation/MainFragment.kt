@@ -7,6 +7,7 @@ import android.location.Location
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.widget.Toast
+import com.demo.mvp.algorithm.TravelMode
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -26,6 +27,9 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
     private var polyDriving: Polygon? = null
+    private var polyTransit: Polygon? = null
+    private var polyBicycling: Polygon? = null
+    private var polyWalking: Polygon? = null
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -119,6 +123,13 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
 
             map?.cameraPosition?.target?.let { target ->
                 presenter?.let {
+
+                    // Move last isochones polygons
+                    polyDriving?.remove()
+                    polyTransit?.remove()
+                    polyBicycling?.remove()
+                    polyWalking?.remove()
+
                     it.findIsochrone(requireContext(), target)
                     it.release()
                 }
@@ -132,19 +143,49 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
     }
 
-    override fun showPolygon(points: Array<LatLng>) {
-        polyDriving?.remove()
-        polyDriving = map?.addPolygon(
-            PolygonOptions()
-                .addAll(points.asList())
-                .fillColor(Color.BLUE - ALPHA_ADJUSTMENT)
-                .strokeColor(Color.BLUE)
-                .strokeWidth(5f)
-        )
+    override fun showPolygon(travelMode: TravelMode, points: Array<LatLng>) {
+        when (travelMode) {
+            TravelMode.DRIVING -> {
+                polyDriving = map?.addPolygon(
+                    PolygonOptions()
+                        .addAll(points.asList())
+                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT)
+                        .strokeColor(Color.BLUE)
+                        .strokeWidth(5f)
+                )
+            }
+            TravelMode.TRANSIT -> {
+                polyTransit = map?.addPolygon(
+                    PolygonOptions()
+                        .addAll(points.asList())
+                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 2)
+                        .strokeColor(Color.BLUE)
+                        .strokeWidth(5f)
+                )
+            }
+            TravelMode.BICYCLING -> {
+                polyBicycling = map?.addPolygon(
+                    PolygonOptions()
+                        .addAll(points.asList())
+                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 3)
+                        .strokeColor(Color.BLUE)
+                        .strokeWidth(5f)
+                )
+            }
+            TravelMode.WALKING -> {
+                polyWalking = map?.addPolygon(
+                    PolygonOptions()
+                        .addAll(points.asList())
+                        .fillColor(Color.BLUE - ALPHA_ADJUSTMENT * 4)
+                        .strokeColor(Color.BLUE)
+                        .strokeWidth(5f)
+                )
+            }
+        }
     }
 
     companion object {
         private const val ALPHA_ADJUSTMENT = 0x77000000
-        private const val DEFAULT_ZOOM = 17f
+        private const val DEFAULT_ZOOM = 12f
     }
 }

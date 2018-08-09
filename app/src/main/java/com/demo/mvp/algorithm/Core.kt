@@ -23,21 +23,36 @@ import kotlin.math.sin
 private const val EARTH_RADIUS: Double = 3963.1676
 private const val DEFAULT_NUMBER_OF_ANGLES = 12
 
-fun getIsochrone(key: String, origin: LatLng, duration: Int, numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES, tolerance: Double = 0.1) =
+fun getIsochrone(
+    key: String,
+    travelMode: TravelMode,
+    origin: LatLng,
+    duration: Int,
+    numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
+    tolerance: Double = 0.1
+) =
     produce(CoroutinesContextProvider.io) {
-        getIsochrone(origin, numberOfAngles, duration, key, tolerance)
+        getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance)
     }
 
-fun getIsochrone(key: String, originAddress: String, duration: Int, numberOfAngles: Int = 12, tolerance: Double = 0.1) =
+fun getIsochrone(
+    key: String,
+    travelMode: TravelMode,
+    originAddress: String,
+    duration: Int,
+    numberOfAngles: Int = 12,
+    tolerance: Double = 0.1
+) =
     produce(CoroutinesContextProvider.io) {
         val originGeocode = queryGeocodeAddress(originAddress, key)
         if (originGeocode is Result.Success) {
             val origin = originGeocode.content.toLatLng()
-            getIsochrone(origin, numberOfAngles, duration, key, tolerance)
+            getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance)
         }
     }
 
 private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
+    travelMode: TravelMode,
     origin: LatLng?,
     numberOfAngles: Int,
     duration: Int,
@@ -76,7 +91,7 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
                 iso[i] = selectDestination(it, phi1[i], rad1[i])
             }
 
-            with(queryMatrix(origin, iso, key)) {
+            with(queryMatrix(travelMode, origin, iso, key)) {
                 if (this is Result.Success) {
                     getAddressesDurations(this.content)?.let { data ->
                         isoData = data
@@ -122,7 +137,7 @@ private fun getAddressesDurations(matrix: Matrix): Pair<Array<String>, Array<Dou
 
         matrix.rows?.get(0)?.elements?.forEach {
             when {
-                it.status.contentEquals("OK") -> durations[i] = 9999f.toDouble()
+                !it.status.contentEquals("OK") -> durations[i] = 9999f.toDouble()
                 it.durationInTraffic != null -> durations[i] = it.durationInTraffic.value / 60f.toDouble()
                 else -> durations[i] = it.duration.value / 60f.toDouble()
             }
@@ -133,10 +148,15 @@ private fun getAddressesDurations(matrix: Matrix): Pair<Array<String>, Array<Dou
     } ?: run { return null }
 }
 
-private suspend fun queryMatrix(origin: LatLng, destinations: Array<String>, key: String): Result<Matrix> {
+private suspend fun queryMatrix(
+    travelMode: TravelMode,
+    origin: LatLng,
+    destinations: Array<String>,
+    key: String
+): Result<Matrix> {
     val destinationsString = destinations.joinToString("|")
     val originString = "${origin.latitude}, ${origin.longitude}"
-    val response = provideApi().getMatrix(originString, destinationsString, key).await()
+    val response = provideApi().getMatrix(travelMode.value, originString, destinationsString, key).await()
     return response.getResult {
         Result.Error(
             IOException("Error query matrix: $origin ====> ${destinations.pretty()}")
@@ -144,9 +164,14 @@ private suspend fun queryMatrix(origin: LatLng, destinations: Array<String>, key
     }
 }
 
-private suspend fun queryMatrix(origin: LatLng, destinations: Array<LatLng>, key: String): Result<Matrix> {
+private suspend fun queryMatrix(
+    travelMode: TravelMode,
+    origin: LatLng,
+    destinations: Array<LatLng>,
+    key: String
+): Result<Matrix> {
     val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
-    return queryMatrix(origin, destinationsStringList.toTypedArray(), key)
+    return queryMatrix(travelMode, origin, destinationsStringList.toTypedArray(), key)
 }
 
 private suspend fun queryGeocodeAddress(address: String, key: String): Result<Geocode> {
@@ -199,4 +224,11 @@ private inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error):
 
 private fun Geocode.toLatLng(): LatLng? = results?.let { results[0] }?.run {
     LatLng(geometry.location.lat, geometry.location.lng)
+}
+
+enum class TravelMode(val value: String) {
+    DRIVING("driving"),
+    TRANSIT("transit"),
+    BICYCLING("bicycling"),
+    WALKING("walking")
 }

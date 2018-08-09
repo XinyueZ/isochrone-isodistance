@@ -110,13 +110,15 @@ class FindLocationPresenter(
 
     override fun findIsochrone(context: Context, target: LatLng) {
         launch(CoroutinesContextProvider.main) {
-            mainPresenter.runFindLocationProgress()
-            getIsochrone(provideGoogleApiKey(context), target, 120)?.let {
-                channel = it
-                channel?.consumeEach {
-                    Log.d("algorithm", "rad1: ${it.pretty()}")
-                    view.showPolygon(it)
-                    mainPresenter.finishFindLocationProgress()
+            mainPresenter.travelModes.forEach { travelModel ->
+                mainPresenter.runFindLocationProgress()
+                getIsochrone(provideGoogleApiKey(context), travelModel, target, 120).let {
+                    channel = it
+                    channel?.consumeEach {
+                        Log.d("algorithm", "rad1: ${it.pretty()}")
+                        view.showPolygon(travelModel, it)
+                        mainPresenter.finishFindLocationProgress()
+                    }
                 }
             }
         }

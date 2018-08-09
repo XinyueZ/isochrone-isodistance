@@ -10,6 +10,9 @@
         <variable
                 name="findLocationViewer"
                 type="com.demo.mvp.findlocation.FindLocationContract.Viewer"/>
+        <variable
+                name="mainViewer"
+                type="com.demo.mvp.findlocation.MainContract.Viewer"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -40,11 +43,13 @@
                 android:layout_height="0dp"/>
 
 
-        <FrameLayout app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintStart_toStartOf="parent"
-                     app:layout_constraintBottom_toBottomOf="parent"
-                     android:layout_width="match_parent"
-                     android:layout_height="0dp">
+        <FrameLayout
+                android:id="@+id/location_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
 
             <ProgressBar
                     android:id="@+id/pb"
@@ -64,5 +69,56 @@
                     app:useCompatPadding="true"/>
 
         </FrameLayout>
+
+
+        <android.support.design.chip.ChipGroup
+                android:id="@+id/travel_modes_group"
+                app:layout_constraintBottom_toTopOf="@+id/location_group"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <android.support.design.chip.Chip android:id="@+id/driving_mode" android:layout_width="wrap_content"
+                                              android:layout_height="wrap_content"
+                                              app:chipIcon="@drawable/ic_drive"
+                                              android:text="@string/travel_mode_driving"
+                                              app:chipIconVisible="true"
+                                              app:checkedIconVisible="true"
+                                              android:onClick="@{() -> mainViewer.turnDrivingMode()}"
+                                              style="@style/Widget.MaterialComponents.Chip.Choice"
+                                              app:checkedIcon="@drawable/ic_drive_checked"/>
+            <android.support.design.chip.Chip android:id="@+id/transit_mode" android:layout_width="wrap_content"
+                                              android:layout_height="wrap_content"
+                                              app:chipIcon="@drawable/ic_transit"
+                                              android:text="@string/travel_mode_transit"
+                                              app:chipIconVisible="true"
+                                              app:checkedIconVisible="true"
+                                              android:onClick="@{() -> mainViewer.turnTransitMode()}"
+                                              style="@style/Widget.MaterialComponents.Chip.Choice"
+                                              app:checkedIcon="@drawable/ic_transit_checked"/>
+            <android.support.design.chip.Chip android:id="@+id/bicycling_mode" android:layout_width="wrap_content"
+                                              android:layout_height="wrap_content"
+                                              app:chipIcon="@drawable/ic_bicycling"
+                                              android:text="@string/travel_mode_bicycling"
+                                              android:onClick="@{() -> mainViewer.turnBicyclingMode()}"
+                                              app:chipIconVisible="true"
+                                              app:checkedIconVisible="true"
+                                              style="@style/Widget.MaterialComponents.Chip.Choice"
+                                              app:checkedIcon="@drawable/ic_bicycling_checked"/>
+            <android.support.design.chip.Chip android:id="@+id/walking_mode" android:layout_width="wrap_content"
+                                              android:layout_height="wrap_content"
+                                              app:chipIcon="@drawable/ic_walking"
+                                              android:checked="true"
+                                              android:text="@string/travel_mode_walking"
+                                              app:chipIconVisible="true"
+                                              android:onClick="@{() -> mainViewer.turnWalkingMode()}"
+                                              app:checkedIconVisible="true"
+                                              style="@style/Widget.MaterialComponents.Chip.Choice"
+                                              app:checkedIcon="@drawable/ic_walking_checked"/>
+
+        </android.support.design.chip.ChipGroup>
     </android.support.constraint.ConstraintLayout>
 </layout>

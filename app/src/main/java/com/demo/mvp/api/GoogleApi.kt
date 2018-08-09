@@ -8,8 +8,13 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GoogleApi {
-    @GET("distancematrix/json?mode=driving") // Doc for matrix api https://developers.google.com/maps/documentation/distance-matrix/intro
-    fun getMatrix(@Query("origins") origins: String, @Query("destinations") destinations: String, @Query("key") key: String): Deferred<Response<Matrix>>
+    @GET("distancematrix/json") // Doc for matrix api https://developers.google.com/maps/documentation/distance-matrix/intro
+    fun getMatrix(
+        @Query("mode") travelMode: String,
+        @Query("origins") origins: String,
+        @Query("destinations") destinations: String,
+        @Query("key") key: String
+    ): Deferred<Response<Matrix>>
 
     @GET("geocode/json")
     fun getGeocode(@Query("address") address: String, @Query("key") key: String): Deferred<Response<Geocode>>
