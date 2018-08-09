@@ -11,38 +11,38 @@ import com.demo.mvp.inject
 
 class MainActivity : AppCompatActivity(), MainContract.Viewer {
 
-    private var mBinding: ActivityMainBinding? = null
+    private var binding: ActivityMainBinding? = null
     private var presenter: MainContract.Presenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.appbar))
-        mBinding?.findLocationViewer = supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
-        inject(this).also { it?.let { inject(mBinding?.findLocationViewer, it) } }
+        binding?.findLocationViewer = supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
+        inject(this).also { it?.let { inject(binding?.findLocationViewer, it) } }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
-            REQUEST_CHECK_SETTINGS -> mBinding?.findLocationViewer?.getCurrentLocation()
+            REQUEST_CHECK_SETTINGS -> binding?.findLocationViewer?.getCurrentLocation()
             else -> super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
     override fun showProgress() {
-        mBinding?.pb?.visibility = View.VISIBLE
+        binding?.pb?.visibility = View.VISIBLE
     }
 
     override fun dismissProgress() {
-        mBinding?.pb?.visibility = View.INVISIBLE
+        binding?.pb?.visibility = View.INVISIBLE
     }
 
     override fun enableFindLocation() {
-        mBinding?.fab?.isEnabled = true
+        binding?.fab?.isEnabled = true
     }
 
     override fun disableFindLocation() {
-        mBinding?.fab?.isEnabled = false
+        binding?.fab?.isEnabled = false
     }
 
     override fun setPresenter(presenter: MainContract.Presenter) {
