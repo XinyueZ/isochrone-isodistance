@@ -17,7 +17,7 @@ isodistance = same distance from one start point
 
 # Setup
 
-In order to use isochrone & isodistance the [Google's Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/start) must be turned on. If the result locations must be sorted the [Google's Geocode API](https://developers.google.com/maps/documentation/geocoding/start) should also be used, please use same API-Key for both APIs.
+In order to use isochrone & isodistance the [Google's Distance Matrix API](https://developers.google.com/maps/documentation/distance-matrix/start) must be turned on. If the result locations must be sorted according to their bearings the [Google's Geocode API](https://developers.google.com/maps/documentation/geocoding/start) should also be used, please use same API-Key for both APIs.
 
 ### 🛑 Don't forget in project
 
