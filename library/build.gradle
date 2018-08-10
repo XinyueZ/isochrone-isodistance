@@ -59,20 +59,20 @@ dependencies {
     api "com.github.grapesnberries:curlloggerinterceptor:${curl}"
 
     // unit testing
-    testApi "junit:junit:$junit"
-    testApi "org.mockito:mockito-inline:$mockito_inline"
-    testApi "com.nhaarman:mockito-kotlin:$mockito_kotlin"
-    testApi "org.assertj:assertj-core:$assertj_core"
-    testApi "io.kotlintest:kotlintest:$kotlinTest"
+    testImplementation "junit:junit:$junit"
+    testImplementation "org.mockito:mockito-inline:$mockito_inline"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    testImplementation "org.assertj:assertj-core:$assertj_core"
+    testImplementation "io.kotlintest:kotlintest:$kotlinTest"
 
     // instrumentation & UI testing
-    androidTestApi "com.android.support.test:runner:$test_runner"
-    androidTestApi "com.android.support.test:rules:$test_rules"
-    androidTestApi "com.android.support.test.espresso:espresso-core:$espresso_core"
-    androidTestApi "com.android.support.test.espresso:espresso-contrib:$espresso_core"
-    androidTestApi "com.nhaarman:mockito-kotlin:$mockito_kotlin"
-    androidTestApi "org.mockito:mockito-android:$mockito_android"
-    androidTestApi "io.kotlintest:kotlintest:$kotlinTest"
+    androidTestImplementation "com.android.support.test:runner:$test_runner"
+    androidTestImplementation "com.android.support.test:rules:$test_rules"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_core"
+    androidTestImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android"
+    androidTestImplementation "io.kotlintest:kotlintest:$kotlinTest"
 }
 
 kotlin {
