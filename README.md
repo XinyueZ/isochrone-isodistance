@@ -1,4 +1,4 @@
-Isochrone and Isodistance with Google Maps
+Isochrone and Isodistance(Kotlin, Android)
 ====
 
 > Isochrone is a polygon representing how far you would go from a single point in every direction, following each road in a given timeframe. It's the best way to find out where you should live if you want to be «at most 5 minutes away from a tube station». Isodistance is similar, but ignores duration taken for traveling. For example by car you would go faster on highways, but with isodistance highways and sidewalks are the same.
