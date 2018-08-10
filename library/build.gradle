@@ -17,15 +17,8 @@ android {
         versionName rootProject.version_name
 
         testInstrumentationRunner rootProject.test_instrumentation_runner
-
         multiDexEnabled = true
-        vectorDrawables.useSupportLibrary = true
     }
-
-    dataBinding {
-        enabled = true
-    }
-
 
     buildTypes {
         release {
