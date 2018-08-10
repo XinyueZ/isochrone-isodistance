@@ -37,6 +37,19 @@ In order to use isochrone & isodistance the [Google's Distance Matrix API](https
 
 - The gcp-key for matrix and geocode APIs: gcp_key(string res)
 
+
+# Coroutines
+
+Don't forget in client application:
+
+```
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}
+```
+
 # Code robust & healthy with klint support
  
 The project uses [ktlint](https://ktlint.github.io/) to enforce Kotlin coding styles.
