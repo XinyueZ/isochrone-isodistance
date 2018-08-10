@@ -22,6 +22,8 @@ interface MainContract {
         fun turnBicyclingMode()
 
         fun turnWalkingMode()
+
+        fun changeDurationMinutes(min: Int)
     }
 
     interface Presenter : BasePresenter {
@@ -30,5 +32,7 @@ interface MainContract {
         fun finishFindLocationProgress()
 
         var travelModes: MutableSet<TravelMode>
+
+        var durationMinutes: Int
     }
 }

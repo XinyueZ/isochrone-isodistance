@@ -8,6 +8,8 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
         get() = _travelModes
         set(_) {}
 
+    override var durationMinutes = 15
+
     init {
         view.setPresenter(this)
     }

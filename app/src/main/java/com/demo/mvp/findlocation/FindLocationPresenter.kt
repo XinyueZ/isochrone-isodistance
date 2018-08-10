@@ -112,7 +112,7 @@ class FindLocationPresenter(
         launch(CoroutinesContextProvider.main) {
             mainPresenter.travelModes.forEach { travelModel ->
                 mainPresenter.runFindLocationProgress()
-                getIsochrone(provideGoogleApiKey(context), travelModel, target, 120).let {
+                getIsochrone(provideGoogleApiKey(context), travelModel, target, mainPresenter.durationMinutes).let {
                     channel = it
                     channel?.consumeEach {
                         Log.d("algorithm", "rad1: ${it.pretty()}")

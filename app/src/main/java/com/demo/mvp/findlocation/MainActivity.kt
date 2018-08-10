@@ -21,8 +21,14 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
         setSupportActionBar(findViewById(R.id.appbar))
         binding?.mainViewer = this
         binding?.findLocationViewer =
-            supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
+                supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
         inject(this).also { it?.let { inject(binding?.findLocationViewer, it) } }
+        binding?.durationMinutesSelector?.apply {
+            minValue = resources.getInteger(R.integer.default_duration_minutes)
+            maxValue = 24 * 60
+            wrapSelectorWheel = true
+        }
+        presenter?.durationMinutes = resources.getInteger(R.integer.default_duration_minutes)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -70,5 +76,9 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
     override fun turnWalkingMode() {
         if (binding?.walkingMode?.isChecked == true) presenter?.travelModes?.add(TravelMode.WALKING)
         else presenter?.travelModes?.remove(TravelMode.WALKING)
+    }
+
+    override fun changeDurationMinutes(min: Int) {
+        presenter?.durationMinutes = min
     }
 }

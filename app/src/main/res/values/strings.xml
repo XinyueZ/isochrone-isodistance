@@ -4,4 +4,7 @@
     <string name="travel_mode_transit">transit</string>
     <string name="travel_mode_bicycling">bicycling</string>
     <string name="travel_mode_walking">walking</string>
+    <string name="duration_minutes_to_target">minutes</string>
+
+    <integer name="default_duration_minutes">30</integer>
 </resources>

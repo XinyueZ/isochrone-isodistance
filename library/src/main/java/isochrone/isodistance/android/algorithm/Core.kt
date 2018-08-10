@@ -28,20 +28,20 @@ fun getIsochrone(
     key: String,
     travelMode: TravelMode,
     origin: LatLng,
-    duration: Int,
+    durationMinutes: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
     tolerance: Double = 0.1,
     sortResult: Boolean = SORT_RESULT
 ) =
     produce(CoroutinesContextProvider.io) {
-        getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance, sortResult)
+        getIsochrone(travelMode, origin, numberOfAngles, durationMinutes, key, tolerance, sortResult)
     }
 
 fun getIsochrone(
     key: String,
     travelMode: TravelMode,
     originAddress: String,
-    duration: Int,
+    durationMinutes: Int,
     numberOfAngles: Int = 12,
     tolerance: Double = 0.1,
     sortResult: Boolean = SORT_RESULT
@@ -50,7 +50,7 @@ fun getIsochrone(
         val originGeocode = queryGeocodeAddress(originAddress, key)
         if (originGeocode is Result.Success) {
             val origin = originGeocode.content.toLatLng()
-            getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance, sortResult)
+            getIsochrone(travelMode, origin, numberOfAngles, durationMinutes, key, tolerance, sortResult)
         }
     }
 
@@ -58,13 +58,13 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
     travelMode: TravelMode,
     origin: LatLng?,
     numberOfAngles: Int,
-    duration: Int,
+    durationMinutes: Int,
     key: String,
     tolerance: Double,
     sortResult: Boolean
 ) {
     origin?.let {
-        var rad1 = Array(numberOfAngles) { duration / 12f.toDouble() }
+        var rad1 = Array(numberOfAngles) { durationMinutes / 12f.toDouble() }
         Log.d("algorithm", "rad1: ${rad1.pretty()}")
 
         val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
@@ -79,7 +79,7 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
         val rmin = Array(numberOfAngles) { 0f.toDouble() }
         Log.d("algorithm", "rmin: ${rmin.pretty()}")
 
-        val rmax = Array(numberOfAngles) { 1.25f.toDouble() * duration }
+        val rmax = Array(numberOfAngles) { 1.25f.toDouble() * durationMinutes }
         Log.d("algorithm", "rmax: ${rmax.pretty()}")
 
         val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
@@ -100,10 +100,10 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
                     this.content.calculateAddressesDurations()?.let { data ->
                         isoData = data
                         (0 until numberOfAngles).forEach { i ->
-                            if ((data.second[i] < (duration - tolerance)) && (!data0[i].contentEquals(data.first[i]))) {
+                            if ((data.second[i] < (durationMinutes - tolerance)) && (!data0[i].contentEquals(data.first[i]))) {
                                 rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
                                 rmin[i] = rad1[i]
-                            } else if ((data.second[i] > (duration + tolerance)) && (!data0[i].contentEquals(
+                            } else if ((data.second[i] > (durationMinutes + tolerance)) && (!data0[i].contentEquals(
                                     data.first[i]
                                 ))
                             ) {
