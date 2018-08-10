@@ -25,7 +25,10 @@ getIsochrone(
                         // You can draw all points based on an Array<LatLng> .
                     }
 ```
+
 More info: FindLocationPresenter.kt
+
+![Sample isochrone](/medium/sample_isochrone.gif)
 
 👷🔧 🚧 isodistance, coming soon and still in planning. 
 
