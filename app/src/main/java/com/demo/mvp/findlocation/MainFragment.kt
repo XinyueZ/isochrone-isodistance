@@ -86,7 +86,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
         with(googleMap.uiSettings) {
-            isZoomControlsEnabled = true
             isZoomGesturesEnabled = true
         }
     }
