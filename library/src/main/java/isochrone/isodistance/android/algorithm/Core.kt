@@ -20,6 +20,8 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 private const val EARTH_RADIUS: Double = 3963.1676
+
+private const val TOLERANCE = 0.01
 private const val DEFAULT_NUMBER_OF_ANGLES = 12
 private const val SORT_RESULT = false
 
@@ -29,11 +31,19 @@ fun getIsochrone(
     origin: LatLng,
     durationMinutes: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
-    tolerance: Double = 0.1,
+    tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT
 ) =
     produce(CoroutinesContextProvider.io) {
-        getIsochrone(travelMode, origin, numberOfAngles, durationMinutes, key, tolerance, sortResult)
+        getIsochrone(
+            travelMode,
+            origin,
+            numberOfAngles,
+            durationMinutes,
+            key,
+            tolerance,
+            sortResult
+        )
     }
 
 fun getIsochrone(
@@ -41,15 +51,23 @@ fun getIsochrone(
     travelMode: TravelMode,
     originAddress: String,
     durationMinutes: Int,
-    numberOfAngles: Int = 12,
-    tolerance: Double = 0.1,
+    numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
+    tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT
 ) =
     produce(CoroutinesContextProvider.io) {
         val originGeocode = queryGeocodeAddress(originAddress, key)
         if (originGeocode is Result.Success) {
             val origin = originGeocode.content.toLatLng()
-            getIsochrone(travelMode, origin, numberOfAngles, durationMinutes, key, tolerance, sortResult)
+            getIsochrone(
+                travelMode,
+                origin,
+                numberOfAngles,
+                durationMinutes,
+                key,
+                tolerance,
+                sortResult
+            )
         }
     }
 
@@ -99,7 +117,10 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
                     this.content.calculateAddressesDurations()?.let { data ->
                         isoData = data
                         (0 until numberOfAngles).forEach { i ->
-                            if ((data.second[i] < (durationMinutes - tolerance)) && (!data0[i].contentEquals(data.first[i]))) {
+                            if ((data.second[i] < (durationMinutes - tolerance)) && (!data0[i].contentEquals(
+                                    data.first[i]
+                                ))
+                            ) {
                                 rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
                                 rmin[i] = rad1[i]
                             } else if ((data.second[i] > (durationMinutes + tolerance)) && (!data0[i].contentEquals(
@@ -121,7 +142,7 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
         }
         when (sortResult) {
             true -> isoData?.let { isoD ->
-                // TODO There's a potential crash when sorting, plz. check it out.
+                // TODO There's a potential crash when sorting, plz. check it out. java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
                 (0 until numberOfAngles).forEach {
                     val result = queryGeocodeAddress(isoD.first[it], key)
                     if (result is Result.Success) {
@@ -145,9 +166,11 @@ private fun Matrix.calculateAddressesDurations(): Pair<Array<String>, Array<Doub
         val durations = Array(it.size) { 0f.toDouble() }
 
         rows?.get(0)?.elements?.forEach {
+            // TODO It can crash java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
             when {
                 !it.status.contentEquals("OK") -> durations[i] = 9999f.toDouble()
-                it.durationInTraffic != null -> durations[i] = it.durationInTraffic.value / 60f.toDouble()
+                it.durationInTraffic != null -> durations[i] = it.durationInTraffic.value /
+                        60f.toDouble()
                 else -> durations[i] = it.duration.value / 60f.toDouble()
             }
             i++
@@ -165,7 +188,8 @@ private suspend fun queryMatrix(
 ): Result<Matrix> {
     val destinationsString = destinations.joinToString("|")
     val originString = "${origin.latitude}, ${origin.longitude}"
-    val response = provideApi().getMatrix(travelMode.value, originString, destinationsString, key).await()
+    val response =
+        provideApi().getMatrix(travelMode.value, originString, destinationsString, key).await()
     return response.getResult {
         Result.Error(
             IOException("Error query matrix: $origin ====> ${destinations.pretty()}")
@@ -196,7 +220,11 @@ private fun selectDestination(origin: LatLng, angle: Double, radius: Double): La
     val lat1 = toRadians((origin.latitude))
     val lng1 = toRadians((origin.longitude))
     val lat2 =
-        asin(sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(bearing))
+        asin(
+            sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(
+                bearing
+            )
+        )
     val lng2 = lng1 + atan2(
         sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
         cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
@@ -208,7 +236,7 @@ private fun getBearing(origin: LatLng, destination: LatLng): Double {
     var bearing = atan2(
         sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180f),
         cos(origin.latitude * PI / 180f) * sin(destination.latitude * PI / 180f) -
-            sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
+                sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
     )
     bearing = bearing * 180f / PI
     bearing = (bearing + 360f) % 360f
@@ -216,7 +244,12 @@ private fun getBearing(origin: LatLng, destination: LatLng): Double {
 }
 
 private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
-    iso.map { getBearing(origin, it) }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
+    iso.map {
+        getBearing(
+            origin,
+            it
+        )
+    }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
 fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
 
