@@ -28,6 +28,7 @@ getIsochrone(
 
 More info: FindLocationPresenter.kt
 
+![Sample isochrone](./medium/sample_isochrone.gif)
 
 👷🔧 🚧 isodistance, coming soon and still in planning. 
 
