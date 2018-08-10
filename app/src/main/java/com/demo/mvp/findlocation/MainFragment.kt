@@ -116,7 +116,11 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
 
     override fun getViewActivity() = requireActivity()
 
-    private fun GoogleMap.moveToMarker(latLng: LatLng, zoom: Float = DEFAULT_ZOOM, anim: Boolean = true) {
+    private fun GoogleMap.moveToMarker(
+        latLng: LatLng,
+        zoom: Float = DEFAULT_ZOOM,
+        anim: Boolean = true
+    ) {
         map?.setOnCameraIdleListener {
             Log.d("algorithm", "current camera: ${map?.cameraPosition?.target}, moved geo: $latLng")
             map?.setOnCameraIdleListener(null)
@@ -154,7 +158,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                         .strokeColor(c)
                         .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT + 1))
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.TRANSIT -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
@@ -195,6 +199,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     companion object {
         private const val ALPHA_ADJUSTMENT = 0x77000000 * 4
         private const val DEFAULT_ZOOM = 14f
-        private const val DEFAULT_ZOOM_OUT = -2.5f
+        private const val DEFAULT_ZOOM_OUT = -1f
     }
 }
