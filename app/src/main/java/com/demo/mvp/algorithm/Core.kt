@@ -22,6 +22,7 @@ import kotlin.math.sin
 
 private const val EARTH_RADIUS: Double = 3963.1676
 private const val DEFAULT_NUMBER_OF_ANGLES = 12
+private const val SORT_RESULT = false
 
 fun getIsochrone(
     key: String,
@@ -29,10 +30,11 @@ fun getIsochrone(
     origin: LatLng,
     duration: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
-    tolerance: Double = 0.1
+    tolerance: Double = 0.1,
+    sortResult: Boolean = SORT_RESULT
 ) =
     produce(CoroutinesContextProvider.io) {
-        getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance)
+        getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance, sortResult)
     }
 
 fun getIsochrone(
@@ -41,13 +43,14 @@ fun getIsochrone(
     originAddress: String,
     duration: Int,
     numberOfAngles: Int = 12,
-    tolerance: Double = 0.1
+    tolerance: Double = 0.1,
+    sortResult: Boolean = SORT_RESULT
 ) =
     produce(CoroutinesContextProvider.io) {
         val originGeocode = queryGeocodeAddress(originAddress, key)
         if (originGeocode is Result.Success) {
             val origin = originGeocode.content.toLatLng()
-            getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance)
+            getIsochrone(travelMode, origin, numberOfAngles, duration, key, tolerance, sortResult)
         }
     }
 
@@ -57,7 +60,8 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
     numberOfAngles: Int,
     duration: Int,
     key: String,
-    tolerance: Double
+    tolerance: Double,
+    sortResult: Boolean
 ) {
     origin?.let {
         var rad1 = Array(numberOfAngles) { duration / 12f.toDouble() }
@@ -116,14 +120,19 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
                 }
             }
         }
-        isoData?.let { isoD ->
-            (0 until numberOfAngles).forEach {
-                val result = queryGeocodeAddress(isoD.first[it], key)
-                if (result is Result.Success) {
-                    iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
+        when (sortResult) {
+            true -> isoData?.let { isoD ->
+                (0 until numberOfAngles).forEach {
+                    val result = queryGeocodeAddress(isoD.first[it], key)
+                    if (result is Result.Success) {
+                        iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
+                    }
                 }
+                send(sortPoints(origin, iso))
             }
-            send(sortPoints(origin, iso))
+            else -> {
+                send(iso)
+            }
         }
     }
 }
