@@ -15,12 +15,18 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
     }
 
     override fun runFindLocationProgress() {
-        view.showProgress()
-        view.disableFindLocation()
+        with(view) {
+            showProgress()
+            disableFindLocation()
+            disableTravelModes()
+        }
     }
 
     override fun finishFindLocationProgress() {
-        view.dismissProgress()
-        view.enableFindLocation()
+        with(view) {
+            dismissProgress()
+            enableFindLocation()
+            enableTravelModes()
+        }
     }
 }

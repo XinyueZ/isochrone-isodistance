@@ -81,4 +81,19 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
     override fun changeDurationMinutes(min: Int) {
         presenter?.durationMinutes = min
     }
+
+    override fun enableTravelModes() {
+        travelModelSettings(true)
+    }
+
+    override fun disableTravelModes() {
+        travelModelSettings(false)
+    }
+
+    private fun travelModelSettings(enable: Boolean) {
+        binding?.bicyclingMode?.isEnabled = enable
+        binding?.drivingMode?.isEnabled = enable
+        binding?.transitMode?.isEnabled = enable
+        binding?.walkingMode?.isEnabled = enable
+    }
 }

@@ -13,7 +13,11 @@ interface MainContract {
 
         fun enableFindLocation()
 
+        fun enableTravelModes()
+
         fun disableFindLocation()
+
+        fun disableTravelModes()
 
         fun turnDrivingMode()
 
