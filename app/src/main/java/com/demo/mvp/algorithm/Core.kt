@@ -91,9 +91,9 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
                 iso[i] = selectDestination(it, phi1[i], rad1[i])
             }
 
-            with(queryMatrix(travelMode, origin, iso, key)) {
+            with(travelMode.queryMatrix(origin, iso, key)) {
                 if (this is Result.Success) {
-                    getAddressesDurations(this.content)?.let { data ->
+                    this.content.calculateAddressesDurations()?.let { data ->
                         isoData = data
                         (0 until numberOfAngles).forEach { i ->
                             if ((data.second[i] < (duration - tolerance)) && (!data0[i].contentEquals(data.first[i]))) {
@@ -128,14 +128,14 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
     }
 }
 
-private fun getAddressesDurations(matrix: Matrix): Pair<Array<String>, Array<Double>>? {
-    matrix.destinationAddresses?.let {
+private fun Matrix.calculateAddressesDurations(): Pair<Array<String>, Array<Double>>? {
+    destinationAddresses?.let {
         val addresses = it.toTypedArray()
 
         var i = 0
         val durations = Array(it.size) { 0f.toDouble() }
 
-        matrix.rows?.get(0)?.elements?.forEach {
+        rows?.get(0)?.elements?.forEach {
             when {
                 !it.status.contentEquals("OK") -> durations[i] = 9999f.toDouble()
                 it.durationInTraffic != null -> durations[i] = it.durationInTraffic.value / 60f.toDouble()
@@ -164,14 +164,13 @@ private suspend fun queryMatrix(
     }
 }
 
-private suspend fun queryMatrix(
-    travelMode: TravelMode,
+private suspend fun TravelMode.queryMatrix(
     origin: LatLng,
     destinations: Array<LatLng>,
     key: String
 ): Result<Matrix> {
     val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
-    return queryMatrix(travelMode, origin, destinationsStringList.toTypedArray(), key)
+    return queryMatrix(this, origin, destinationsStringList.toTypedArray(), key)
 }
 
 private suspend fun queryGeocodeAddress(address: String, key: String): Result<Geocode> {
