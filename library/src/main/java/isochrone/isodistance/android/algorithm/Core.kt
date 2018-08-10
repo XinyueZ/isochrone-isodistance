@@ -218,7 +218,7 @@ private fun getBearing(origin: LatLng, destination: LatLng): Double {
 private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
     iso.map { getBearing(origin, it) }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
-fun <T> Array<T>.pretty() = java.util.Arrays.toString(this)
+fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
 
 private inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error): Result<E> {
     if (isSuccessful) {
