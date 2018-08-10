@@ -18,6 +18,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
+import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.TravelMode
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -123,7 +124,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         anim: Boolean = true
     ) {
         map?.setOnCameraIdleListener {
-            Log.d("algorithm", "current camera: ${map?.cameraPosition?.target}, moved geo: $latLng")
+            Log.d(TAG, "current camera: ${map?.cameraPosition?.target}, moved geo: $latLng")
             map?.setOnCameraIdleListener(null)
 
             map?.cameraPosition?.target?.let { target ->

@@ -21,7 +21,7 @@ getIsochrone(
              "walking", // Travel mode 
              "Address or lat-lng", //Target location, for "current location" is a good use-case. 
              120).consumeEach { // 120 minutes to target.
-                        Log.d("algorithm", "rad1: ${it.pretty()}")
+                        Log.d(TAG, "rad1: ${it.pretty()}")
                         // You can draw all points based on an Array<LatLng> .
                     }
 ```

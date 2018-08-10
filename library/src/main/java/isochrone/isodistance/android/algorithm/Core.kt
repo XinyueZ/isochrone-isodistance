@@ -24,6 +24,7 @@ private const val EARTH_RADIUS: Double = 3963.1676
 private const val TOLERANCE = 0.01
 private const val DEFAULT_NUMBER_OF_ANGLES = 12
 private const val SORT_RESULT = false
+const val TAG = "iso-algorithm"
 
 fun getIsochrone(
     key: String,
@@ -82,31 +83,31 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
 ) {
     origin?.let {
         var rad1 = Array(numberOfAngles) { durationMinutes / 12f.toDouble() }
-        Log.d("algorithm", "rad1: ${rad1.pretty()}")
+        Log.d(TAG, "rad1: ${rad1.pretty()}")
 
         val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
-        Log.d("algorithm", "phi1: ${phi1.pretty()}")
+        Log.d(TAG, "phi1: ${phi1.pretty()}")
 
         val data0 = Array(numberOfAngles) { "" }
-        Log.d("algorithm", "data0: ${data0.pretty()}")
+        Log.d(TAG, "data0: ${data0.pretty()}")
 
         var rad0 = Array(numberOfAngles) { 0f.toDouble() }
-        Log.d("algorithm", "rad0: ${rad0.pretty()}")
+        Log.d(TAG, "rad0: ${rad0.pretty()}")
 
         val rmin = Array(numberOfAngles) { 0f.toDouble() }
-        Log.d("algorithm", "rmin: ${rmin.pretty()}")
+        Log.d(TAG, "rmin: ${rmin.pretty()}")
 
         val rmax = Array(numberOfAngles) { 1.25f.toDouble() * durationMinutes }
-        Log.d("algorithm", "rmax: ${rmax.pretty()}")
+        Log.d(TAG, "rmax: ${rmax.pretty()}")
 
         val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
-        Log.d("algorithm", "iso: ${iso.pretty()}")
+        Log.d(TAG, "iso: ${iso.pretty()}")
 
         var isoData: Pair<Array<String>, Array<Double>>? = null
 
         while (rad0.zip(rad1).map { it.first - it.second }.sum() != 0f.toDouble()) {
             val rad2 = Array(numberOfAngles) { 0f.toDouble() }
-            Log.d("algorithm", "rad2: ${rad2.pretty()}")
+            Log.d(TAG, "rad2: ${rad2.pretty()}")
 
             (0 until numberOfAngles).forEach { i ->
                 iso[i] = selectDestination(it, phi1[i], rad1[i])

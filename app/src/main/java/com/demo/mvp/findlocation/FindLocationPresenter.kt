@@ -17,6 +17,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.getIsochrone
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
@@ -123,7 +124,7 @@ class FindLocationPresenter(
                 ).let {
                     channel = it
                     channel?.consumeEach {
-                        Log.d("algorithm", "rad1: ${it.pretty()}")
+                        Log.d(TAG, "rad1: ${it.pretty()}")
                         view.showPolygon(travelModel, it)
                         mainPresenter.finishFindLocationProgress()
                     }

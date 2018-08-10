@@ -3,13 +3,14 @@ package isochrone.isodistance.android.net
 import com.google.gson.GsonBuilder
 import com.grapesnberries.curllogger.CurlLoggerInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.api.GoogleApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 private fun OkHttpClient.Builder.addDebugInterceptors(): OkHttpClient.Builder {
-    addInterceptor(CurlLoggerInterceptor("algorithm"))
+    addInterceptor(CurlLoggerInterceptor(TAG))
     return this
 }
 
