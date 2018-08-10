@@ -11,6 +11,8 @@ isodistance = same distance from one start point
 
 # Status of project
 
+👷 Run `./gradlew check`  or  `./gradlew check connectedCheck` to validdate whole project including app and library firstly.
+
 👍 *isochrone*, is already done, it can be used directly.
 
 ``` kotlin
