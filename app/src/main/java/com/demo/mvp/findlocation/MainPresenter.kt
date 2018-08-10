@@ -1,6 +1,6 @@
 package com.demo.mvp.findlocation
 
-import com.demo.mvp.algorithm.TravelMode
+import isochrone.isodistance.android.algorithm.TravelMode
 
 class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presenter {
     private val _travelModes = mutableSetOf<TravelMode>().apply { add(TravelMode.WALKING) }

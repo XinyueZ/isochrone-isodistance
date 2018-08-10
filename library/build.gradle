@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
@@ -11,7 +11,6 @@ android {
 
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.demo.mvp"
         minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
@@ -49,23 +48,21 @@ configurations.all { configuration ->
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":library")
 
-    implementation "com.android.support:support-core-utils:$supportLib4"
-    implementation "com.android.support:support-core-ui:$supportLib4"
-    implementation "com.android.support:support-media-compat:$supportLib4"
-    implementation ("com.android.support:appcompat-v7:$supportLib7") {
-        exclude module: 'support-v4'
-    }
-    implementation "com.android.support.constraint:constraint-layout:${constraint_layout}"
-    implementation "com.android.support:multidex:${multidex_version}"
-    implementation "com.android.support:design:${design}"
-    implementation "com.google.android.gms:play-services-location:${play_service}"
-    implementation "com.google.android.gms:play-services-maps:${play_service}"
+    api "com.google.android.gms:play-services-location:${play_service}"
+    api "com.google.android.gms:play-services-maps:${play_service}"
 
-    implementation "pub.devrel:easypermissions:${easyPermissions}"
-    
-    implementation "com.google.maps.android:android-maps-utils:${maps_utils}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${play_service}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutine}"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine}"
+
+    api "com.google.code.gson:gson:${gson}"
+
+    api "com.squareup.retrofit2:retrofit:${retrofit}"
+    api "com.squareup.retrofit2:converter-gson:${retrofit}"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofit_coroutine}"
+
+    api "com.github.grapesnberries:curlloggerinterceptor:${curl}"
 }
 
 kotlin {

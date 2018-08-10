@@ -5,8 +5,8 @@ import android.location.Location
 import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
-import com.demo.mvp.algorithm.TravelMode
 import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.algorithm.TravelMode
 
 interface FindLocationContract {
     interface Viewer : BaseViewer<Presenter> {

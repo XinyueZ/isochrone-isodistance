@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.demo.mvp.R
-import com.demo.mvp.algorithm.TravelMode
 import com.demo.mvp.databinding.ActivityMainBinding
 import com.demo.mvp.inject
+import isochrone.isodistance.android.algorithm.TravelMode
 
 class MainActivity : AppCompatActivity(), MainContract.Viewer {
 

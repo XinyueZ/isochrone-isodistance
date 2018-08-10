@@ -2,7 +2,7 @@ package com.demo.mvp.findlocation
 
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
-import com.demo.mvp.algorithm.TravelMode
+import isochrone.isodistance.android.algorithm.TravelMode
 
 interface MainContract {
     interface Viewer : BaseViewer<MainContract.Presenter> {

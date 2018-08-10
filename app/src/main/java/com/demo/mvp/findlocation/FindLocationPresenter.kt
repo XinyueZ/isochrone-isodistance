@@ -4,9 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Looper
 import android.util.Log
-import com.demo.mvp.algorithm.getIsochrone
-import com.demo.mvp.algorithm.pretty
-import com.demo.mvp.net.CoroutinesContextProvider
 import com.demo.mvp.provideGoogleApiKey
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
@@ -20,6 +17,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.algorithm.getIsochrone
+import isochrone.isodistance.android.algorithm.pretty
+import isochrone.isodistance.android.net.CoroutinesContextProvider
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
