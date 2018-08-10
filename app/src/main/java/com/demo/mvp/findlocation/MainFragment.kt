@@ -12,11 +12,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.maps.model.Polygon
-import com.google.android.gms.maps.model.PolygonOptions
+import com.google.android.gms.maps.model.*
 import isochrone.isodistance.android.algorithm.TravelMode
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -169,7 +165,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                         .strokeColor(c)
                         .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT + 1))
+                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.BICYCLING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)

@@ -1,4 +1,4 @@
-package isochrone.isodistance.android.net
+package isochrone.isodistance.android.utils
 
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI

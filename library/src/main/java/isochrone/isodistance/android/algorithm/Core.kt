@@ -4,19 +4,15 @@ import android.util.Log
 import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.matrix.Matrix
-import isochrone.isodistance.android.net.CoroutinesContextProvider
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.net.provideApi
+import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.experimental.channels.ProducerScope
 import kotlinx.coroutines.experimental.channels.produce
 import retrofit2.Response
 import java.io.IOException
-import java.lang.Math.PI
-import java.lang.Math.asin
-import java.lang.Math.atan2
-import java.lang.Math.toDegrees
-import java.lang.Math.toRadians
-import java.util.Arrays
+import java.lang.Math.*
+import java.util.*
 import kotlin.math.cos
 import kotlin.math.sin
 
