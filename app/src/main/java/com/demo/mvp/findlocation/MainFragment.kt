@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.location.Location
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
+import android.support.v4.graphics.ColorUtils
 import android.util.Log
 import android.widget.Toast
 import com.demo.mvp.R
@@ -12,7 +13,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.Polygon
+import com.google.android.gms.maps.model.PolygonOptions
 import isochrone.isodistance.android.algorithm.TravelMode
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -20,7 +25,7 @@ import pub.devrel.easypermissions.EasyPermissions
 private const val PRQ_FINE_LOCATION = 0x0000002
 
 class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
-    EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
+        EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
     private var polyDriving: Polygon? = null
@@ -50,11 +55,11 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         location?.let {
             map?.moveToMarker(LatLng(it.latitude, it.longitude))
             Toast.makeText(context, "Updated current location.", Toast.LENGTH_SHORT)
-                .show()
+                    .show()
 
             view?.let { view ->
                 Snackbar.make(view, "Refresh location after second(s).", Snackbar.LENGTH_SHORT)
-                    .show()
+                        .show()
             }
         }
     }
@@ -62,18 +67,18 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     @AfterPermissionGranted(PRQ_FINE_LOCATION)
     override fun getCurrentLocation() {
         if (EasyPermissions.hasPermissions(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                )
         ) {
             getMapAsync(this)
             presenter?.findLocation()
         } else {
             EasyPermissions.requestPermissions(
-                this,
-                "This demo needs location permission.",
-                PRQ_FINE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                    this,
+                    "This demo needs location permission.",
+                    PRQ_FINE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
             )
         }
     }
@@ -89,7 +94,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     override fun canNotShowSettingDialog() {
         // For demo, I ignore here.
         Toast.makeText(context, "Can not show setting dialog.", Toast.LENGTH_LONG)
-            .show()
+                .show()
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
@@ -136,8 +141,8 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
             }
         }
         addMarker(
-            MarkerOptions().position(latLng)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                MarkerOptions().position(latLng)
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
         if (anim) animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
@@ -148,44 +153,44 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
             TravelMode.DRIVING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_driving)
                 polyDriving = map?.addPolygon(
-                    PolygonOptions()
-                        .addAll(points.asList())
-                        .fillColor(c - ALPHA_ADJUSTMENT)
-                        .strokeColor(c)
-                        .strokeWidth(5f)
+                        PolygonOptions()
+                                .addAll(points.asList())
+                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
+                                .strokeColor(c)
+                                .strokeWidth(5f)
                 )
                 map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.TRANSIT -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
                 polyTransit = map?.addPolygon(
-                    PolygonOptions()
-                        .addAll(points.asList())
-                        .fillColor(c - ALPHA_ADJUSTMENT)
-                        .strokeColor(c)
-                        .strokeWidth(5f)
+                        PolygonOptions()
+                                .addAll(points.asList())
+                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
+                                .strokeColor(c)
+                                .strokeWidth(5f)
                 )
                 map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.BICYCLING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)
                 polyBicycling = map?.addPolygon(
-                    PolygonOptions()
-                        .addAll(points.asList())
-                        .fillColor(c - ALPHA_ADJUSTMENT)
-                        .strokeColor(c)
-                        .strokeWidth(5f)
+                        PolygonOptions()
+                                .addAll(points.asList())
+                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
+                                .strokeColor(c)
+                                .strokeWidth(5f)
                 )
                 map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.WALKING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_walking)
                 polyWalking = map?.addPolygon(
-                    PolygonOptions()
-                        .addAll(points.asList())
-                        .fillColor(c - ALPHA_ADJUSTMENT)
-                        .strokeColor(c)
-                        .strokeWidth(5f)
+                        PolygonOptions()
+                                .addAll(points.asList())
+                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
+                                .strokeColor(c)
+                                .strokeWidth(5f)
                 )
                 map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
@@ -193,7 +198,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     }
 
     companion object {
-        private const val ALPHA_ADJUSTMENT = 0x77000000 * 4
+        private const val ALPHA_ADJUSTMENT = 15
         private const val DEFAULT_ZOOM = 14f
         private const val DEFAULT_ZOOM_OUT = -1f
     }

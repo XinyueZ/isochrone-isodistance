@@ -11,8 +11,11 @@ import kotlinx.coroutines.experimental.channels.ProducerScope
 import kotlinx.coroutines.experimental.channels.produce
 import retrofit2.Response
 import java.io.IOException
-import java.lang.Math.*
-import java.util.*
+import java.lang.Math.PI
+import java.lang.Math.asin
+import java.lang.Math.atan2
+import java.lang.Math.toDegrees
+import java.lang.Math.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -118,6 +121,7 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
         }
         when (sortResult) {
             true -> isoData?.let { isoD ->
+                // TODO There's a potential crash when sorting, plz. check it out.
                 (0 until numberOfAngles).forEach {
                     val result = queryGeocodeAddress(isoD.first[it], key)
                     if (result is Result.Success) {
@@ -214,7 +218,7 @@ private fun getBearing(origin: LatLng, destination: LatLng): Double {
 private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
     iso.map { getBearing(origin, it) }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
-fun <T> Array<T>.pretty() = Arrays.toString(this)
+fun <T> Array<T>.pretty() = java.util.Arrays.toString(this)
 
 private inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error): Result<E> {
     if (isSuccessful) {

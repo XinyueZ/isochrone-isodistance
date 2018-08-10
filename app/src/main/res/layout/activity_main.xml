@@ -1,164 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.demo.mvp.findlocation.MainActivity">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.demo.mvp.findlocation.MainActivity">
 
     <data>
 
         <import type="android.view.ViewGroup.LayoutParams"/>
 
         <variable
-            name="findLocationViewer"
-            type="com.demo.mvp.findlocation.FindLocationContract.Viewer"/>
+                name="findLocationViewer"
+                type="com.demo.mvp.findlocation.FindLocationContract.Viewer"/>
 
         <variable
-            name="mainViewer"
-            type="com.demo.mvp.findlocation.MainContract.Viewer"/>
+                name="mainViewer"
+                type="com.demo.mvp.findlocation.MainContract.Viewer"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true">
 
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/appbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
 
         <fragment
-            android:id="@+id/main_fragment"
-            android:name="com.demo.mvp.findlocation.MainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar"/>
+                android:id="@+id/main_fragment"
+                android:name="com.demo.mvp.findlocation.MainFragment"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/appbar"/>
 
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="@android:color/black"
-            android:text="@string/duration_minutes_to_target"
-            app:layout_constraintBottom_toTopOf="@+id/duration_minutes_selector"
-            app:layout_constraintEnd_toEndOf="@+id/duration_minutes_selector"
-            app:layout_constraintStart_toStartOf="parent"/>
-
-        <NumberPicker
-            android:id="@+id/duration_minutes_selector"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/darker_gray"
-            android:onValueChange="@{(v, oldValue, newValue) -> mainViewer.changeDurationMinutes(newValue)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"/>
-
-        <LinearLayout
-            android:id="@+id/location_group"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/travel_modes_group"
-            app:layout_constraintStart_toStartOf="@+id/travel_modes_group">
-
-            <ProgressBar
-                android:id="@+id/pb"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_height="5dp"
-                android:layout_gravity="top"
-                android:layout_width="match_parent"
-                android:indeterminate="true"
-                android:paddingEnd="@dimen/activity_horizontal_margin"
-                android:paddingStart="@dimen/activity_horizontal_margin"
-                android:theme="@style/AppTheme.Progress"
-                android:visibility="invisible"/>
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> findLocationViewer.getCurrentLocation()}"
-                app:srcCompat="@android:drawable/ic_dialog_map"
-                app:useCompatPadding="true"/>
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:text="@string/duration_minutes_to_target"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintBottom_toTopOf="@+id/duration_minutes_selector"
+                app:layout_constraintEnd_toEndOf="@+id/duration_minutes_selector"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <NumberPicker
+                android:id="@+id/duration_minutes_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:onValueChange="@{(v, oldValue, newValue) -> mainViewer.changeDurationMinutes(newValue)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+                android:id="@+id/location_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/travel_modes_group"
+                app:layout_constraintStart_toStartOf="@+id/travel_modes_group">
+
+            <ProgressBar
+                    android:id="@+id/pb"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_height="5dp"
+                    android:layout_gravity="top"
+                    android:layout_width="match_parent"
+                    android:indeterminate="true"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:theme="@style/AppTheme.Progress"
+                    android:visibility="invisible"/>
+
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> findLocationViewer.getCurrentLocation()}"
+                    app:srcCompat="@android:drawable/ic_dialog_map"
+                    app:useCompatPadding="true"/>
 
         </LinearLayout>
 
 
         <android.support.design.chip.ChipGroup
-            android:id="@+id/travel_modes_group"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/location_group"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <android.support.design.chip.Chip
-                android:id="@+id/driving_mode"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:id="@+id/travel_modes_group"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{() -> mainViewer.turnDrivingMode()}"
-                android:text="@string/travel_mode_driving"
-                app:checkedIcon="@drawable/ic_drive_checked"
-                app:checkedIconVisible="true"
-                app:chipIcon="@drawable/ic_drive"
-                app:chipIconVisible="true"/>
+                app:layout_constraintBottom_toTopOf="@+id/location_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
             <android.support.design.chip.Chip
-                android:id="@+id/transit_mode"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> mainViewer.turnTransitMode()}"
-                android:text="@string/travel_mode_transit"
-                app:checkedIcon="@drawable/ic_transit_checked"
-                app:checkedIconVisible="true"
-                app:chipIcon="@drawable/ic_transit"
-                app:chipIconVisible="true"/>
+                    android:id="@+id/driving_mode"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> mainViewer.turnDrivingMode()}"
+                    android:text="@string/travel_mode_driving"
+                    app:checkedIcon="@drawable/ic_drive_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_drive"
+                    app:chipIconVisible="true"/>
 
             <android.support.design.chip.Chip
-                android:id="@+id/bicycling_mode"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> mainViewer.turnBicyclingMode()}"
-                android:text="@string/travel_mode_bicycling"
-                app:checkedIcon="@drawable/ic_bicycling_checked"
-                app:checkedIconVisible="true"
-                app:chipIcon="@drawable/ic_bicycling"
-                app:chipIconVisible="true"/>
+                    android:id="@+id/transit_mode"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> mainViewer.turnTransitMode()}"
+                    android:text="@string/travel_mode_transit"
+                    app:checkedIcon="@drawable/ic_transit_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_transit"
+                    app:chipIconVisible="true"/>
 
             <android.support.design.chip.Chip
-                android:id="@+id/walking_mode"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:onClick="@{() -> mainViewer.turnWalkingMode()}"
-                android:text="@string/travel_mode_walking"
-                app:checkedIcon="@drawable/ic_walking_checked"
-                app:checkedIconVisible="true"
-                app:chipIcon="@drawable/ic_walking"
-                app:chipIconVisible="true"/>
+                    android:id="@+id/bicycling_mode"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{() -> mainViewer.turnBicyclingMode()}"
+                    android:text="@string/travel_mode_bicycling"
+                    app:checkedIcon="@drawable/ic_bicycling_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_bicycling"
+                    app:chipIconVisible="true"/>
+
+            <android.support.design.chip.Chip
+                    android:id="@+id/walking_mode"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:onClick="@{() -> mainViewer.turnWalkingMode()}"
+                    android:text="@string/travel_mode_walking"
+                    app:checkedIcon="@drawable/ic_walking_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_walking"
+                    app:chipIconVisible="true"/>
 
         </android.support.design.chip.ChipGroup>
     </android.support.constraint.ConstraintLayout>

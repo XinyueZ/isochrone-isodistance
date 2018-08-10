@@ -64,6 +64,22 @@ dependencies {
     api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofit_coroutine}"
 
     api "com.github.grapesnberries:curlloggerinterceptor:${curl}"
+
+    // unit testing
+    testApi "junit:junit:$junit"
+    testApi "org.mockito:mockito-inline:$mockito_inline"
+    testApi "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    testApi "org.assertj:assertj-core:$assertj_core"
+    testApi "io.kotlintest:kotlintest:$kotlinTest"
+
+    // instrumentation & UI testing
+    androidTestApi "com.android.support.test:runner:$test_runner"
+    androidTestApi "com.android.support.test:rules:$test_rules"
+    androidTestApi "com.android.support.test.espresso:espresso-core:$espresso_core"
+    androidTestApi "com.android.support.test.espresso:espresso-contrib:$espresso_core"
+    androidTestApi "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    androidTestApi "org.mockito:mockito-android:$mockito_android"
+    androidTestApi "io.kotlintest:kotlintest:$kotlinTest"
 }
 
 kotlin {

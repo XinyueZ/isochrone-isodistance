@@ -8,7 +8,14 @@ import com.demo.mvp.provideGoogleApiKey
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.CommonStatusCodes
 import com.google.android.gms.common.api.ResolvableApiException
-import com.google.android.gms.location.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationAvailability
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationSettingsRequest
+import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.algorithm.getIsochrone
 import isochrone.isodistance.android.algorithm.pretty
@@ -105,7 +112,7 @@ class FindLocationPresenter(
         launch(CoroutinesContextProvider.main) {
             mainPresenter.travelModes.forEach { travelModel ->
                 mainPresenter.runFindLocationProgress()
-                getIsochrone(provideGoogleApiKey(context), travelModel, target, mainPresenter.durationMinutes, sortResult = true).let {
+                getIsochrone(provideGoogleApiKey(context), travelModel, target, mainPresenter.durationMinutes, sortResult = false).let {
                     channel = it
                     channel?.consumeEach {
                         Log.d("algorithm", "rad1: ${it.pretty()}")
