@@ -59,102 +59,101 @@ fun getIsochrone(
     produce(CoroutinesContextProvider.io) {
         val originGeocode = queryGeocodeAddress(originAddress, key)
         if (originGeocode is Result.Success) {
-            val origin = originGeocode.content.toLatLng()
-            getIsochrone(
-                travelMode,
-                origin,
-                numberOfAngles,
-                durationMinutes,
-                key,
-                tolerance,
-                sortResult
-            )
+            originGeocode.content.toLatLng()?.let {
+                getIsochrone(
+                    travelMode,
+                    it,
+                    numberOfAngles,
+                    durationMinutes,
+                    key,
+                    tolerance,
+                    sortResult
+                )
+            }
         }
     }
 
 private suspend fun ProducerScope<Array<LatLng>>.getIsochrone(
     travelMode: TravelMode,
-    origin: LatLng?,
+    origin: LatLng,
     numberOfAngles: Int,
     durationMinutes: Int,
     key: String,
     tolerance: Double,
     sortResult: Boolean
 ) {
-    origin?.let {
-        var rad1 = Array(numberOfAngles) { durationMinutes / 12f.toDouble() }
-        Log.d(TAG, "rad1: ${rad1.pretty()}")
+    var rad1 = Array(numberOfAngles) { durationMinutes / 12f.toDouble() }
+    Log.d(TAG, "rad1: ${rad1.pretty()}")
 
-        val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
-        Log.d(TAG, "phi1: ${phi1.pretty()}")
+    val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
+    Log.d(TAG, "phi1: ${phi1.pretty()}")
 
-        val data0 = Array(numberOfAngles) { "" }
-        Log.d(TAG, "data0: ${data0.pretty()}")
+    val data0 = Array(numberOfAngles) { "" }
+    Log.d(TAG, "data0: ${data0.pretty()}")
 
-        var rad0 = Array(numberOfAngles) { 0f.toDouble() }
-        Log.d(TAG, "rad0: ${rad0.pretty()}")
+    var rad0 = Array(numberOfAngles) { 0f.toDouble() }
+    Log.d(TAG, "rad0: ${rad0.pretty()}")
 
-        val rmin = Array(numberOfAngles) { 0f.toDouble() }
-        Log.d(TAG, "rmin: ${rmin.pretty()}")
+    val rmin = Array(numberOfAngles) { 0f.toDouble() }
+    Log.d(TAG, "rmin: ${rmin.pretty()}")
 
-        val rmax = Array(numberOfAngles) { 1.25f.toDouble() * durationMinutes }
-        Log.d(TAG, "rmax: ${rmax.pretty()}")
+    val rmax = Array(numberOfAngles) { 1.25f.toDouble() * durationMinutes }
+    Log.d(TAG, "rmax: ${rmax.pretty()}")
 
-        val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
-        Log.d(TAG, "iso: ${iso.pretty()}")
+    val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
+    Log.d(TAG, "iso: ${iso.pretty()}")
 
-        var isoData: Pair<Array<String>, Array<Double>>? = null
+    var isoData: Pair<Array<String>, Array<Double>>? = null
 
-        while (rad0.zip(rad1).map { it.first - it.second }.sum() != 0f.toDouble()) {
-            val rad2 = Array(numberOfAngles) { 0f.toDouble() }
-            Log.d(TAG, "rad2: ${rad2.pretty()}")
+    while (rad0.zip(rad1).map { it.first - it.second }.sum() != 0f.toDouble()) {
+        val rad2 = Array(numberOfAngles) { 0f.toDouble() }
+        Log.d(TAG, "rad2: ${rad2.pretty()}")
 
-            (0 until numberOfAngles).forEach { i ->
-                iso[i] = selectDestination(it, phi1[i], rad1[i])
-            }
+        (0 until numberOfAngles).forEach { i ->
+            iso[i] = selectDestination(origin, phi1[i], rad1[i])
+        }
 
-            with(travelMode.queryMatrix(origin, iso, key)) {
-                if (this is Result.Success) {
-                    this.content.calculateAddressesDurations()?.let { data ->
-                        isoData = data
-                        (0 until numberOfAngles).forEach { i ->
-                            if ((data.second[i] < (durationMinutes - tolerance)) && (!data0[i].contentEquals(
-                                    data.first[i]
-                                ))
-                            ) {
-                                rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
-                                rmin[i] = rad1[i]
-                            } else if ((data.second[i] > (durationMinutes + tolerance)) && (!data0[i].contentEquals(
-                                    data.first[i]
-                                ))
-                            ) {
-                                rad2[i] = (rmin[i] + rad1[i]) / 2f.toDouble()
-                                rmax[i] = rad1[i]
-                            } else {
-                                rad2[i] = rad1[i]
-                            }
-                            data0[i] = data.first[i]
+        with(travelMode.queryMatrix(origin, iso, key)) {
+            if (this is Result.Success) {
+                this.content.calculateAddressesDurations()?.let { data ->
+                    isoData = data
+                    (0 until numberOfAngles).forEach { i ->
+                        if ((data.second[i] < (durationMinutes - tolerance)) && (!data0[i].contentEquals(
+                                data.first[i]
+                            ))
+                        ) {
+                            rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
+                            rmin[i] = rad1[i]
+                        } else if ((data.second[i] > (durationMinutes + tolerance)) && (!data0[i].contentEquals(
+                                data.first[i]
+                            ))
+                        ) {
+                            rad2[i] = (rmin[i] + rad1[i]) / 2f.toDouble()
+                            rmax[i] = rad1[i]
+                        } else {
+                            rad2[i] = rad1[i]
                         }
-                        rad0 = rad1
-                        rad1 = rad2
+                        data0[i] = data.first[i]
                     }
+                    rad0 = rad1
+                    rad1 = rad2
                 }
             }
         }
-        when (sortResult) {
-            true -> isoData?.let { isoD ->
-                // TODO There's a potential crash when sorting, plz. check it out. java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
-                (0 until numberOfAngles).forEach {
-                    val result = queryGeocodeAddress(isoD.first[it], key)
-                    if (result is Result.Success) {
-                        iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
-                    }
+    }
+    when (sortResult) {
+        true -> isoData?.let { isoD ->
+            // TODO There's a potential crash when sorting, plz. check it out. java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+            (0 until numberOfAngles).forEach {
+                val result = queryGeocodeAddress(isoD.first[it], key)
+                if (result is Result.Success) {
+                    iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
                 }
-                send(sortPoints(origin, iso))
             }
-            else -> {
-                send(iso)
-            }
+            send(sortPoints(origin, iso))
+        }
+        else -> {
+            send(iso)
         }
     }
 }

@@ -119,7 +119,7 @@ class FindLocationPresenter(
                     target,
                     mainPresenter.durationMinutes,
                     sortResult = false,
-                    numberOfAngles = 48,
+                    numberOfAngles = 12,
                     tolerance = 0.005
                 ).let {
                     channel = it
