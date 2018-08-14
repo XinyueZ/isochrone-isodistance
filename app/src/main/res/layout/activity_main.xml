@@ -112,7 +112,7 @@
                 android:layout_marginBottom="5dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:singleSelection="true">
-            ​
+
             <android.support.design.chip.Chip
                     android:id="@+id/isochrone_type"
                     style="@style/Widget.MaterialComponents.Chip.Choice"
@@ -130,7 +130,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/type_isodistance"/>
 
-            ​
         </android.support.design.chip.ChipGroup>
 
 
