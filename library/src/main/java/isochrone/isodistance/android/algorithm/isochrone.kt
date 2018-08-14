@@ -19,13 +19,6 @@ import java.lang.Math.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 
-private const val EARTH_RADIUS: Double = 3963.1676
-
-private const val TOLERANCE = 0.01
-private const val DEFAULT_NUMBER_OF_ANGLES = 12
-private const val SORT_RESULT = false
-const val TAG = "iso-algorithm"
-
 fun getIsochrone(
     key: String,
     travelMode: TravelMode,
