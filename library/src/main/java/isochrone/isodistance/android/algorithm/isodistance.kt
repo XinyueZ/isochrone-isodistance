@@ -44,9 +44,9 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsodistance(
 ) {
     createPosition(numberOfAngles).run {
         val targetDistance = Math.max(0.toDouble(), distance)
-        val distances = createDistances(this, origin)
         var c = 0
         while (c <= numberOfAngles) {
+            val distances = createDistances(this, origin)
             if (c == numberOfAngles || distances.second.isEmpty()) {
                 Log.d(TAG, "c@$c")
                 send(this.map { it.latLng }.toTypedArray())
@@ -54,11 +54,11 @@ private suspend fun ProducerScope<Array<LatLng>>.getIsodistance(
                 with(travelMode.queryMatrix(origin, distances.second, key)) {
                     if (this is Result.Success) {
                         var i = 0
-                        this.content.rows?.first()?.elements?.forEach { element ->
+                        content.rows?.first()?.elements?.forEach { element ->
                             if (element.status.contentEquals("OK")) {
                                 val distanceValue = element.distance.value.toDouble()
                                 val position = this@run[distances.first[i]]
-                                if (distanceValue > targetDistance &&
+                                if (distanceValue < targetDistance &&
                                         (position.min.radius == 0.0 || position.radius > position.min.radius && distanceValue > position.min.value)) {
                                     position.min.radius = position.radius
                                     position.min.value = distanceValue
@@ -124,7 +124,6 @@ private fun createPosition(numberOfAngles: Int) = Array(numberOfAngles) {
             max = Limit(0.0, 0.0),
             radius = 0.01,
             latLng = LatLng(0.0, 0.0),
-            distance = 0.0,
             found = false
     )
 }
@@ -135,7 +134,6 @@ private class Position(
     var max: Limit,
     var radius: Double,
     var latLng: LatLng,
-    var distance: Double,
     var found: Boolean
 )
 
