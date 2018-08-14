@@ -2,7 +2,6 @@ package isochrone.isodistance.android.algorithm
 
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
-import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
@@ -207,10 +206,6 @@ private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
     }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
 fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
-
-private fun Geocode.toLatLng(): LatLng? = results?.let { results[0] }?.run {
-    LatLng(geometry.location.lat, geometry.location.lng)
-}
 
 enum class TravelMode(val value: String) {
     DRIVING("driving"),
