@@ -206,4 +206,3 @@ private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
     }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
 fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
-

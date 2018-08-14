@@ -51,6 +51,6 @@ interface MainContract {
 
         var durationMinutesOrMeters: Int
 
-        var type: Int //0: Isochrone, 1: Isodistance: For sample, use int directly.
+        var type: Int // 0: Isochrone, 1: Isodistance: For sample, use int directly.
     }
 }

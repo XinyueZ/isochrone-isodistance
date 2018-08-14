@@ -10,7 +10,7 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
 
     override var durationMinutesOrMeters = 15
 
-    override var type: Int = 0 //0: Isochrone, 1: Isodistance: For sample, use int directly.
+    override var type: Int = 0 // 0: Isochrone, 1: Isodistance: For sample, use int directly.
 
     init {
         view.setPresenter(this)

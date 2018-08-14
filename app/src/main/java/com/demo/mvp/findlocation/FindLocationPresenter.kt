@@ -49,13 +49,13 @@ private const val MAX_WAIT_TIME = UPDATE_INTERVAL * 3 // Every 3 minutes.
 const val REQUEST_CHECK_SETTINGS = 0x0000009
 
 class FindLocationPresenter(
-        private val view: FindLocationContract.Viewer,
-        private val mainPresenter: MainPresenter,
-        private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
-                view.getViewContext()
-        ),
-        private val localReq: LocationRequest = LocationRequest.create(),
-        private val localCallback: LocationCallback = FindCallback(view)
+    private val view: FindLocationContract.Viewer,
+    private val mainPresenter: MainPresenter,
+    private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
+            view.getViewContext()
+    ),
+    private val localReq: LocationRequest = LocationRequest.create(),
+    private val localCallback: LocationCallback = FindCallback(view)
 ) : FindLocationContract.Presenter {
     init {
         view.setPresenter(this)
@@ -121,7 +121,7 @@ class FindLocationPresenter(
                 mainPresenter.runFindLocationProgress()
                 Log.d(TAG, "type: ${mainPresenter.type}")
 
-                if (mainPresenter.type == 0) {//0: Isochrone, 1: Isodistance: For sample, use int directly.
+                if (mainPresenter.type == 0) { // 0: Isochrone, 1: Isodistance: For sample, use int directly.
                     getIsochrone(
                             provideGoogleApiKey(context),
                             travelModel,
