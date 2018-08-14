@@ -11,9 +11,17 @@ interface MainContract {
 
         fun dismissProgress()
 
+        fun enableIsochrone()
+
+        fun enableIsodistance()
+
         fun enableFindLocation()
 
         fun enableTravelModes()
+
+        fun disableIsochrone()
+
+        fun disableIsodistance()
 
         fun disableFindLocation()
 
@@ -27,6 +35,10 @@ interface MainContract {
 
         fun turnWalkingMode()
 
+        fun turnIsochrone()
+
+        fun turnIsodistance()
+
         fun changeDurationMinutes(min: Int)
     }
 
@@ -37,6 +49,8 @@ interface MainContract {
 
         var travelModes: MutableSet<TravelMode>
 
-        var durationMinutes: Int
+        var durationMinutesOrMeters: Int
+
+        var type: Int //0: Isochrone, 1: Isodistance: For sample, use int directly.
     }
 }

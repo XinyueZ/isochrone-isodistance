@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
             maxValue = 24 * 60
             wrapSelectorWheel = true
         }
-        presenter?.durationMinutes = resources.getInteger(R.integer.default_duration_minutes)
+        presenter?.durationMinutesOrMeters = resources.getInteger(R.integer.default_duration_minutes)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -52,6 +52,22 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
 
     override fun disableFindLocation() {
         binding?.fab?.isEnabled = false
+    }
+
+    override fun enableIsochrone() {
+        binding?.isochroneType?.isEnabled = true
+    }
+
+    override fun enableIsodistance() {
+        binding?.isodistanceType?.isEnabled = true
+    }
+
+    override fun disableIsochrone() {
+        binding?.isochroneType?.isEnabled = false
+    }
+
+    override fun disableIsodistance() {
+        binding?.isodistanceType?.isEnabled = false
     }
 
     override fun setPresenter(presenter: MainContract.Presenter) {
@@ -78,8 +94,24 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
         else presenter?.travelModes?.remove(TravelMode.WALKING)
     }
 
+    override fun turnIsochrone() {
+        if (binding?.isochroneType?.isChecked == true) presenter?.type = 0
+        else {
+            binding?.isodistanceType?.isChecked = true
+            turnIsodistance()
+        }
+    }
+
+    override fun turnIsodistance() {
+        if (binding?.isodistanceType?.isChecked == true) presenter?.type = 1
+        else {
+            binding?.isochroneType?.isChecked = true
+            turnIsochrone()
+        }
+    }
+
     override fun changeDurationMinutes(min: Int) {
-        presenter?.durationMinutes = min
+        presenter?.durationMinutesOrMeters = min
     }
 
     override fun enableTravelModes() {

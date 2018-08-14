@@ -73,8 +73,8 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/travel_modes_group"
-                app:layout_constraintStart_toStartOf="@+id/travel_modes_group">
+                app:layout_constraintEnd_toEndOf="@+id/type_group"
+                app:layout_constraintStart_toStartOf="@+id/type_group">
 
             <ProgressBar
                     android:id="@+id/pb"
@@ -100,6 +100,38 @@
                     app:useCompatPadding="true"/>
 
         </LinearLayout>
+
+        <android.support.design.chip.ChipGroup
+                android:id="@+id/type_group"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/travel_modes_group"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:singleSelection="true">
+            ​
+            <android.support.design.chip.Chip
+                    android:id="@+id/isochrone_type"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:onClick="@{() -> mainViewer.turnIsochrone()}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/type_isochrone"/>
+
+            <android.support.design.chip.Chip
+                    android:id="@+id/isodistance_type"
+                    android:onClick="@{() -> mainViewer.turnIsodistance()}"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/type_isodistance"/>
+
+            ​
+        </android.support.design.chip.ChipGroup>
 
 
         <android.support.design.chip.ChipGroup

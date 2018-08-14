@@ -8,7 +8,9 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
         get() = _travelModes
         set(_) {}
 
-    override var durationMinutes = 15
+    override var durationMinutesOrMeters = 15
+
+    override var type: Int = 0 //0: Isochrone, 1: Isodistance: For sample, use int directly.
 
     init {
         view.setPresenter(this)
@@ -19,6 +21,8 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
             showProgress()
             disableFindLocation()
             disableTravelModes()
+            disableIsochrone()
+            disableIsodistance()
         }
     }
 
@@ -27,6 +31,8 @@ class MainPresenter(private val view: MainContract.Viewer) : MainContract.Presen
             dismissProgress()
             enableFindLocation()
             enableTravelModes()
+            enableIsochrone()
+            enableIsodistance()
         }
     }
 }

@@ -19,6 +19,7 @@ import com.google.android.gms.location.LocationSettingsStatusCodes
 import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.getIsochrone
+import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
@@ -48,13 +49,13 @@ private const val MAX_WAIT_TIME = UPDATE_INTERVAL * 3 // Every 3 minutes.
 const val REQUEST_CHECK_SETTINGS = 0x0000009
 
 class FindLocationPresenter(
-    private val view: FindLocationContract.Viewer,
-    private val mainPresenter: MainPresenter,
-    private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
-        view.getViewContext()
-    ),
-    private val localReq: LocationRequest = LocationRequest.create(),
-    private val localCallback: LocationCallback = FindCallback(view)
+        private val view: FindLocationContract.Viewer,
+        private val mainPresenter: MainPresenter,
+        private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
+                view.getViewContext()
+        ),
+        private val localReq: LocationRequest = LocationRequest.create(),
+        private val localCallback: LocationCallback = FindCallback(view)
 ) : FindLocationContract.Presenter {
     init {
         view.setPresenter(this)
@@ -76,26 +77,26 @@ class FindLocationPresenter(
 
         requestLocation()
         LocationServices.getSettingsClient(view.getViewActivity())
-            .checkLocationSettings(
-                LocationSettingsRequest.Builder().setAlwaysShow(true).setNeedBle(
-                    true
-                ).addLocationRequest(localReq).build()
-            )
-            .addOnFailureListener {
-                val exp = it as ApiException
-                when (exp.statusCode) {
-                    CommonStatusCodes.RESOLUTION_REQUIRED -> {
-                        val resolvable = exp as ResolvableApiException
-                        resolvable.startResolutionForResult(
-                            view.getViewActivity(),
-                            REQUEST_CHECK_SETTINGS
-                        )
-                    }
-                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                        view.canNotShowSettingDialog()
+                .checkLocationSettings(
+                        LocationSettingsRequest.Builder().setAlwaysShow(true).setNeedBle(
+                                true
+                        ).addLocationRequest(localReq).build()
+                )
+                .addOnFailureListener {
+                    val exp = it as ApiException
+                    when (exp.statusCode) {
+                        CommonStatusCodes.RESOLUTION_REQUIRED -> {
+                            val resolvable = exp as ResolvableApiException
+                            resolvable.startResolutionForResult(
+                                    view.getViewActivity(),
+                                    REQUEST_CHECK_SETTINGS
+                            )
+                        }
+                        LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                            view.canNotShowSettingDialog()
+                        }
                     }
                 }
-            }
     }
 
     @SuppressLint("MissingPermission")
@@ -109,24 +110,42 @@ class FindLocationPresenter(
         localClient.removeLocationUpdates(localCallback)
     }
 
+    @Volatile
+    private var findingIsochroneInProgress = false
+
     override fun findIsochrone(context: Context, target: LatLng) {
+        if (findingIsochroneInProgress) return
         launch(CoroutinesContextProvider.main) {
             mainPresenter.travelModes.forEach { travelModel ->
+                findingIsochroneInProgress = true
                 mainPresenter.runFindLocationProgress()
-                getIsochrone(
-                    provideGoogleApiKey(context),
-                    travelModel,
-                    target,
-                    mainPresenter.durationMinutes,
-                    sortResult = false,
-                    numberOfAngles = 12,
-                    tolerance = 0.005
-                ).let {
+                Log.d(TAG, "type: ${mainPresenter.type}")
+
+                if (mainPresenter.type == 0) {//0: Isochrone, 1: Isodistance: For sample, use int directly.
+                    getIsochrone(
+                            provideGoogleApiKey(context),
+                            travelModel,
+                            target,
+                            mainPresenter.durationMinutesOrMeters,
+                            sortResult = false,
+                            numberOfAngles = 12,
+                            tolerance = 0.005
+                    )
+                } else {
+                    getIsodistance(
+                            provideGoogleApiKey(context),
+                            travelModel,
+                            target,
+                            mainPresenter.durationMinutesOrMeters.toDouble(),
+                            8
+                    )
+                }.let {
                     channel = it
                     channel?.consumeEach {
                         Log.d(TAG, "rad1: ${it.pretty()}")
                         view.showPolygon(travelModel, it)
                         mainPresenter.finishFindLocationProgress()
+                        findingIsochroneInProgress = false
                     }
                 }
             }

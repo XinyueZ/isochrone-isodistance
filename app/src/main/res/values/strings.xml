@@ -4,7 +4,10 @@
     <string name="travel_mode_transit">transit</string>
     <string name="travel_mode_bicycling">bicycling</string>
     <string name="travel_mode_walking">walking</string>
-    <string name="duration_minutes_to_target">minutes</string>
+    <string name="duration_minutes_to_target">minutes or meters</string>
 
     <integer name="default_duration_minutes">30</integer>
+
+    <string name="type_isochrone">isochrone</string>
+    <string name="type_isodistance">isodistance</string>
 </resources>
