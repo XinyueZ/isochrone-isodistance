@@ -207,9 +207,3 @@ private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
 
 fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
 
-enum class TravelMode(val value: String) {
-    DRIVING("driving"),
-    TRANSIT("transit"),
-    BICYCLING("bicycling"),
-    WALKING("walking")
-}

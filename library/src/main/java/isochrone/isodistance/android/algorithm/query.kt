@@ -54,3 +54,10 @@ internal suspend fun queryMatrix(
 internal fun Geocode.toLatLng(): LatLng? = results?.let { results[0] }?.run {
     LatLng(geometry.location.lat, geometry.location.lng)
 }
+
+enum class TravelMode(val value: String) {
+    DRIVING("driving"),
+    TRANSIT("transit"),
+    BICYCLING("bicycling"),
+    WALKING("walking")
+}
