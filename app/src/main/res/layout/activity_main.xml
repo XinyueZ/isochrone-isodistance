@@ -120,6 +120,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    app:checkedIcon="@drawable/ic_check_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_check"
+                    app:chipIconVisible="true"
                     android:text="@string/type_isochrone"/>
 
             <android.support.design.chip.Chip
@@ -128,6 +132,10 @@
                     style="@style/Widget.MaterialComponents.Chip.Choice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:checkedIcon="@drawable/ic_check_checked"
+                    app:checkedIconVisible="true"
+                    app:chipIcon="@drawable/ic_check"
+                    app:chipIconVisible="true"
                     android:text="@string/type_isodistance"/>
 
         </android.support.design.chip.ChipGroup>
