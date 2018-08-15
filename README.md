@@ -27,7 +27,7 @@ getIsochrone(
 ```
 
 
-👍 isodistance, approximately equal distance to target.
+👍 *isodistance*, approximately equal distance to target.
 
 ``` kotlin
 getIsodistance(
