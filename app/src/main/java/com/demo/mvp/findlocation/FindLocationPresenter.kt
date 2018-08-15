@@ -119,7 +119,7 @@ class FindLocationPresenter(
             mainPresenter.travelModes.forEach { travelModel ->
                 findingIsochroneInProgress = true
                 mainPresenter.runFindLocationProgress()
-                Log.d(TAG, "type: ${mainPresenter.type}")
+                Log.d(TAG, "type: ${if (mainPresenter.type == 0) "isochrone" else "isodistance"}")
 
                 if (mainPresenter.type == 0) { // 0: Isochrone, 1: Isodistance: For sample, use int directly.
                     getIsochrone(
@@ -136,8 +136,10 @@ class FindLocationPresenter(
                             provideGoogleApiKey(context),
                             travelModel,
                             target,
-                            mainPresenter.durationMinutesOrMeters.toDouble(),
-                            8
+                            mainPresenter.durationMinutesOrMeters,
+                            sortResult = false,
+                            numberOfAngles = 12,
+                            tolerance = 0.005
                     )
                 }.let {
                     channel = it

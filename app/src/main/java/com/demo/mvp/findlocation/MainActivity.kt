@@ -23,12 +23,12 @@ class MainActivity : AppCompatActivity(), MainContract.Viewer {
         binding?.findLocationViewer =
                 supportFragmentManager.findFragmentById(R.id.main_fragment) as FindLocationContract.Viewer
         inject(this).also { it?.let { inject(binding?.findLocationViewer, it) } }
-        binding?.durationMinutesSelector?.apply {
-            minValue = resources.getInteger(R.integer.default_duration_minutes)
+        binding?.selector?.apply {
+            minValue = resources.getInteger(R.integer.default_duration_minutes_and_meters)
             maxValue = 24 * 60
             wrapSelectorWheel = true
         }
-        presenter?.durationMinutesOrMeters = resources.getInteger(R.integer.default_duration_minutes)
+        presenter?.durationMinutesOrMeters = resources.getInteger(R.integer.default_duration_minutes_and_meters)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
