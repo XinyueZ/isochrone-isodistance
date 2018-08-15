@@ -53,8 +53,8 @@
                 android:textColor="@android:color/black"
                 android:text="@string/duration_minutes_to_target"
                 android:background="@android:color/darker_gray"
-                app:layout_constraintBottom_toTopOf="@+id/duration_minutes_selector"
-                app:layout_constraintEnd_toEndOf="@+id/duration_minutes_selector"
+                app:layout_constraintBottom_toTopOf="@+id/selector"
+                app:layout_constraintEnd_toEndOf="@+id/selector"
                 app:layout_constraintStart_toStartOf="parent"/>
 
         <NumberPicker

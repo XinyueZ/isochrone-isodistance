@@ -15,6 +15,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
@@ -149,6 +150,14 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
     }
 
+    private fun makeBounds(latLngs: Array<LatLng>): LatLngBounds {
+        val builder = LatLngBounds.builder()
+        latLngs.forEach {
+            builder.include(it)
+        }
+        return builder.build()
+    }
+
     override fun showPolygon(travelMode: TravelMode, points: Array<LatLng>) {
         when (travelMode) {
             TravelMode.DRIVING -> {
@@ -160,7 +169,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.TRANSIT -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
@@ -171,7 +179,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.BICYCLING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)
@@ -182,7 +189,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
             }
             TravelMode.WALKING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_walking)
@@ -193,14 +199,14 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
-                map?.animateCamera(CameraUpdateFactory.zoomBy(DEFAULT_ZOOM_OUT))
+
             }
         }
+        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points),0))
     }
 
     companion object {
         private const val ALPHA_ADJUSTMENT = 15
         private const val DEFAULT_ZOOM = 14f
-        private const val DEFAULT_ZOOM_OUT = -1f
     }
 }
