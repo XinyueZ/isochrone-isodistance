@@ -15,7 +15,7 @@ import java.lang.Math.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 
-fun getIso(
+internal fun getIso(
     key: String,
     travelMode: TravelMode,
     origin: LatLng,
@@ -38,7 +38,7 @@ fun getIso(
             )
         }
 
-fun getIso(
+internal fun getIso(
     key: String,
     travelMode: TravelMode,
     originAddress: String,

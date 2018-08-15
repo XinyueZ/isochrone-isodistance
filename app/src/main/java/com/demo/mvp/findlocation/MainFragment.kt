@@ -199,10 +199,9 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
-
             }
         }
-        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points),0))
+        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points), 0))
     }
 
     companion object {
