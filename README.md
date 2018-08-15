@@ -5,15 +5,15 @@ Isochrone and Isodistance(Kotlin, Android)
 
 # Glossary
 
-isochrone = same duration from one start point
+isochrone = approximately equal time (minute) to target.
 
-isodistance = same distance from one start point
+isodistance = approximately equal distance (meter) to target.
 
 # Status of project
 
 👷 Run `./gradlew check`  or  `./gradlew check connectedCheck` to validate whole project including sample app and library firstly.
 
-👍 *isochrone*, is already done, it can be used directly.
+👍 *isochrone*, approximately equal time to target.
 
 ``` kotlin
 getIsochrone(
@@ -26,11 +26,22 @@ getIsochrone(
                     }
 ```
 
+
+👍 isodistance, approximately equal distance to target.
+
+``` kotlin
+getIsodistance(
+             /*API-KEY for matrix and geocode APIs*/,
+             "walking", // Travel mode
+             "Address or lat-lng", //Target location, for "current location" is a good use-case.
+             120).consumeEach { // 120 meters to target.
+                        Log.d(TAG, "rad1: ${it.pretty()}")
+                        // You can draw all points based on an Array<LatLng> .
+                    }
+```
+
+
 More info: FindLocationPresenter.kt
-
-![Sample isochrone](./medium/sample_isochrone.gif)
-
-👷🔧 🚧 isodistance, coming soon and still in planning. 
 
 # Setup
 
@@ -77,16 +88,9 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Start Android Studio
 
-# Reference & Learn
+# Show
 
-https://isochrone.dugwood.com/index.html 
-
-https://github.com/dugwood/isochrone-isodistance-with-google-maps
-
-http://drewfustin.com/isochrones/
-
-https://github.com/drewfustin/isocronut
-
+![Sample isochrone](./medium/sample.gif)
 
 # License
 
