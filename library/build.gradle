@@ -32,18 +32,10 @@ android {
     }
 }
 
-configurations.all { configuration ->
-    resolutionStrategy {
-        force "com.android.support:support-v4:$supportLib4",
-                "com.android.support:appcompat-v7:$supportLib7"
-    }
-}
-
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "com.google.android.gms:play-services-location:${play_service}"
     api "com.google.android.gms:play-services-maps:${play_service}"
 
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${play_service}"
@@ -64,15 +56,6 @@ dependencies {
     testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
     testImplementation "org.assertj:assertj-core:$assertj_core"
     testImplementation "io.kotlintest:kotlintest:$kotlinTest"
-
-    // instrumentation & UI testing
-    androidTestImplementation "com.android.support.test:runner:$test_runner"
-    androidTestImplementation "com.android.support.test:rules:$test_rules"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
-    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_core"
-    androidTestImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
-    androidTestImplementation "org.mockito:mockito-android:$mockito_android"
-    androidTestImplementation "io.kotlintest:kotlintest:$kotlinTest"
 }
 
 kotlin {

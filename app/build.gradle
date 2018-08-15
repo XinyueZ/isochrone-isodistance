@@ -58,6 +58,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":library")
 
+    implementation "com.google.android.gms:play-services-location:${play_service}"
+
     implementation "com.android.support:support-core-utils:$supportLib4"
     implementation "com.android.support:support-core-ui:$supportLib4"
     implementation "com.android.support:support-media-compat:$supportLib4"
@@ -73,6 +75,16 @@ dependencies {
     implementation "pub.devrel:easypermissions:${easyPermissions}"
     
     implementation "com.google.maps.android:android-maps-utils:${maps_utils}"
+
+
+    // instrumentation & UI testing
+    androidTestImplementation "com.android.support.test:runner:$test_runner"
+    androidTestImplementation "com.android.support.test:rules:$test_rules"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$espresso_core"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_core"
+    androidTestImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
+    androidTestImplementation "org.mockito:mockito-android:$mockito_android"
+    androidTestImplementation "io.kotlintest:kotlintest:$kotlinTest"
 }
 
 kotlin {
