@@ -55,7 +55,7 @@ dependencies {
     testImplementation "org.mockito:mockito-inline:$mockito_inline"
     testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
     testImplementation "org.assertj:assertj-core:$assertj_core"
-    testImplementation "io.kotlintest:kotlintest:$kotlinTest"
+    testImplementation "io.kotlintest:kotlintest-runner-junit5:$kotlin_test"
 }
 
 kotlin {
