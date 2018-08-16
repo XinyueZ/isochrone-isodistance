@@ -37,7 +37,7 @@ buildscript {
         // Test dependencies
         junit = "4.12"
         mockito_inline = "2.7.13"
-        mockito_kotlin = "1.5.0"
+        mockito_kotlin = "1+"
         assertj_core = "3.10.0"
 
         // Instrumentation-test dependencies
