@@ -94,7 +94,7 @@ from the ktlint [README](https://github.com/shyiko/ktlint/blob/master/README.md)
 
 - Start Android Studio
 
-# Show
+# Show(different result according to traffic status)
 
 ![Sample isochrone](./medium/sample.gif)
 
