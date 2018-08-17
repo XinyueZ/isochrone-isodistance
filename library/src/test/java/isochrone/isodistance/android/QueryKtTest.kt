@@ -30,20 +30,26 @@ import org.junit.Test
 import retrofit2.Response
 
 class QueryKtTest {
-    private val fakeOrigin = LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
-    private val fakeDestinations = arrayOf(LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()))
+    private val fakeOrigin =
+        LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+    private val fakeDestinations = arrayOf(
+        LatLng(Gen.double().random().first(), Gen.double().random().first()),
+        LatLng(Gen.double().random().first(), Gen.double().random().first()),
+        LatLng(Gen.double().random().first(), Gen.double().random().first()),
+        LatLng(Gen.double().random().first(), Gen.double().random().first()),
+        LatLng(Gen.double().random().first(), Gen.double().random().first()),
+        LatLng(Gen.double().random().first(), Gen.double().random().first())
+    )
     private val key = Gen.string().random().first()
     private val address = Gen.string().random().filter { it.isNotBlank() }.first()
 
     @Test
     fun test_Geocode_toLatLng_ext() {
         val someLocation =
-                Location(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+            Location(
+                Gen.double().random().iterator().next(),
+                Gen.double().random().iterator().next()
+            )
         val results = mock<List<ResultsItem>> {
             on { get(0) } doReturn ResultsItem(geometry = Geometry(location = someLocation))
         }
@@ -107,10 +113,10 @@ class QueryKtTest {
     fun test_queryMatrix() = runBlocking {
         val travelMode = TravelMode.WALKING
         val result = travelMode.queryMatrix(
-                fakeOrigin,
-                fakeDestinations,
-                provideApi(),
-                key
+            fakeOrigin,
+            fakeDestinations,
+            provideApi(),
+            key
         )
         assertNotNull(result)
         Unit
