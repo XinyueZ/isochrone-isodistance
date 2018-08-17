@@ -25,7 +25,7 @@ class QueryKtTest {
     @Test
     fun test_Geocode_toLatLng_ext() {
         val someLocation =
-            Location(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+                Location(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
         val results = mock<List<ResultsItem>> {
             on { get(0) } doReturn ResultsItem(geometry = Geometry(location = someLocation))
         }
@@ -69,7 +69,7 @@ class QueryKtTest {
 
         // Not-success response with whatever in content body, get onError and run it
         whenever(mockError.invoke()).thenReturn(Result.Error(RuntimeException()))
-        val  nullResponse2 = mock<Response<String>>()
+        val nullResponse2 = mock<Response<String>>()
         whenever(nullResponse2.isSuccessful).thenReturn(false)
         whenever(nullResponse2.body()).thenReturn(Gen.string().random().iterator().next())
         val getResult2 = nullResponse2.getResult(mockError)
