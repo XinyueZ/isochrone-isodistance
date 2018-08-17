@@ -10,14 +10,17 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.kotlintest.properties.Gen
 import isochrone.isodistance.android.algorithm.TravelMode
 import isochrone.isodistance.android.algorithm.getResult
+import isochrone.isodistance.android.algorithm.queryGeocodeAddress
 import isochrone.isodistance.android.algorithm.queryMatrix
 import isochrone.isodistance.android.algorithm.toLatLng
+import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.geocode.Geometry
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.net.provideApi
+import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -35,6 +38,7 @@ class QueryKtTest {
             LatLng(Gen.double().random().first(), Gen.double().random().first()),
             LatLng(Gen.double().random().first(), Gen.double().random().first()))
     private val key = Gen.string().random().first()
+    private val address = Gen.string().random().filter { it.isNotBlank() }.first()
 
     @Test
     fun test_Geocode_toLatLng_ext() {
@@ -109,6 +113,19 @@ class QueryKtTest {
                 key
         )
         assertNotNull(result)
+        Unit
+    }
+
+    @Test
+    fun test_queryGeocodeAddress() = runBlocking {
+        val mockResponse = mock<Response<Geocode>>()
+        val mockRet = mock<Deferred<Response<Geocode>>>()
+        whenever(mockRet.await()).thenReturn(mockResponse)
+        val mockGoogleApi = mock<GoogleApi> {
+            on { getGeocode(address, key) } doReturn mockRet
+        }
+        queryGeocodeAddress(address, mockGoogleApi, key)
+        verify(mockGoogleApi, times(1)).getGeocode(address, key)
         Unit
     }
 }
