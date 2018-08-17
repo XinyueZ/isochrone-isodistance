@@ -34,7 +34,6 @@ import retrofit2.Response
 
 class QueryKtTest {
     private val key = Gen.string().random().first()
-    private val address = Gen.string().random().filter { it.isNotBlank() }.first()
 
     @Test
     fun test_Geocode_toLatLng_ext() {
@@ -145,6 +144,7 @@ class QueryKtTest {
 
     @Test
     fun test_queryGeocodeAddress() = runBlocking {
+        val address = Gen.string().random().filter { it.isNotBlank() }.first()
         val mockResponse = mock<Response<Geocode>>()
         val mockRet = mock<Deferred<Response<Geocode>>>()
         whenever(mockRet.await()).thenReturn(mockResponse)
