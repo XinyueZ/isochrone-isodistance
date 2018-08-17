@@ -17,6 +17,7 @@ import isochrone.isodistance.android.domain.geocode.Geometry
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
 import isochrone.isodistance.android.net.Result
+import isochrone.isodistance.android.net.provideApi
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -104,6 +105,7 @@ class QueryKtTest {
         val result = travelMode.queryMatrix(
                 fakeOrigin,
                 fakeDestinations,
+                provideApi(),
                 key
         )
         assertNotNull(result)
