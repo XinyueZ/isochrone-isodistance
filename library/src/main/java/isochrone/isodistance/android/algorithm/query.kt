@@ -26,27 +26,26 @@ internal suspend fun queryGeocodeAddress(address: String, key: String): Result<G
 }
 
 internal suspend fun TravelMode.queryMatrix(
-    origin: LatLng,
-    destinations: Array<LatLng>,
-    key: String
+        origin: LatLng,
+        destinations: Array<LatLng>,
+        key: String
 ): Result<Matrix> {
+    val originString = "${origin.latitude}, ${origin.longitude}"
     val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
-    return queryMatrix(this, origin, destinationsStringList.toTypedArray(), key)
+    return queryMatrix(originString, destinationsStringList.toTypedArray(), key)
 }
 
-internal suspend fun queryMatrix(
-    travelMode: TravelMode,
-    origin: LatLng,
-    destinations: Array<String>,
-    key: String
+private suspend fun TravelMode.queryMatrix(
+        originString: String,
+        destinations: Array<String>,
+        key: String
 ): Result<Matrix> {
     val destinationsString = destinations.joinToString("|")
-    val originString = "${origin.latitude}, ${origin.longitude}"
     val response =
-            provideApi().getMatrix(travelMode.value, originString, destinationsString, key).await()
+            provideApi().getMatrix(value, originString, destinationsString, key).await()
     return response.getResult {
         Result.Error(
-                IOException("Error query matrix: $origin ====> ${destinations.pretty()}")
+                IOException("Error query matrix: $originString ====> ${destinations.pretty()}")
         )
     }
 }
