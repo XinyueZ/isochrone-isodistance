@@ -1,5 +1,6 @@
 package isochrone.isodistance.android
 
+import com.google.android.gms.maps.model.LatLng
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.reset
@@ -9,12 +10,14 @@ import com.nhaarman.mockito_kotlin.whenever
 import io.kotlintest.properties.Gen
 import isochrone.isodistance.android.algorithm.TravelMode
 import isochrone.isodistance.android.algorithm.getResult
+import isochrone.isodistance.android.algorithm.queryMatrix
 import isochrone.isodistance.android.algorithm.toLatLng
 import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.geocode.Geometry
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
 import isochrone.isodistance.android.net.Result
+import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
@@ -23,6 +26,15 @@ import org.junit.Test
 import retrofit2.Response
 
 class QueryKtTest {
+    private val fakeOrigin = LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+    private val fakeDestinations = arrayOf(LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()))
+    private val key = Gen.string().random().first()
+
     @Test
     fun test_Geocode_toLatLng_ext() {
         val someLocation =
@@ -84,5 +96,17 @@ class QueryKtTest {
         assertTrue(TravelMode.TRANSIT.value.contentEquals("transit"))
         assertTrue(TravelMode.BICYCLING.value.contentEquals("bicycling"))
         assertTrue(TravelMode.WALKING.value.contentEquals("walking"))
+    }
+
+    @Test
+    fun test_queryMatrix() = runBlocking {
+        val travelMode = TravelMode.WALKING
+        val result = travelMode.queryMatrix(
+                fakeOrigin,
+                fakeDestinations,
+                key
+        )
+        assertNotNull(result)
+        Unit
     }
 }

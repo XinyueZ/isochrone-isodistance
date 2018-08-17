@@ -26,9 +26,9 @@ internal suspend fun queryGeocodeAddress(address: String, key: String): Result<G
 }
 
 internal suspend fun TravelMode.queryMatrix(
-        origin: LatLng,
-        destinations: Array<LatLng>,
-        key: String
+    origin: LatLng,
+    destinations: Array<LatLng>,
+    key: String
 ): Result<Matrix> {
     val originString = "${origin.latitude}, ${origin.longitude}"
     val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
@@ -36,9 +36,9 @@ internal suspend fun TravelMode.queryMatrix(
 }
 
 private suspend fun TravelMode.queryMatrix(
-        originString: String,
-        destinations: Array<String>,
-        key: String
+    originString: String,
+    destinations: Array<String>,
+    key: String
 ): Result<Matrix> {
     val destinationsString = destinations.joinToString("|")
     val response =
