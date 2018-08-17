@@ -28,7 +28,7 @@ buildscript {
         retrofit = "2+"
         curl = "0.1"
 
-        coroutine = "0.+"
+        coroutine = "0.23.4" // Current I use this version: https://stackoverflow.com/a/51579257/1835650
         retrofit_coroutine = "1.0.0"
 
         maps_utils = "0.5"

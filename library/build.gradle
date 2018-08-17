@@ -30,6 +30,10 @@ android {
     lintOptions {
         warningsAsErrors true
     }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 }
 
 configurations.all { configuration ->
