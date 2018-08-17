@@ -56,7 +56,7 @@ configurations.all { configuration ->
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(":library")
+    debugImplementation project(":library")
 
     implementation "com.google.android.gms:play-services-location:${play_service}"
 
