@@ -34,11 +34,7 @@ internal suspend fun TravelMode.queryMatrix(
     destinations: Array<LatLng>,
     googleApi: GoogleApi,
     key: String
-): Result<Matrix> {
-    val originString = "${origin.latitude}, ${origin.longitude}"
-    val destinationsStringList = destinations.map { "${it.latitude}, ${it.longitude}" }
-    return queryMatrix(originString, destinationsStringList.toTypedArray(), googleApi, key)
-}
+) = queryMatrix(origin.toLatLngString(), destinations.toLatLngStringArray(), googleApi, key)
 
 private suspend fun TravelMode.queryMatrix(
     originString: String,
@@ -46,9 +42,8 @@ private suspend fun TravelMode.queryMatrix(
     googleApi: GoogleApi,
     key: String
 ): Result<Matrix> {
-    val destinationsString = destinations.joinToString("|")
-    val response =
-        googleApi.getMatrix(value, originString, destinationsString, key).await()
+    val destinationsString = destinations.toPipelineJoinedString()
+    val response = googleApi.getMatrix(value, originString, destinationsString, key).await()
     return response.getResult {
         Result.Error(
             IOException("Error query matrix: $originString ====> ${destinations.pretty()}")
@@ -59,6 +54,12 @@ private suspend fun TravelMode.queryMatrix(
 internal fun Geocode.toLatLng(): LatLng? = results?.let { results[0] }?.run {
     LatLng(geometry.location.lat, geometry.location.lng)
 }
+
+internal fun LatLng.toLatLngString(): String = "$latitude,$longitude"
+
+internal fun Array<String>.toPipelineJoinedString() = joinToString("|")
+
+internal fun Array<LatLng>.toLatLngStringArray() = map { it.toLatLngString() }.toTypedArray()
 
 enum class TravelMode(val value: String) {
     DRIVING("driving"),

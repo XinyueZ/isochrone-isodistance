@@ -13,13 +13,16 @@ import isochrone.isodistance.android.algorithm.getResult
 import isochrone.isodistance.android.algorithm.queryGeocodeAddress
 import isochrone.isodistance.android.algorithm.queryMatrix
 import isochrone.isodistance.android.algorithm.toLatLng
+import isochrone.isodistance.android.algorithm.toLatLngString
+import isochrone.isodistance.android.algorithm.toLatLngStringArray
+import isochrone.isodistance.android.algorithm.toPipelineJoinedString
 import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.geocode.Geometry
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
+import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
-import isochrone.isodistance.android.net.provideApi
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals
@@ -30,16 +33,6 @@ import org.junit.Test
 import retrofit2.Response
 
 class QueryKtTest {
-    private val fakeOrigin =
-        LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
-    private val fakeDestinations = arrayOf(
-        LatLng(Gen.double().random().first(), Gen.double().random().first()),
-        LatLng(Gen.double().random().first(), Gen.double().random().first()),
-        LatLng(Gen.double().random().first(), Gen.double().random().first()),
-        LatLng(Gen.double().random().first(), Gen.double().random().first()),
-        LatLng(Gen.double().random().first(), Gen.double().random().first()),
-        LatLng(Gen.double().random().first(), Gen.double().random().first())
-    )
     private val key = Gen.string().random().first()
     private val address = Gen.string().random().filter { it.isNotBlank() }.first()
 
@@ -110,15 +103,43 @@ class QueryKtTest {
     }
 
     @Test
-    fun test_queryMatrix() = runBlocking {
+    fun test_queryMatrix_ext() = runBlocking {
         val travelMode = TravelMode.WALKING
-        val result = travelMode.queryMatrix(
-            fakeOrigin,
-            fakeDestinations,
-            provideApi(),
+
+        val origin = LatLng(Gen.double().random().first(), Gen.double().random().first())
+
+        val destinations = arrayOf(
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first()),
+            LatLng(Gen.double().random().first(), Gen.double().random().first())
+        )
+        val destinationsFormatted = destinations.toLatLngStringArray().toPipelineJoinedString()
+
+        val mockResponse = mock<Response<Matrix>>()
+        val mockRet = mock<Deferred<Response<Matrix>>>()
+        whenever(mockRet.await()).thenReturn(mockResponse)
+        val mockGoogleApi = mock<GoogleApi> {
+            on {
+                getMatrix(
+                    travelMode.value,
+                    origin.toLatLngString(),
+                    destinationsFormatted,
+                    key
+                )
+            } doReturn mockRet
+        }
+        travelMode.queryMatrix(
+            origin,
+            destinations,
+            mockGoogleApi,
             key
         )
-        assertNotNull(result)
+        verify(mockGoogleApi, times(1)).getMatrix(
+            travelMode.value,
+            origin.toLatLngString(),
+            destinationsFormatted,
+            key
+        )
         Unit
     }
 
