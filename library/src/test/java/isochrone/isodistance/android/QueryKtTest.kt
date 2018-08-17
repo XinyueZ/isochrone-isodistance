@@ -1,4 +1,4 @@
-package isochrone.isodistance.android;
+package isochrone.isodistance.android
 
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
@@ -8,7 +8,9 @@ import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.geocode.Geometry
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
-import org.junit.Assert
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
+import org.junit.Assert.assertNull
 import org.junit.Test
 
 class QueryKtTest {
@@ -23,12 +25,12 @@ class QueryKtTest {
         // Test for valid location
         val geocode = Geocode(results)
         val latLng = geocode.toLatLng()
-        Assert.assertNotNull(latLng)
-        Assert.assertEquals(latLng?.latitude, someLocation.lat)
-        Assert.assertEquals(latLng?.longitude, someLocation.lng)
+        assertNotNull(latLng)
+        assertEquals(latLng?.latitude, someLocation.lat)
+        assertEquals(latLng?.longitude, someLocation.lng)
 
         // Test for invalid location
         val nullResultsGeocode = Geocode(null)
-        Assert.assertNull(nullResultsGeocode.toLatLng())
+        assertNull(nullResultsGeocode.toLatLng())
     }
 }
