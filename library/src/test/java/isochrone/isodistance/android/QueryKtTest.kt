@@ -7,6 +7,7 @@ import com.nhaarman.mockito_kotlin.times
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.kotlintest.properties.Gen
+import isochrone.isodistance.android.algorithm.TravelMode
 import isochrone.isodistance.android.algorithm.getResult
 import isochrone.isodistance.android.algorithm.toLatLng
 import isochrone.isodistance.android.domain.geocode.Geocode
@@ -75,5 +76,13 @@ class QueryKtTest {
         val getResult2 = nullResponse2.getResult(mockError)
         assertTrue(getResult2 is Result.Error)
         verify(mockError, times(1)).invoke()
+    }
+
+    @Test
+    fun test_TravelMode_enum() {
+        assertTrue(TravelMode.DRIVING.value.contentEquals("driving"))
+        assertTrue(TravelMode.TRANSIT.value.contentEquals("transit"))
+        assertTrue(TravelMode.BICYCLING.value.contentEquals("bicycling"))
+        assertTrue(TravelMode.WALKING.value.contentEquals("walking"))
     }
 }
