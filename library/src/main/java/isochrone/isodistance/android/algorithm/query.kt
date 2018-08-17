@@ -15,7 +15,7 @@ internal inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error)
             return Result.Success(body)
         }
     }
-    return onError.invoke()
+    return onError()
 }
 
 internal suspend fun queryGeocodeAddress(address: String, key: String): Result<Geocode> {
