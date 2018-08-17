@@ -14,7 +14,7 @@ private fun OkHttpClient.Builder.addDebugInterceptors(): OkHttpClient.Builder {
     return this
 }
 
-internal val retrofitBuilder: Retrofit.Builder by lazy {
+private val retrofitBuilder: Retrofit.Builder by lazy {
     Retrofit.Builder()
         .client(OkHttpClient.Builder().addDebugInterceptors().build())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
@@ -26,7 +26,7 @@ internal val retrofitBuilder: Retrofit.Builder by lazy {
         )
 }
 
-fun provideApi(): GoogleApi =
+internal fun provideApi(): GoogleApi =
     retrofitBuilder
         .baseUrl("https://maps.googleapis.com/maps/api/")
         .build()
