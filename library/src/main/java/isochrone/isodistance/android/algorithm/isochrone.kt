@@ -1,6 +1,7 @@
 package isochrone.isodistance.android.algorithm
 
 import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.net.provideApi
 
 fun getIsochrone(
     key: String,
@@ -11,14 +12,15 @@ fun getIsochrone(
     tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT
 ) = getIso(
-        key,
-        travelMode,
-        origin,
-        durationMinutes,
-        numberOfAngles,
-        tolerance,
-        sortResult,
-        false
+    travelMode,
+    origin,
+    durationMinutes,
+    numberOfAngles,
+    tolerance,
+    sortResult,
+    false,
+    provideApi(),
+    key
 )
 
 fun getIsochrone(
@@ -30,12 +32,13 @@ fun getIsochrone(
     tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT
 ) = getIso(
-        key,
-        travelMode,
-        originAddress,
-        durationMinutes,
-        numberOfAngles,
-        tolerance,
-        sortResult,
-        false
+    travelMode,
+    originAddress,
+    durationMinutes,
+    numberOfAngles,
+    tolerance,
+    sortResult,
+    false,
+    provideApi(),
+    key
 )

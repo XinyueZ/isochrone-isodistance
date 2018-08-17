@@ -2,6 +2,7 @@ package isochrone.isodistance.android.algorithm
 
 import android.util.Log
 import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
@@ -16,65 +17,70 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 internal fun getIso(
-    key: String,
     travelMode: TravelMode,
     origin: LatLng,
     value: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
     tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT,
-    distanceBased: Boolean
+    distanceBased: Boolean,
+    googleApi: GoogleApi,
+    key: String
 ) =
-        produce(CoroutinesContextProvider.io) {
-            getIso(
-                    travelMode,
-                    origin,
-                    numberOfAngles,
-                    value,
-                    key,
-                    tolerance,
-                    sortResult,
-                    distanceBased
-            )
-        }
+    produce(CoroutinesContextProvider.io) {
+        getIso(
+            travelMode,
+            origin,
+            numberOfAngles,
+            value,
+            tolerance,
+            sortResult,
+            distanceBased,
+            googleApi,
+            key
+        )
+    }
 
 internal fun getIso(
-    key: String,
     travelMode: TravelMode,
     originAddress: String,
     value: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
     tolerance: Double = TOLERANCE,
     sortResult: Boolean = SORT_RESULT,
-    distanceBased: Boolean
+    distanceBased: Boolean,
+    googleApi: GoogleApi,
+    key: String
 ) =
-        produce(CoroutinesContextProvider.io) {
-            val originGeocode = queryGeocodeAddress(originAddress, key)
-            if (originGeocode is Result.Success) {
-                originGeocode.content.toLatLng()?.let {
-                    getIso(
-                            travelMode,
-                            it,
-                            numberOfAngles,
-                            value,
-                            key,
-                            tolerance,
-                            sortResult,
-                            distanceBased
-                    )
-                }
+    produce(CoroutinesContextProvider.io) {
+        val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
+        if (originGeocode is Result.Success) {
+            originGeocode.content.toLatLng()?.let {
+                getIso(
+                    travelMode,
+                    it,
+                    numberOfAngles,
+                    value,
+                    tolerance,
+                    sortResult,
+                    distanceBased,
+                    googleApi,
+                    key
+                )
             }
         }
+    }
 
 internal suspend fun ProducerScope<Array<LatLng>>.getIso(
     travelMode: TravelMode,
     origin: LatLng,
     numberOfAngles: Int,
     value: Int,
-    key: String,
     tolerance: Double,
     sortResult: Boolean,
-    distanceBased: Boolean
+    distanceBased: Boolean,
+    googleApi: GoogleApi,
+    key: String
 ) {
     var rad1 = Array(numberOfAngles) { value / 12f.toDouble() }
     Log.d(TAG, "rad1: ${rad1.pretty()}")
@@ -107,20 +113,20 @@ internal suspend fun ProducerScope<Array<LatLng>>.getIso(
             iso[i] = selectDestination(origin, phi1[i], rad1[i])
         }
 
-        with(travelMode.queryMatrix(origin, iso, key)) {
+        with(travelMode.queryMatrix(origin, iso, googleApi, key)) {
             if (this is Result.Success) {
                 this.content.associateAddresses2Values(distanceBased)?.let { data ->
                     isoData = data
                     (0 until numberOfAngles).forEach { i ->
                         if ((data.second[i] < (value - tolerance)) && (!data0[i].contentEquals(
-                                        data.first[i]
-                                ))
+                                data.first[i]
+                            ))
                         ) {
                             rad2[i] = (rmax[i] + rad1[i]) / 2f.toDouble()
                             rmin[i] = rad1[i]
                         } else if ((data.second[i] > (value + tolerance)) && (!data0[i].contentEquals(
-                                        data.first[i]
-                                ))
+                                data.first[i]
+                            ))
                         ) {
                             rad2[i] = (rmin[i] + rad1[i]) / 2f.toDouble()
                             rmax[i] = rad1[i]
@@ -139,7 +145,7 @@ internal suspend fun ProducerScope<Array<LatLng>>.getIso(
         true -> isoData?.let { isoD ->
             // TODO There's a potential crash when sorting, plz. check it out. java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
             (0 until numberOfAngles).forEach {
-                val result = queryGeocodeAddress(isoD.first[it], key)
+                val result = queryGeocodeAddress(isoD.first[it], googleApi, key)
                 if (result is Result.Success) {
                     iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
                 }
@@ -192,23 +198,23 @@ private fun selectDestination(origin: LatLng, angle: Double, radius: Double): La
     val lat1 = toRadians((origin.latitude))
     val lng1 = toRadians((origin.longitude))
     val lat2 =
-            asin(
-                    sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(
-                            bearing
-                    )
+        asin(
+            sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(
+                bearing
             )
+        )
     val lng2 = lng1 + atan2(
-            sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
-            cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
+        sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
+        cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
     )
     return LatLng(toDegrees(lat2), toDegrees(lng2))
 }
 
 private fun getBearing(origin: LatLng, destination: LatLng): Double {
     var bearing = atan2(
-            sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180f),
-            cos(origin.latitude * PI / 180f) * sin(destination.latitude * PI / 180f) -
-                    sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
+        sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180f),
+        cos(origin.latitude * PI / 180f) * sin(destination.latitude * PI / 180f) -
+                sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
     )
     bearing = bearing * 180f / PI
     bearing = (bearing + 360f) % 360f
@@ -216,11 +222,11 @@ private fun getBearing(origin: LatLng, destination: LatLng): Double {
 }
 
 private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
-        iso.map {
-            getBearing(
-                    origin,
-                    it
-            )
-        }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
+    iso.map {
+        getBearing(
+            origin,
+            it
+        )
+    }.zip(iso).sortedBy { it.first }.map { it.second }.toTypedArray()
 
 fun <T> Array<T>.pretty(): String = java.util.Arrays.toString(this)
