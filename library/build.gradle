@@ -32,6 +32,12 @@ android {
     }
 }
 
+configurations.all { configuration ->
+    resolutionStrategy {
+        force "com.android.support:support-v4:$supportLib4",
+                "com.android.support:appcompat-v7:$supportLib7"
+    }
+}
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
