@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Geometry(
     @SerializedName("viewport")
-    val viewport: Viewport,
+    val viewport: Viewport? = null,
     @SerializedName("location")
     val location: Location,
     @SerializedName("location_type")

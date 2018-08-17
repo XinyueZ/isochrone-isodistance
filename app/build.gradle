@@ -84,7 +84,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$espresso_core"
     androidTestImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin"
     androidTestImplementation "org.mockito:mockito-android:$mockito_android"
-    androidTestImplementation "io.kotlintest:kotlintest:$kotlinTest"
+    androidTestImplementation "io.kotlintest:kotlintest-runner-junit5:$kotlin_test"
 }
 
 kotlin {
