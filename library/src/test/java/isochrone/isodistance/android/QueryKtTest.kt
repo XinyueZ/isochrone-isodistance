@@ -33,6 +33,7 @@ import org.junit.Test
 import retrofit2.Response
 
 class QueryKtTest {
+
     private val key = Gen.string().random().first()
 
     @Test
@@ -154,5 +155,41 @@ class QueryKtTest {
         queryGeocodeAddress(address, mockGoogleApi, key)
         verify(mockGoogleApi, times(1)).getGeocode(address, key)
         Unit
+    }
+
+    @Test
+    fun test_toLatLngString_ext() {
+        val latLng = LatLng(Gen.double().random().first(), Gen.double().random().first())
+        assertTrue(latLng.toLatLngString().contentEquals("${latLng.latitude},${latLng.longitude}"))
+    }
+
+    @Test
+    fun test_toPipelineJoinedString_ext() {
+        val arr = Gen.string().constants().toList().toTypedArray()
+        assertTrue(arr.toPipelineJoinedString().contentEquals(arr.joinToString("|")))
+    }
+
+    @Test
+    fun test_toLatLngStringArray_ext() {
+        val arr = arrayOf(
+            LatLng(
+                Gen.double().random().iterator().next(),
+                Gen.double().random().iterator().next()
+            ),
+            LatLng(
+                Gen.double().random().iterator().next(),
+                Gen.double().random().iterator().next()
+            ),
+            LatLng(
+                Gen.double().random().iterator().next(),
+                Gen.double().random().iterator().next()
+            ),
+            LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+        )
+        val typed = arr.toLatLngStringArray()
+        var i = 0
+        arr.forEach {
+            assertTrue(it.toLatLngString().contentEquals(typed[i++]))
+        }
     }
 }
