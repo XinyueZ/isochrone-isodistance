@@ -15,7 +15,7 @@ class QueryKtTest {
     @Test
     fun test_Geocode_toLatLng_ext() {
         val someLocation =
-            Location(Gen.double().constants().first(), Gen.double().constants().first())
+            Location(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
         val results = mock<List<ResultsItem>> {
             on { get(0) } doReturn ResultsItem(geometry = Geometry(location = someLocation))
         }
