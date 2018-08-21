@@ -4,7 +4,6 @@ buildscript {
         min_sdk_version = 19
         target_sdk_version = 28
         compile_sdk_version = 28
-
         app_id = "com.demo.mvp"
         version_code = 1
         version_name = "0.1"
