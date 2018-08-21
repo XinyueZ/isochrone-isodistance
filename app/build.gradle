@@ -58,8 +58,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":library")
 
-    implementation "com.google.android.gms:play-services-location:${play_service}"
-
     implementation "com.android.support:support-core-utils:$supportLib4"
     implementation "com.android.support:support-core-ui:$supportLib4"
     implementation "com.android.support:support-media-compat:$supportLib4"
