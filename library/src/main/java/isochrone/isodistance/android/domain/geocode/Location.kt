@@ -3,8 +3,8 @@ package isochrone.isodistance.android.domain.geocode
 import com.google.gson.annotations.SerializedName
 
 data class Location(
-    @SerializedName("lng")
-    val lng: Double = 0.0,
     @SerializedName("lat")
-    val lat: Double = 0.0
+    val lat: Double = 0.0,
+    @SerializedName("lng")
+    val lng: Double = 0.0
 )

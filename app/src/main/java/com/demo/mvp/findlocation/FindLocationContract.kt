@@ -5,7 +5,6 @@ import android.location.Location
 import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
-import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.algorithm.TravelMode
 
 interface FindLocationContract {
@@ -20,11 +19,11 @@ interface FindLocationContract {
 
         fun getViewActivity(): FragmentActivity
 
-        fun showPolygon(travelMode: TravelMode, points: Array<LatLng>)
+        fun showPolygon(travelMode: TravelMode, points: Array<isochrone.isodistance.android.domain.geocode.Location>)
     }
 
     interface Presenter : BasePresenter {
-        fun findIsochrone(context: Context, target: LatLng)
+        fun findIsochrone(context: Context, target: isochrone.isodistance.android.domain.geocode.Location)
 
         fun findLocation()
 

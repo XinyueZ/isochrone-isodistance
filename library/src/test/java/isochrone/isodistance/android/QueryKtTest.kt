@@ -1,6 +1,5 @@
 package isochrone.isodistance.android
 
-import com.google.android.gms.maps.model.LatLng
 import com.nhaarman.mockito_kotlin.doReturn
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.reset
@@ -12,7 +11,7 @@ import isochrone.isodistance.android.algorithm.TravelMode
 import isochrone.isodistance.android.algorithm.getResult
 import isochrone.isodistance.android.algorithm.queryGeocodeAddress
 import isochrone.isodistance.android.algorithm.queryMatrix
-import isochrone.isodistance.android.algorithm.toLatLng
+import isochrone.isodistance.android.algorithm.toLocation
 import isochrone.isodistance.android.algorithm.toLatLngString
 import isochrone.isodistance.android.algorithm.toLatLngStringArray
 import isochrone.isodistance.android.algorithm.toPipelineJoinedString
@@ -49,14 +48,14 @@ class QueryKtTest {
 
         // Test for valid location
         val geocode = Geocode(results)
-        val latLng = geocode.toLatLng()
+        val latLng = geocode.toLocation()
         assertNotNull(latLng)
-        assertEquals(latLng?.latitude, someLocation.lat)
-        assertEquals(latLng?.longitude, someLocation.lng)
+        assertEquals(latLng?.lat, someLocation.lat)
+        assertEquals(latLng?.lng, someLocation.lng)
 
         // Test for invalid location
         val nullResultsGeocode = Geocode(null)
-        assertNull(nullResultsGeocode.toLatLng())
+        assertNull(nullResultsGeocode.toLocation())
     }
 
     @Test
@@ -106,12 +105,12 @@ class QueryKtTest {
     fun test_queryMatrix_ext() = runBlocking {
         val travelMode = TravelMode.WALKING
 
-        val origin = LatLng(Gen.double().random().first(), Gen.double().random().first())
+        val origin = Location(Gen.double().random().first(), Gen.double().random().first())
 
         val destinations = arrayOf(
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first()),
-            LatLng(Gen.double().random().first(), Gen.double().random().first())
+            Location(Gen.double().random().first(), Gen.double().random().first()),
+            Location(Gen.double().random().first(), Gen.double().random().first()),
+            Location(Gen.double().random().first(), Gen.double().random().first())
         )
         val destinationsFormatted = destinations.toLatLngStringArray().toPipelineJoinedString()
 
@@ -159,8 +158,8 @@ class QueryKtTest {
 
     @Test
     fun test_toLatLngString_ext() {
-        val latLng = LatLng(Gen.double().random().first(), Gen.double().random().first())
-        assertTrue(latLng.toLatLngString().contentEquals("${latLng.latitude},${latLng.longitude}"))
+        val latLng = Location(Gen.double().random().first(), Gen.double().random().first())
+        assertTrue(latLng.toLatLngString().contentEquals("${latLng.lat},${latLng.lng}"))
     }
 
     @Test
@@ -172,19 +171,19 @@ class QueryKtTest {
     @Test
     fun test_toLatLngStringArray_ext() {
         val arr = arrayOf(
-            LatLng(
+            Location(
                 Gen.double().random().iterator().next(),
                 Gen.double().random().iterator().next()
             ),
-            LatLng(
+            Location(
                 Gen.double().random().iterator().next(),
                 Gen.double().random().iterator().next()
             ),
-            LatLng(
+            Location(
                 Gen.double().random().iterator().next(),
                 Gen.double().random().iterator().next()
             ),
-            LatLng(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
+            Location(Gen.double().random().iterator().next(), Gen.double().random().iterator().next())
         )
         val typed = arr.toLatLngStringArray()
         var i = 0

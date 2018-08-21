@@ -137,7 +137,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                     polyBicycling?.remove()
                     polyWalking?.remove()
 
-                    it.findIsochrone(requireContext(), target)
+                    it.findIsochrone(requireContext(), target.toLocation())
                     it.release()
                 }
             }
@@ -158,13 +158,13 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         return builder.build()
     }
 
-    override fun showPolygon(travelMode: TravelMode, points: Array<LatLng>) {
+    override fun showPolygon(travelMode: TravelMode, points: Array<isochrone.isodistance.android.domain.geocode.Location>) {
         when (travelMode) {
             TravelMode.DRIVING -> {
                 val c = ContextCompat.getColor(requireContext(), R.color.c_driving)
                 polyDriving = map?.addPolygon(
                         PolygonOptions()
-                                .addAll(points.asList())
+                                .addAll(points.asList().map { it.toLatLng() })
                                 .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
                                 .strokeColor(c)
                                 .strokeWidth(5f)
@@ -174,7 +174,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
                 polyTransit = map?.addPolygon(
                         PolygonOptions()
-                                .addAll(points.asList())
+                                .addAll(points.asList().map { it.toLatLng() })
                                 .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
                                 .strokeColor(c)
                                 .strokeWidth(5f)
@@ -184,7 +184,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)
                 polyBicycling = map?.addPolygon(
                         PolygonOptions()
-                                .addAll(points.asList())
+                                .addAll(points.asList().map { it.toLatLng() })
                                 .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
                                 .strokeColor(c)
                                 .strokeWidth(5f)
@@ -194,18 +194,20 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 val c = ContextCompat.getColor(requireContext(), R.color.c_walking)
                 polyWalking = map?.addPolygon(
                         PolygonOptions()
-                                .addAll(points.asList())
+                                .addAll(points.asList().map { it.toLatLng() })
                                 .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
                                 .strokeColor(c)
                                 .strokeWidth(5f)
                 )
             }
         }
-        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points), 0))
+        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points.map { it.toLatLng() }.toTypedArray()), 0))
     }
 
     companion object {
         private const val ALPHA_ADJUSTMENT = 15
         private const val DEFAULT_ZOOM = 14f
+        private fun LatLng.toLocation() = isochrone.isodistance.android.domain.geocode.Location(latitude, longitude)
+        private fun isochrone.isodistance.android.domain.geocode.Location.toLatLng() = LatLng(lat, lng)
     }
 }

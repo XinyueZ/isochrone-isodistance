@@ -1,8 +1,8 @@
 package isochrone.isodistance.android.algorithm
 
-import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Geocode
+import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import retrofit2.Response
@@ -30,8 +30,8 @@ internal suspend fun queryGeocodeAddress(
 }
 
 internal suspend fun TravelMode.queryMatrix(
-    origin: LatLng,
-    destinations: Array<LatLng>,
+    origin: Location,
+    destinations: Array<Location>,
     googleApi: GoogleApi,
     key: String
 ) = queryMatrix(origin.toLatLngString(), destinations.toLatLngStringArray(), googleApi, key)
@@ -51,15 +51,15 @@ private suspend fun TravelMode.queryMatrix(
     }
 }
 
-internal fun Geocode.toLatLng(): LatLng? = results?.let { results[0] }?.run {
-    LatLng(geometry.location.lat, geometry.location.lng)
+internal fun Geocode.toLocation(): Location? = results?.let { results[0] }?.run {
+    geometry.location
 }
 
-internal fun LatLng.toLatLngString(): String = "$latitude,$longitude"
+internal fun Location.toLatLngString(): String = "$lat,$lng"
 
 internal fun Array<String>.toPipelineJoinedString() = joinToString("|")
 
-internal fun Array<LatLng>.toLatLngStringArray() = map { it.toLatLngString() }.toTypedArray()
+internal fun Array<Location>.toLatLngStringArray() = map { it.toLatLngString() }.toTypedArray()
 
 enum class TravelMode(val value: String) {
     DRIVING("driving"),

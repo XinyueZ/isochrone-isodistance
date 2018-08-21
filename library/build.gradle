@@ -50,8 +50,6 @@ configurations.all { configuration ->
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "com.google.android.gms:play-services-maps:${play_service}"
-
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${play_service}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutine}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine}"

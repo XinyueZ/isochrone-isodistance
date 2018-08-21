@@ -16,11 +16,11 @@ import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.LocationSettingsRequest
 import com.google.android.gms.location.LocationSettingsStatusCodes
-import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.getIsochrone
 import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
+import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.consumeEach
@@ -65,7 +65,7 @@ class FindLocationPresenter(
         localReq.maxWaitTime = MAX_WAIT_TIME
     }
 
-    private var channel: ReceiveChannel<Array<LatLng>>? = null
+    private var channel: ReceiveChannel<Array<Location>>? = null
 
     @SuppressLint("MissingPermission")
     override fun findLocation() {
@@ -113,7 +113,7 @@ class FindLocationPresenter(
     @Volatile
     private var findingIsochroneInProgress = false
 
-    override fun findIsochrone(context: Context, target: LatLng) {
+    override fun findIsochrone(context: Context, target: Location) {
         if (findingIsochroneInProgress) return
         launch(CoroutinesContextProvider.main) {
             mainPresenter.travelModes.forEach { travelModel ->

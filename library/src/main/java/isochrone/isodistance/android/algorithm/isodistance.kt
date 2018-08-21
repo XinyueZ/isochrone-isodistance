@@ -1,12 +1,12 @@
 package isochrone.isodistance.android.algorithm
 
-import com.google.android.gms.maps.model.LatLng
+import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.net.provideApi
 
 fun getIsodistance(
     key: String,
     travelMode: TravelMode,
-    origin: LatLng,
+    origin: Location,
     distanceMeters: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
     tolerance: Double = TOLERANCE,

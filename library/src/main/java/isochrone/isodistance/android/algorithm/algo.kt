@@ -1,8 +1,8 @@
 package isochrone.isodistance.android.algorithm
 
 import android.util.Log
-import com.google.android.gms.maps.model.LatLng
 import isochrone.isodistance.android.api.GoogleApi
+import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
@@ -18,7 +18,7 @@ import kotlin.math.sin
 
 internal fun getIso(
     travelMode: TravelMode,
-    origin: LatLng,
+    origin: Location,
     value: Int,
     numberOfAngles: Int = DEFAULT_NUMBER_OF_ANGLES,
     tolerance: Double = TOLERANCE,
@@ -55,7 +55,7 @@ internal fun getIso(
     produce(CoroutinesContextProvider.io) {
         val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
         if (originGeocode is Result.Success) {
-            originGeocode.content.toLatLng()?.let {
+            originGeocode.content.toLocation()?.let {
                 getIso(
                     travelMode,
                     it,
@@ -71,9 +71,9 @@ internal fun getIso(
         }
     }
 
-internal suspend fun ProducerScope<Array<LatLng>>.getIso(
+internal suspend fun ProducerScope<Array<Location>>.getIso(
     travelMode: TravelMode,
-    origin: LatLng,
+    origin: Location,
     numberOfAngles: Int,
     value: Int,
     tolerance: Double,
@@ -100,7 +100,7 @@ internal suspend fun ProducerScope<Array<LatLng>>.getIso(
     val rmax = Array(numberOfAngles) { 1.25f.toDouble() * value }
     Log.d(TAG, "rmax: ${rmax.pretty()}")
 
-    val iso = Array(numberOfAngles) { LatLng(0f.toDouble(), 0f.toDouble()) }
+    val iso = Array(numberOfAngles) { Location(0f.toDouble(), 0f.toDouble()) }
     Log.d(TAG, "iso: ${iso.pretty()}")
 
     var isoData: Pair<Array<String>, Array<Double>>? = null
@@ -147,7 +147,7 @@ internal suspend fun ProducerScope<Array<LatLng>>.getIso(
             (0 until numberOfAngles).forEach {
                 val result = queryGeocodeAddress(isoD.first[it], googleApi, key)
                 if (result is Result.Success) {
-                    iso[it] = result.content.toLatLng() ?: LatLng(0f.toDouble(), 0f.toDouble())
+                    iso[it] = result.content.toLocation() ?: Location(0f.toDouble(), 0f.toDouble())
                 }
             }
             send(sortPoints(origin, iso))
@@ -193,10 +193,10 @@ private fun Matrix.associateAddresses2Values(distanceBased: Boolean): Pair<Array
     } ?: run { return null }
 }
 
-private fun selectDestination(origin: LatLng, angle: Double, radius: Double): LatLng {
+private fun selectDestination(origin: Location, angle: Double, radius: Double): Location {
     val bearing = toRadians(angle)
-    val lat1 = toRadians((origin.latitude))
-    val lng1 = toRadians((origin.longitude))
+    val lat1 = toRadians((origin.lat))
+    val lng1 = toRadians((origin.lng))
     val lat2 =
         asin(
             sin(lat1) * cos(radius / EARTH_RADIUS) + cos(lat1) * sin(radius / EARTH_RADIUS) * cos(
@@ -207,21 +207,21 @@ private fun selectDestination(origin: LatLng, angle: Double, radius: Double): La
         sin(bearing) * sin(radius / EARTH_RADIUS) * cos(lat1),
         cos(radius / EARTH_RADIUS) - sin(lat1) * sin(lat2)
     )
-    return LatLng(toDegrees(lat2), toDegrees(lng2))
+    return Location(toDegrees(lat2), toDegrees(lng2))
 }
 
-private fun getBearing(origin: LatLng, destination: LatLng): Double {
+private fun getBearing(origin: Location, destination: Location): Double {
     var bearing = atan2(
-        sin((destination.longitude - origin.longitude) * PI / 180) * cos(destination.latitude * PI / 180f),
-        cos(origin.latitude * PI / 180f) * sin(destination.latitude * PI / 180f) -
-                sin(origin.latitude * PI / 180f) * cos(destination.latitude * PI / 180f) * cos((destination.longitude - origin.longitude) * PI / 180f)
+        sin((destination.lng - origin.lng) * PI / 180) * cos(destination.lat * PI / 180f),
+        cos(origin.lat * PI / 180f) * sin(destination.lat * PI / 180f) -
+                sin(origin.lat * PI / 180f) * cos(destination.lat * PI / 180f) * cos((destination.lng - origin.lng) * PI / 180f)
     )
     bearing = bearing * 180f / PI
     bearing = (bearing + 360f) % 360f
     return bearing
 }
 
-private fun sortPoints(origin: LatLng, iso: Array<LatLng>) =
+private fun sortPoints(origin: Location, iso: Array<Location>) =
     iso.map {
         getBearing(
             origin,
