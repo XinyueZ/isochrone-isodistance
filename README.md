@@ -1,5 +1,5 @@
-Isochrone and Isodistance(Kotlin, Android)
-====
+Isochrone and Isodistance(Kotlin, JVM, Android, Backend)
+========================================================
 
 > Isochrone is a polygon representing how far you would go from a single point in every direction, following each road in a given timeframe. It's the best way to find out where you should live if you want to be «at most 5 minutes away from a tube station». Isodistance is similar, but ignores duration taken for traveling. For example by car you would go faster on highways, but with isodistance highways and sidewalks are the same.
 
@@ -8,6 +8,17 @@ Isochrone and Isodistance(Kotlin, Android)
 isochrone = approximately equal time (minute) to target.
 
 isodistance = approximately equal distance (meter) to target.
+
+# Support
+
+- JVM code, for Kotlin ,Java etc.
+- Android is first support.
+- Server-side is supported, however, the gradle should be adjusted for special development environment at backend-developer.
+
+# Feature
+
+- **Input:** lat-lng, travel mode, time in minutes. **Output:** list of locations based on approximately equal time.
+- **Input:** address in text, travel model, distance in meters. **Output:** list of locations based on approximately equal distance.
 
 # Status of project
 
