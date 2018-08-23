@@ -5,18 +5,8 @@ import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
-import retrofit2.Response
+import isochrone.isodistance.android.net.getResult
 import java.io.IOException
-
-internal inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error): Result<E> {
-    if (isSuccessful) {
-        val body = body()
-        if (body != null) {
-            return Result.Success(body)
-        }
-    }
-    return onError()
-}
 
 internal suspend fun queryGeocodeAddress(
     address: String,

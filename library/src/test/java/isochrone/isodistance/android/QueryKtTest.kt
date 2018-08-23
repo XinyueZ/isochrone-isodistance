@@ -8,12 +8,11 @@ import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.kotlintest.properties.Gen
 import isochrone.isodistance.android.algorithm.TravelMode
-import isochrone.isodistance.android.algorithm.getResult
 import isochrone.isodistance.android.algorithm.queryGeocodeAddress
 import isochrone.isodistance.android.algorithm.queryMatrix
-import isochrone.isodistance.android.algorithm.toLocation
 import isochrone.isodistance.android.algorithm.toLatLngString
 import isochrone.isodistance.android.algorithm.toLatLngStringArray
+import isochrone.isodistance.android.algorithm.toLocation
 import isochrone.isodistance.android.algorithm.toPipelineJoinedString
 import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Geocode
@@ -22,6 +21,7 @@ import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.geocode.ResultsItem
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
+import isochrone.isodistance.android.net.getResult
 import kotlinx.coroutines.experimental.Deferred
 import kotlinx.coroutines.experimental.runBlocking
 import org.junit.Assert.assertEquals

@@ -1,5 +1,7 @@
 package isochrone.isodistance.android.net
 
+import retrofit2.Response
+
 /**
  * A generic class that holds a value with its loading status.
  * @param <T>
@@ -17,4 +19,14 @@ sealed class Result<out T : Any> {
             Loading -> "Loading"
         }
     }
+}
+
+internal inline fun <E : Any> Response<E>.getResult(onError: () -> Result.Error): Result<E> {
+    if (isSuccessful) {
+        val body = body()
+        if (body != null) {
+            return Result.Success(body)
+        }
+    }
+    return onError()
 }
