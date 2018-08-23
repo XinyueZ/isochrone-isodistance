@@ -141,8 +141,8 @@ class FindLocationPresenter(
                             numberOfAngles = 12,
                             tolerance = 0.005
                     )
-                }.let {
-                    channel = it
+                }.let { receiveChannel ->
+                    channel = receiveChannel
                     channel?.consumeEach {
                         Log.d(TAG, "rad1: ${it.pretty()}")
                         view.showPolygon(travelModel, it)
