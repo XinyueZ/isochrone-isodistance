@@ -137,7 +137,9 @@ internal suspend fun ProducerScope<Array<Location>>.getIso(
                     }
                     rad0 = rad1
                     rad1 = rad2
-                }
+                }  // TODO Handling on ?:run for NULL case of let above.
+            } else {
+                // TODO Handling on unsuccessful nearby call.
             }
         }
     }
