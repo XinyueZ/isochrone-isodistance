@@ -39,7 +39,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0cb8afe5-454a-4c63-9845-0e18584b6f5d" name="Default" comment="Revert to use" />
+    <list default="true" id="0cb8afe5-454a-4c63-9845-0e18584b6f5d" name="Default" comment="Revert to use">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,37 +114,44 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="-1257250625">
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="kt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Kotlin" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1960">
+            <state relative-caret-position="741">
               <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/AlgoKtTest.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="463">
-                <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-              </first_editor>
-              <second_editor>
-                <markdownNavigatorState />
-              </second_editor>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="60" column="33" lean-forward="true" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -150,25 +160,25 @@
         <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2780">
-              <caret line="139" column="18" selection-start-line="139" selection-start-column="18" selection-end-line="139" selection-end-column="71" />
+              <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/src/main/AndroidManifest.xml">
-          <provider selected="true" editor-type-id="text-editor" />
           <provider editor-type-id="android-manifest" />
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="480">
               <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
             </state>
           </provider>
-          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -192,8 +202,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/net/Result.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="440">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="620">
+              <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -345,10 +355,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="processDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on all variants." />
@@ -1207,10 +1213,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="compileDebugNdk" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -1428,10 +1430,6 @@
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="processDebugResources" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on all variants." />
@@ -2172,10 +2170,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/app" />
                 <option name="name" value="compileDebugNdk" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -2371,10 +2365,6 @@
                 <option name="description" value="Runs all device checks using Device Providers and Test Servers." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/library" />
                 <option name="name" value="deviceCheck" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/library" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForRelease" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="description" value="Runs lint on all variants." />
@@ -3004,10 +2994,6 @@
               </ExternalTaskPojo>
               <ExternalTaskPojo>
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/library" />
-                <option name="name" value="transformNativeLibsWithStripDebugSymbolForDebug" />
-              </ExternalTaskPojo>
-              <ExternalTaskPojo>
-                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/library" />
                 <option name="name" value="compileDebugNdk" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
@@ -3168,18 +3154,6 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/49e02dbf8e63e9c0e07227f42ac4434562d36849/kotlin-gradle-plugin-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.2.61/77a9484a91b965bdab66b1ddd284a26bf60dcc64/kotlin-gradle-plugin-api-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.2.61/957a542317a109a91740dbfd7985c6d53b805a48/kotlin-compiler-embeddable-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.2.61/e7182f6ecdfd4e7958febeaec366ab1cd8520397/kotlin-annotation-processing-gradle-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.61/8a930fa2df4db285b4f87fa6a88501207d348dd5/kotlin-android-extensions-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.2.61/ec21751c51d00a1765bc2d56f56b37dc42f013ab/kotlin-compiler-runner-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.2.61/2b238c25391b625f82be36cdcb5338fc6e893544/kotlin-script-runtime-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.2.61/aa3622272b4bd1d65c02702fa27033e8cc85a4c1/kotlin-build-common-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.2.61/d21b0b9d9dc54a2bfd47b9bc45c4aeb172a2008c/kotlin-daemon-client-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.61/3791515d7539f39f1cc3298aa2fa685496e03a9d/kotlin-reflect-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.61/5146b44c50f5e853d6d77150089b6281d72fe736/kotlin-stdlib-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.61/bb8aafdddb6c895ba1a9646eddabdb844eb544fb/kotlin-stdlib-common-1.2.61-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.3.0-alpha06/5c1d3d6246fef8f8969e1c7875b09652fe70d5de/gradle-3.3.0-alpha06.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/6a08413ee8ac77a7eda563b757661401f940ec49/kotlin-gradle-plugin-1.2.61.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.diffplug.spotless/spotless-plugin-gradle/3.13.0/cad61a1689c80f4abde03868c34c730a2662ebbf/spotless-plugin-gradle-3.13.0.jar" />
@@ -3292,18 +3266,6 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/49e02dbf8e63e9c0e07227f42ac4434562d36849/kotlin-gradle-plugin-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.2.61/77a9484a91b965bdab66b1ddd284a26bf60dcc64/kotlin-gradle-plugin-api-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.2.61/957a542317a109a91740dbfd7985c6d53b805a48/kotlin-compiler-embeddable-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.2.61/e7182f6ecdfd4e7958febeaec366ab1cd8520397/kotlin-annotation-processing-gradle-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.61/8a930fa2df4db285b4f87fa6a88501207d348dd5/kotlin-android-extensions-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.2.61/ec21751c51d00a1765bc2d56f56b37dc42f013ab/kotlin-compiler-runner-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.2.61/2b238c25391b625f82be36cdcb5338fc6e893544/kotlin-script-runtime-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.2.61/aa3622272b4bd1d65c02702fa27033e8cc85a4c1/kotlin-build-common-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.2.61/d21b0b9d9dc54a2bfd47b9bc45c4aeb172a2008c/kotlin-daemon-client-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.61/3791515d7539f39f1cc3298aa2fa685496e03a9d/kotlin-reflect-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.61/5146b44c50f5e853d6d77150089b6281d72fe736/kotlin-stdlib-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.61/bb8aafdddb6c895ba1a9646eddabdb844eb544fb/kotlin-stdlib-common-1.2.61-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.3.0-alpha06/5c1d3d6246fef8f8969e1c7875b09652fe70d5de/gradle-3.3.0-alpha06.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/6a08413ee8ac77a7eda563b757661401f940ec49/kotlin-gradle-plugin-1.2.61.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.diffplug.spotless/spotless-plugin-gradle/3.13.0/cad61a1689c80f4abde03868c34c730a2662ebbf/spotless-plugin-gradle-3.13.0.jar" />
@@ -3416,18 +3378,6 @@
                       <ExternalModuleBuildClasspathPojo>
                         <option name="entries">
                           <list>
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/49e02dbf8e63e9c0e07227f42ac4434562d36849/kotlin-gradle-plugin-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin-api/1.2.61/77a9484a91b965bdab66b1ddd284a26bf60dcc64/kotlin-gradle-plugin-api-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-embeddable/1.2.61/957a542317a109a91740dbfd7985c6d53b805a48/kotlin-compiler-embeddable-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-annotation-processing-gradle/1.2.61/e7182f6ecdfd4e7958febeaec366ab1cd8520397/kotlin-annotation-processing-gradle-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-android-extensions/1.2.61/8a930fa2df4db285b4f87fa6a88501207d348dd5/kotlin-android-extensions-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-compiler-runner/1.2.61/ec21751c51d00a1765bc2d56f56b37dc42f013ab/kotlin-compiler-runner-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.2.61/2b238c25391b625f82be36cdcb5338fc6e893544/kotlin-script-runtime-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.2.61/aa3622272b4bd1d65c02702fa27033e8cc85a4c1/kotlin-build-common-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-daemon-client/1.2.61/d21b0b9d9dc54a2bfd47b9bc45c4aeb172a2008c/kotlin-daemon-client-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-reflect/1.2.61/3791515d7539f39f1cc3298aa2fa685496e03a9d/kotlin-reflect-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.2.61/5146b44c50f5e853d6d77150089b6281d72fe736/kotlin-stdlib-1.2.61-sources.jar" />
-                            <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.61/bb8aafdddb6c895ba1a9646eddabdb844eb544fb/kotlin-stdlib-common-1.2.61-sources.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.build/gradle/3.3.0-alpha06/5c1d3d6246fef8f8969e1c7875b09652fe70d5de/gradle-3.3.0-alpha06.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-gradle-plugin/1.2.61/6a08413ee8ac77a7eda563b757661401f940ec49/kotlin-gradle-plugin-1.2.61.jar" />
                             <option value="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.diffplug.spotless/spotless-plugin-gradle/3.13.0/cad61a1689c80f4abde03868c34c730a2662ebbf/spotless-plugin-gradle-3.13.0.jar" />
@@ -3540,152 +3490,152 @@
               <option name="name" value="isochrone-isodistance" />
               <option name="projectBuildClasspath">
                 <list>
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/announce" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/antlr" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/base-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/base-services-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-cache" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-cache-http" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-comparison" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-init" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-option" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/cli" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/code-quality" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/composite-builds" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/core-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/dependency-management" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/diagnostics" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ear" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ide" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ide-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ide-play" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/installation-beacon" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-android-performance-testing" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-integ-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-performance-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-testing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ivy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/jacoco" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/javascript" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/jvm-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-java" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-scala" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/launcher" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/logging" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/maven" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/messaging" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/model-core" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/model-groovy" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/osgi" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/persistent-cache" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-jvm" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-native" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-play" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugin-development" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugin-use" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugins" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/process-services" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/publish" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/reporting" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-gcs" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-http" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-s3" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-sftp" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-option" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/launcher" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/announce" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/signing" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/test-kit" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-base" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-junit-platform" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-jvm" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/installation-beacon" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/jvm-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/native" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/tooling-api" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/tooling-api-builders" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/version-control" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/workers" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ivy" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/wrapper" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/ant-1.9.11.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/ant-launcher-1.9.11.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-base-services-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-base-services-groovy-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-build-cache-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-build-option-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-cli-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-core-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-core-api-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-docs-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-installation-beacon-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-jvm-services-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/process-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugins" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/antlr" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugin-use" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/maven" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-base" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/version-control" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/osgi" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-junit-platform" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/composite-builds" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/model-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/test-kit" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/cli" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-init" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ear" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/jacoco" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/persistent-cache" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-comparison" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/publish" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/platform-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-sftp" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/base-services" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/model-core" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/diagnostics" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/dependency-management" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ide-play" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/workers" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/code-quality" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-java" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-cache" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/plugin-development" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/core-api" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/javascript" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-gcs" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-performance-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/ide-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/base-services-groovy" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/messaging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/testing-jvm" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/tooling-api-builders" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/logging" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-scala" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/language-native" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/resources-s3" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/internal-android-performance-testing" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/src/build-cache-http" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-model-groovy-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-kotlin-dsl-tooling-models-0.18.4.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-resources-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-tooling-api-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-kotlin-dsl-0.18.4.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-core-api-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/ant-1.9.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-cli-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-docs-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-persistent-cache-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-build-option-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/ant-launcher-1.9.11.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-messaging-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/groovy-all-2.4.12.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-jvm-services-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-launcher-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-base-services-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-kotlin-dsl-provider-plugins-0.18.4.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-kotlin-dsl-tooling-builders-0.18.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-kotlin-dsl-tooling-models-0.18.4.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-launcher-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-logging-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-messaging-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-model-core-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-model-groovy-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-native-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-persistent-cache-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-core-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-installation-beacon-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-base-services-groovy-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-process-services-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-resources-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-build-cache-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-runtime-api-info-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-tooling-api-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-native-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-logging-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/gradle-wrapper-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/groovy-all-2.4.12.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-announce-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-antlr-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-build-cache-http-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-build-comparison-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-jvm-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-base-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-jvm-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-build-init-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-maven-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-sftp-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-signing-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-s3-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-code-quality-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-composite-builds-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-dependency-management-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-diagnostics-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ear-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-native-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-play-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-test-kit-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ivy-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-jacoco-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-javascript-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-osgi-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-groovy-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-java-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-jvm-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-native-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-scala-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-maven-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-osgi-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-base-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-jvm-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-native-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-play-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugin-development-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugin-use-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugins-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-publish-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-antlr-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-reporting-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-play-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-gcs-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-http-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-s3-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-sftp-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-scala-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-signing-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-test-kit-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-base-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-resources-http-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ear-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-publish-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-junit-platform-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-jvm-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-composite-builds-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-dependency-management-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-testing-native-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-tooling-api-builders-4.9.jar" />
-                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-version-control-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-base-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-jvm-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugin-development-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-diagnostics-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-native-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-build-cache-http-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-workers-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-javascript-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-platform-native-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-jacoco-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugins-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-build-comparison-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-native-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-version-control-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-plugin-use-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-language-scala-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-ide-play-4.9.jar" />
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/ivy-2.2.0.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-tooling-api-builders-4.9.jar" />
+                  <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.9-all/491wbe0x5d54n9cojs2p0zv90/gradle-4.9/lib/plugins/gradle-announce-4.9.jar" />
                 </list>
               </option>
             </ExternalProjectBuildClasspathPojo>
@@ -3733,9 +3683,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="3600" />
-    <option name="width" value="2560" />
-    <option name="height" value="1440" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -3933,45 +3882,15 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
             <path>
               <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="mvp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="app" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="mvp" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="findlocation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
               <item name="library" type="feadf853:AndroidModuleNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
@@ -3983,41 +3902,6 @@
               <item name="library" type="feadf853:AndroidModuleNode" />
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="algorithm" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="domain" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="net" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
-              <item name="library" type="feadf853:AndroidModuleNode" />
-              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
-              <item name="android" type="cbb59c9e:AndroidPsiDirectoryNode" />
-              <item name="utils" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="isochrone-isodistance" type="1abcf292:AndroidViewProjectNode" />
@@ -4027,8 +3911,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -4430,9 +4312,9 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="3600" y="0" width="2560" height="1440" extended-state="0" />
+    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1457506" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12673056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -4448,13 +4330,13 @@
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49372384" weight="0.2185478" />
+      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.49372384" weight="0.21823472" />
       <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" x="0" y="0" width="430" height="880" id="Documentation" order="10" sideWeight="0.49883774" side_tool="true" visible="true" weight="0.39899352" />
       <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.5058113" side_tool="true" weight="0.3278217" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.48910153" side_tool="true" weight="0.2969087" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.32983795" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="14" sideWeight="0.50116223" visible="true" weight="0.39899352" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="14" sideWeight="0.50116223" visible="true" weight="0.38700292" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.32983795" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -4512,7 +4394,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt</url>
-          <line>36</line>
+          <line>26</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -4559,7 +4441,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/utils/ColorTransparentUtils.kt" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -4687,12 +4568,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3420">
           <caret line="171" column="62" selection-start-line="171" selection-start-column="62" selection-end-line="171" selection-end-column="62" />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -4729,13 +4610,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a1ab9c6fd424b105981c42303553d84c/jars/classes.jar!/com/google/android/gms/common/api/GoogleApi.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="52" column="41" selection-start-line="52" selection-start-column="41" selection-end-line="52" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-base-15.0.1.aar/a1ab9c6fd424b105981c42303553d84c/jars/classes.jar!/com/google/android/gms/common/api/GoogleApi.class" />
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/utils/CoroutinesContextProvider.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -4750,20 +4625,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.powermock/powermock-core/2.0.0-beta.5/8051d4c6aa3d33dfd215de77d2c932f773b58232/powermock-core-2.0.0-beta.5-sources.jar!/org/powermock/core/classloader/annotations/PrepareForTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="65" column="74" selection-start-line="65" selection-start-column="74" selection-end-line="65" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.powermock/powermock-api-mockito2/2.0.0-beta.5/f77fad76252e14970a13f6b0f666bf8ec7e3801/powermock-api-mockito2-2.0.0-beta.5-sources.jar!/org/powermock/api/mockito/PowerMockito.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="60" column="36" selection-start-line="60" selection-start-column="36" selection-end-line="60" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.powermock/powermock-core/2.0.0-beta.5/8051d4c6aa3d33dfd215de77d2c932f773b58232/powermock-core-2.0.0-beta.5-sources.jar!/org/powermock/core/classloader/annotations/PrepareForTest.java" />
+    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.powermock/powermock-api-mockito2/2.0.0-beta.5/f77fad76252e14970a13f6b0f666bf8ec7e3801/powermock-api-mockito2-2.0.0-beta.5-sources.jar!/org/powermock/api/mockito/PowerMockito.java" />
     <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/net/Provider.kt" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.2.60/d1717ea2b34537140fe051ef0e2e8cbd91c650b8/kotlin-stdlib-common-1.2.60-sources.jar!/generated/_Arrays.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -4837,36 +4700,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1960">
-          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+        <state relative-caret-position="640">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2780">
-          <caret line="139" column="18" selection-start-line="139" selection-start-column="18" selection-end-line="139" selection-end-column="71" />
+          <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="24" column="67" selection-start-line="24" selection-start-column="67" selection-end-line="24" selection-end-column="67" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/MainFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -4884,8 +4740,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/net/Result.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="440">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        <state relative-caret-position="620">
+          <caret line="31" column="1" selection-start-line="31" selection-start-column="1" selection-end-line="31" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -4897,19 +4753,23 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="55" column="29" lean-forward="true" selection-start-line="55" selection-start-column="29" selection-end-line="55" selection-end-column="29" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="60" column="33" lean-forward="true" selection-start-line="60" selection-start-column="33" selection-end-line="60" selection-end-column="33" />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="463">
-            <caret line="107" column="19" selection-start-line="107" selection-start-column="19" selection-end-line="107" selection-end-column="19" />
-          </first_editor>
-          <second_editor>
-            <markdownNavigatorState />
-          </second_editor>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="741">
+          <caret line="98" column="46" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/AlgoKtTest.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
         </state>
       </provider>
     </entry>
