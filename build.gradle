@@ -21,7 +21,7 @@ buildscript {
 
         kotlin_version = "1.2.61"
         ktlint_version = '0.24.0'
-        gradle_version = "3.3.0-alpha06"
+        gradle_version = "3.3.0-alpha07"
 
         gson = "2+"
         retrofit = "2+"
