@@ -50,7 +50,7 @@ configurations.all { configuration ->
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${play_service}"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutine}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine}"
 
