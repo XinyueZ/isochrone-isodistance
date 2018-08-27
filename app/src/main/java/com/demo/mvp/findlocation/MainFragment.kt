@@ -33,10 +33,15 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
-    private var polyDriving: Polygon? = null
-    private var polyTransit: Polygon? = null
-    private var polyBicycling: Polygon? = null
-    private var polyWalking: Polygon? = null
+    private val polygons = linkedMapOf<TravelMode, Polygon?>()
+    private val polygonColors by lazy {
+        linkedMapOf(
+            TravelMode.DRIVING to getColor(requireContext(), R.color.c_driving),
+            TravelMode.TRANSIT to getColor(requireContext(), R.color.c_transit),
+            TravelMode.BICYCLING to getColor(requireContext(), R.color.c_bicycling),
+            TravelMode.WALKING to getColor(requireContext(), R.color.c_walking)
+        )
+    }
     private var job: Job? = null
 
     override fun onDestroyView() {
@@ -137,11 +142,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 presenter?.let {
 
                     // Move last isochones polygons
-                    polyDriving?.remove()
-                    polyTransit?.remove()
-                    polyBicycling?.remove()
-                    polyWalking?.remove()
-
+                    polygons.values.forEach{polygon -> polygon?.remove()}
                     job = it.findIsochrone(requireContext(), target.toLocation())
                 }
             }
@@ -158,13 +159,8 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         travelMode: TravelMode,
         points: Array<isochrone.isodistance.android.domain.geocode.Location>
     ) {
-        when (travelMode) {
-            TravelMode.DRIVING -> getColor(requireContext(), R.color.c_driving)
-            TravelMode.TRANSIT -> getColor(requireContext(), R.color.c_transit)
-            TravelMode.BICYCLING -> getColor(requireContext(), R.color.c_bicycling)
-            TravelMode.WALKING -> getColor(requireContext(), R.color.c_walking)
-        }.let { color ->
-            polyDriving = map?.addPolygon(
+        polygonColors[travelMode]?.let { color ->
+            polygons[travelMode] = map?.addPolygon(
                 PolygonOptions()
                     .addAll(points.asList().map { it.toLatLng() })
                     .fillColor(ColorUtils.setAlphaComponent(color, ALPHA_ADJUSTMENT))
