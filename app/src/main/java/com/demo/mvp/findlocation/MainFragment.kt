@@ -171,12 +171,15 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                     .strokeColor(color)
                     .strokeWidth(5f)
             )
-            map?.animateCamera(
-                CameraUpdateFactory.newLatLngBounds(
-                    points.map { it.toLatLng() }.toTypedArray().makeBounds(),
-                    0
+
+            points.map { it.toLatLng() }.toTypedArray().makeBounds()?.let { bounds ->
+                map?.animateCamera(
+                    CameraUpdateFactory.newLatLngBounds(
+                        bounds,
+                        0
+                    )
                 )
-            )
+            }
         }
     }
 
