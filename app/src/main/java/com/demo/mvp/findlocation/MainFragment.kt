@@ -168,6 +168,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                     .strokeWidth(5f)
             )
 
+            // Camera is being animated and trying to show all pins.
             points.map { it.toLatLng() }.toTypedArray().makeBounds()?.let { bounds ->
                 map?.animateCamera(
                     CameraUpdateFactory.newLatLngBounds(
