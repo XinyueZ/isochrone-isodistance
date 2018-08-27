@@ -45,3 +45,7 @@ compileTestJava {
 compileKotlin {
     kotlinOptions.allWarningsAsErrors = true
 }
+
+compileTestKotlin {
+    kotlinOptions.allWarningsAsErrors = true
+}
