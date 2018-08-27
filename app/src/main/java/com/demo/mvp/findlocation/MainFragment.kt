@@ -4,7 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.getColor
 import android.support.v4.graphics.ColorUtils
 import android.util.Log
 import android.widget.Toast
@@ -154,50 +154,30 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
     }
 
-    override fun showPolygon(travelMode: TravelMode, points: Array<isochrone.isodistance.android.domain.geocode.Location>) {
+    override fun showPolygon(
+        travelMode: TravelMode,
+        points: Array<isochrone.isodistance.android.domain.geocode.Location>
+    ) {
         when (travelMode) {
-            TravelMode.DRIVING -> {
-                val c = ContextCompat.getColor(requireContext(), R.color.c_driving)
-                polyDriving = map?.addPolygon(
-                        PolygonOptions()
-                                .addAll(points.asList().map { it.toLatLng() })
-                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
-                                .strokeColor(c)
-                                .strokeWidth(5f)
+            TravelMode.DRIVING -> getColor(requireContext(), R.color.c_driving)
+            TravelMode.TRANSIT -> getColor(requireContext(), R.color.c_transit)
+            TravelMode.BICYCLING -> getColor(requireContext(), R.color.c_bicycling)
+            TravelMode.WALKING -> getColor(requireContext(), R.color.c_walking)
+        }.let { color ->
+            polyDriving = map?.addPolygon(
+                PolygonOptions()
+                    .addAll(points.asList().map { it.toLatLng() })
+                    .fillColor(ColorUtils.setAlphaComponent(color, ALPHA_ADJUSTMENT))
+                    .strokeColor(color)
+                    .strokeWidth(5f)
+            )
+            map?.animateCamera(
+                CameraUpdateFactory.newLatLngBounds(
+                    points.map { it.toLatLng() }.toTypedArray().makeBounds(),
+                    0
                 )
-            }
-            TravelMode.TRANSIT -> {
-                val c = ContextCompat.getColor(requireContext(), R.color.c_transit)
-                polyTransit = map?.addPolygon(
-                        PolygonOptions()
-                                .addAll(points.asList().map { it.toLatLng() })
-                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
-                                .strokeColor(c)
-                                .strokeWidth(5f)
-                )
-            }
-            TravelMode.BICYCLING -> {
-                val c = ContextCompat.getColor(requireContext(), R.color.c_bicycling)
-                polyBicycling = map?.addPolygon(
-                        PolygonOptions()
-                                .addAll(points.asList().map { it.toLatLng() })
-                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
-                                .strokeColor(c)
-                                .strokeWidth(5f)
-                )
-            }
-            TravelMode.WALKING -> {
-                val c = ContextCompat.getColor(requireContext(), R.color.c_walking)
-                polyWalking = map?.addPolygon(
-                        PolygonOptions()
-                                .addAll(points.asList().map { it.toLatLng() })
-                                .fillColor(ColorUtils.setAlphaComponent(c, ALPHA_ADJUSTMENT))
-                                .strokeColor(c)
-                                .strokeWidth(5f)
-                )
-            }
+            )
         }
-        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(points.map { it.toLatLng() }.toTypedArray().makeBounds(), 0))
     }
 
     companion object {
