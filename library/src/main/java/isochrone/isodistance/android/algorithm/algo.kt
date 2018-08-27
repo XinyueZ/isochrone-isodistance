@@ -1,6 +1,5 @@
 package isochrone.isodistance.android.algorithm
 
-import android.util.Log
 import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
@@ -83,31 +82,16 @@ internal suspend fun ProducerScope<Array<Location>>.getIso(
     key: String
 ) {
     var rad1 = Array(numberOfAngles) { value / 12f.toDouble() }
-    Log.d(TAG, "rad1: ${rad1.pretty()}")
-
     val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
-    Log.d(TAG, "phi1: ${phi1.pretty()}")
-
     val data0 = Array(numberOfAngles) { "" }
-    Log.d(TAG, "data0: ${data0.pretty()}")
-
     var rad0 = Array(numberOfAngles) { 0f.toDouble() }
-    Log.d(TAG, "rad0: ${rad0.pretty()}")
-
     val rmin = Array(numberOfAngles) { 0f.toDouble() }
-    Log.d(TAG, "rmin: ${rmin.pretty()}")
-
     val rmax = Array(numberOfAngles) { 1.25f.toDouble() * value }
-    Log.d(TAG, "rmax: ${rmax.pretty()}")
-
     val iso = Array(numberOfAngles) { Location(0f.toDouble(), 0f.toDouble()) }
-    Log.d(TAG, "iso: ${iso.pretty()}")
-
     var isoData: Pair<Array<String>, Array<Double>>? = null
 
     while (rad0.zip(rad1).map { it.first - it.second }.sum() != 0f.toDouble()) {
         val rad2 = Array(numberOfAngles) { 0f.toDouble() }
-        Log.d(TAG, "rad2: ${rad2.pretty()}")
 
         (0 until numberOfAngles).forEach { i ->
             iso[i] = selectDestination(origin, phi1[i], rad1[i])
