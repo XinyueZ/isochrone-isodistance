@@ -142,7 +142,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 presenter?.let {
 
                     // Move last isochones polygons
-                    polygons.values.forEach{polygon -> polygon?.remove()}
+                    polygons.values.forEach { polygon -> polygon?.remove() }
                     job = it.findIsochrone(requireContext(), target.toLocation())
                 }
             }
