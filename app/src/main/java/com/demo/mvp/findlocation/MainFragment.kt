@@ -9,13 +9,15 @@ import android.support.v4.graphics.ColorUtils
 import android.util.Log
 import android.widget.Toast
 import com.demo.mvp.R
+import com.demo.mvp.makeBounds
+import com.demo.mvp.toLatLng
+import com.demo.mvp.toLocation
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
@@ -152,14 +154,6 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         else moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
     }
 
-    private fun makeBounds(latLngs: Array<LatLng>): LatLngBounds {
-        val builder = LatLngBounds.builder()
-        latLngs.forEach {
-            builder.include(it)
-        }
-        return builder.build()
-    }
-
     override fun showPolygon(travelMode: TravelMode, points: Array<isochrone.isodistance.android.domain.geocode.Location>) {
         when (travelMode) {
             TravelMode.DRIVING -> {
@@ -203,13 +197,11 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 )
             }
         }
-        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(makeBounds(points.map { it.toLatLng() }.toTypedArray()), 0))
+        map?.animateCamera(CameraUpdateFactory.newLatLngBounds(points.map { it.toLatLng() }.toTypedArray().makeBounds(), 0))
     }
 
     companion object {
         private const val ALPHA_ADJUSTMENT = 15
         private const val DEFAULT_ZOOM = 14f
-        private fun LatLng.toLocation() = isochrone.isodistance.android.domain.geocode.Location(latitude, longitude)
-        private fun isochrone.isodistance.android.domain.geocode.Location.toLatLng() = LatLng(lat, lng)
     }
 }
