@@ -1,5 +1,5 @@
-Isochrone and Isodistance(Kotlin, JVM, Android, Backend)
-========================================================
+Isochrone and Isodistance(Kotlin, Java, jvm)
+============================================
 
 [![Build Status](https://travis-ci.com/XinyueZ/isochrone-isodistance.svg?token=pe7v7WLzsrqGjiNTXRMy&branch=master)](https://travis-ci.com/XinyueZ/isochrone-isodistance)
 
@@ -13,9 +13,9 @@ isodistance = approximately equal distance (meter) to target.
 
 # Support
 
-- JVM code, for Kotlin ,Java etc.
+- Pure jvm-library.
 - Android is first support.
-- Server-side is supported, however, the gradle should be adjusted for special development environment at backend-developer.
+- Server-side is supported.
 
 # Feature
 
