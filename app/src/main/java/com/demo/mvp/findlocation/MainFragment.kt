@@ -21,6 +21,7 @@ import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
 import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.TravelMode
+import kotlinx.coroutines.experimental.Job
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -34,10 +35,12 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
     private var polyTransit: Polygon? = null
     private var polyBicycling: Polygon? = null
     private var polyWalking: Polygon? = null
+    private var job: Job? = null
 
     override fun onDestroyView() {
-        super.onDestroyView()
+        job?.cancel()
         presenter?.release()
+        super.onDestroyView()
     }
 
     override fun onRequestPermissionsResult(
@@ -137,8 +140,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                     polyBicycling?.remove()
                     polyWalking?.remove()
 
-                    it.findIsochrone(requireContext(), target.toLocation())
-                    it.release()
+                    job = it.findIsochrone(requireContext(), target.toLocation())
                 }
             }
         }

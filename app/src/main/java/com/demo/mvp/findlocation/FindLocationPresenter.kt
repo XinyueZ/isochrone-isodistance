@@ -22,6 +22,7 @@ import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
+import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.channels.ReceiveChannel
 import kotlinx.coroutines.experimental.channels.consumeEach
 import kotlinx.coroutines.experimental.launch
@@ -113,9 +114,9 @@ class FindLocationPresenter(
     @Volatile
     private var findingIsochroneInProgress = false
 
-    override fun findIsochrone(context: Context, target: Location) {
-        if (findingIsochroneInProgress) return
-        launch(CoroutinesContextProvider.main) {
+    override fun findIsochrone(context: Context, target: Location): Job? {
+        if (findingIsochroneInProgress) return null
+        return launch(CoroutinesContextProvider.main) {
             mainPresenter.travelModes.forEach { travelModel ->
                 findingIsochroneInProgress = true
                 mainPresenter.runFindLocationProgress()
