@@ -53,7 +53,7 @@ class FindLocationPresenter(
     private val view: FindLocationContract.Viewer,
     private val mainPresenter: MainPresenter,
     private val localClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(
-            view.getViewContext()
+        view.getViewContext()
     ),
     private val localReq: LocationRequest = LocationRequest.create(),
     private val localCallback: LocationCallback = FindCallback(view)
@@ -68,6 +68,9 @@ class FindLocationPresenter(
 
     private var channel: ReceiveChannel<Array<Location>>? = null
 
+    @Volatile
+    private var findingIsochroneInProgress = false
+
     @SuppressLint("MissingPermission")
     override fun findLocation() {
         mainPresenter.runFindLocationProgress()
@@ -78,26 +81,26 @@ class FindLocationPresenter(
 
         requestLocation()
         LocationServices.getSettingsClient(view.getViewActivity())
-                .checkLocationSettings(
-                        LocationSettingsRequest.Builder().setAlwaysShow(true).setNeedBle(
-                                true
-                        ).addLocationRequest(localReq).build()
-                )
-                .addOnFailureListener {
-                    val exp = it as ApiException
-                    when (exp.statusCode) {
-                        CommonStatusCodes.RESOLUTION_REQUIRED -> {
-                            val resolvable = exp as ResolvableApiException
-                            resolvable.startResolutionForResult(
-                                    view.getViewActivity(),
-                                    REQUEST_CHECK_SETTINGS
-                            )
-                        }
-                        LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                            view.canNotShowSettingDialog()
-                        }
+            .checkLocationSettings(
+                LocationSettingsRequest.Builder().setAlwaysShow(true).setNeedBle(
+                    true
+                ).addLocationRequest(localReq).build()
+            )
+            .addOnFailureListener {
+                val exp = it as ApiException
+                when (exp.statusCode) {
+                    CommonStatusCodes.RESOLUTION_REQUIRED -> {
+                        val resolvable = exp as ResolvableApiException
+                        resolvable.startResolutionForResult(
+                            view.getViewActivity(),
+                            REQUEST_CHECK_SETTINGS
+                        )
+                    }
+                    LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
+                        view.canNotShowSettingDialog()
                     }
                 }
+            }
     }
 
     @SuppressLint("MissingPermission")
@@ -111,9 +114,6 @@ class FindLocationPresenter(
         localClient.removeLocationUpdates(localCallback)
     }
 
-    @Volatile
-    private var findingIsochroneInProgress = false
-
     override fun findIsochrone(context: Context, target: Location): Job? {
         if (findingIsochroneInProgress) return null
         return launch(CoroutinesContextProvider.main) {
@@ -124,23 +124,23 @@ class FindLocationPresenter(
 
                 if (mainPresenter.type == 0) { // 0: Isochrone, 1: Isodistance: For sample, use int directly.
                     getIsochrone(
-                            provideGoogleApiKey(context),
-                            travelModel,
-                            target,
-                            mainPresenter.durationMinutesOrMeters,
-                            sortResult = false,
-                            numberOfAngles = 12,
-                            tolerance = 0.005
+                        provideGoogleApiKey(context),
+                        travelModel,
+                        target,
+                        mainPresenter.durationMinutesOrMeters,
+                        sortResult = false,
+                        numberOfAngles = 12,
+                        tolerance = 0.005
                     )
                 } else {
                     getIsodistance(
-                            provideGoogleApiKey(context),
-                            travelModel,
-                            target,
-                            mainPresenter.durationMinutesOrMeters,
-                            sortResult = false,
-                            numberOfAngles = 12,
-                            tolerance = 0.005
+                        provideGoogleApiKey(context),
+                        travelModel,
+                        target,
+                        mainPresenter.durationMinutesOrMeters,
+                        sortResult = false,
+                        numberOfAngles = 12,
+                        tolerance = 0.005
                     )
                 }.let { receiveChannel ->
                     channel = receiveChannel
