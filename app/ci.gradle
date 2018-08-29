@@ -1,0 +1,33 @@
+def ciServer = 'TRAVIS'
+def executingOnCI = "true" == System.getenv(ciServer)
+
+if (executingOnCI) {
+    println "👍  On CI(Travis CI) building....\n"
+    def mapKey = System.getenv('MAP_KEY')
+    print "👍 " + mapKey + "\n"
+    def gcpKey = System.getenv('GCP_KEY')
+    print "👍 " + gcpKey + "\n"
+    def fileName = "src/main/res/values/map_gcp_key.xml"
+    def keyFile = file(fileName)
+    if (keyFile.exists()) {
+        println("A file named " + fileName + " already exisits in the same folder.")
+    } else {
+        def content = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" +
+                "<resources>\n" +
+                "    <string name=\"google_map_key\">" + mapKey +
+                "</string>\n" +
+                "    <string name=\"gcp_key\">" + gcpKey +
+                "</string>\n" +
+                "</resources>"
+        print "👍 \n" + content + "\n"
+        try {
+            if(!keyFile.createNewFile()) {
+                print("🛑 Cannot create " + fileName + ".🛑 \n")
+            }
+            print(fileName + " is OK: " + keyFile.exists() + ", is file: " + keyFile.isFile())
+            keyFile.write(content)
+        } catch(e) {
+            print "🛑 " + e + "🛑\n"
+        }
+    }
+}
