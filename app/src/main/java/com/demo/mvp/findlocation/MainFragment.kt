@@ -18,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
@@ -33,6 +34,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
+    private var current: Marker?=null
     private val polygons = linkedMapOf<TravelMode, Polygon?>()
     private val polygonColors by lazy {
         linkedMapOf(
@@ -147,7 +149,8 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
                 }
             }
         }
-        addMarker(
+        current?.remove()
+        current = addMarker(
                 MarkerOptions().position(latLng)
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
