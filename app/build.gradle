@@ -90,3 +90,5 @@ kotlin {
         coroutines "enable"
     }
 }
+
+apply from: "ci.gradle"
