@@ -9,7 +9,7 @@ buildscript {
         version_name = "0.1"
         test_instrumentation_runner ="android.support.test.runner.AndroidJUnitRunner"
 
-        appCompat = "28.0.0-rc01"
+        appCompat = "28+"
         supportLib4 = appCompat
         supportLib7 = appCompat
         design = appCompat
