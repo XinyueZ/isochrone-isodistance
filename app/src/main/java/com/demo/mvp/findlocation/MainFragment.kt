@@ -34,7 +34,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
         EasyPermissions.PermissionCallbacks, OnMapReadyCallback {
     private var presenter: FindLocationContract.Presenter? = null
     private var map: GoogleMap? = null
-    private var current: Marker?=null
+    private var current: Marker? = null
     private val polygons = linkedMapOf<TravelMode, Polygon?>()
     private val polygonColors by lazy {
         linkedMapOf(
