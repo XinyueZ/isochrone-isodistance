@@ -39,19 +39,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0cb8afe5-454a-4c63-9845-0e18584b6f5d" name="Default" comment="Update constraint-layout to 1.1.3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationContract.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationContract.kt" afterDir="false" />
+    <list default="true" id="0cb8afe5-454a-4c63-9845-0e18584b6f5d" name="Default" comment="Use coroutine 0.25.2-eap13 , update namespaces in projects">
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationPresenter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationPresenter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/MainFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/MainFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/api/GoogleApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/api/GoogleApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/net/Provider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/net/Provider.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/utils/CoroutinesContextProvider.kt" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/utils/CoroutinesContextProvider.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +119,7 @@
         <counts>
           <entry key="class" value="1" />
           <entry key="gradle" value="9" />
-          <entry key="kt" value="20" />
+          <entry key="kt" value="22" />
           <entry key="md" value="2" />
           <entry key="properties" value="1" />
           <entry key="xml" value="7" />
@@ -139,7 +129,7 @@
         <counts>
           <entry key="CLASS" value="1" />
           <entry key="Groovy" value="9" />
-          <entry key="Kotlin" value="20" />
+          <entry key="Kotlin" value="22" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Properties" value="1" />
           <entry key="XML" value="7" />
@@ -148,17 +138,17 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="50" />
-          <entry key="kt" value="316" />
+          <entry key="kt" value="329" />
           <entry key="md" value="12" />
           <entry key="properties" value="2" />
-          <entry key="txt" value="101" />
+          <entry key="txt" value="164" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="50" />
-          <entry key="Kotlin" value="316" />
-          <entry key="PLAIN_TEXT" value="113" />
+          <entry key="Kotlin" value="329" />
+          <entry key="PLAIN_TEXT" value="176" />
           <entry key="Properties" value="2" />
         </counts>
       </usages-collector>
@@ -180,7 +170,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="485">
+            <state relative-caret-position="1720">
               <caret line="86" selection-start-line="86" selection-end-line="86" />
             </state>
           </provider>
@@ -198,8 +188,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="356">
-              <caret line="61" column="26" lean-forward="true" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+            <state relative-caret-position="201">
+              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/isochrone.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="100">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-50">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
             </state>
           </provider>
         </entry>
@@ -225,26 +233,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="35" column="28" lean-forward="true" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/api/GoogleApi.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/net/Result.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+            <state relative-caret-position="-500">
+              <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -252,8 +242,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationPresenter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2026">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
+            <state relative-caret-position="350">
+              <caret line="119" column="29" lean-forward="true" selection-start-line="119" selection-start-column="15" selection-end-line="119" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -3317,8 +3307,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationContract.kt" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/README.md" />
-        <option value="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt" />
         <option value="$PROJECT_DIR$/library/src/test/java/isochrone/isodistance/android/QueryKtTest.kt" />
+        <option value="$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationPresenter.kt" />
       </list>
     </option>
@@ -4000,7 +3990,14 @@
       <option name="project" value="LOCAL" />
       <updated>1536869651563</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Use coroutine 0.25.2-eap13 , update namespaces in projects">
+      <created>1536870480729</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1536870480729</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -4039,7 +4036,7 @@
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12673056" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12673056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Build Variants" order="3" side_tool="true" />
@@ -4061,7 +4058,7 @@
       <window_info anchor="bottom" id="Logcat" order="11" sideWeight="0.5058113" side_tool="true" weight="0.3278217" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.49817073" side_tool="true" weight="0.3627546" />
       <window_info anchor="bottom" id="Version Control" order="13" weight="0.3297769" />
-      <window_info anchor="bottom" id="Terminal" order="14" sideWeight="0.50116223" visible="true" weight="0.3773036" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="14" sideWeight="0.50116223" visible="true" weight="0.3773036" />
       <window_info anchor="bottom" id="Inspection Results" order="15" weight="0.32983795" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -4109,7 +4106,8 @@
     <MESSAGE value="Update gradle to alpha10" />
     <MESSAGE value="Update kotlin to 1.3 M2, coroutine 0.26.0" />
     <MESSAGE value="Update constraint-layout to 1.1.3" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update constraint-layout to 1.1.3" />
+    <MESSAGE value="Use coroutine 0.25.2-eap13 , update namespaces in projects" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use coroutine 0.25.2-eap13 , update namespaces in projects" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -4242,13 +4240,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/isochrone.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="12" column="9" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
@@ -4328,13 +4319,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
           <caret line="29" column="2" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
-          <caret line="32" selection-start-line="32" selection-end-line="32" />
         </state>
       </provider>
     </entry>
@@ -4435,13 +4419,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="35" column="28" lean-forward="true" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/api/GoogleApi.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
@@ -4453,13 +4430,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="8" column="29" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
         </state>
       </provider>
     </entry>
@@ -4484,17 +4454,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1720">
+          <caret line="86" selection-start-line="86" selection-end-line="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-500">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/query.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-50">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/algo.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="61" column="26" lean-forward="true" selection-start-line="61" selection-start-column="26" selection-end-line="61" selection-end-column="26" />
+        <state relative-caret-position="201">
+          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/src/main/java/isochrone/isodistance/android/algorithm/isochrone.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/demo/mvp/findlocation/FindLocationPresenter.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2026">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="350">
+          <caret line="119" column="29" lean-forward="true" selection-start-line="119" selection-start-column="15" selection-end-line="119" selection-end-column="29" />
         </state>
       </provider>
     </entry>

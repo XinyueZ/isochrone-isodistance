@@ -5,6 +5,7 @@ import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.produce
 import java.lang.Math.PI
@@ -26,7 +27,7 @@ internal fun getIso(
     googleApi: GoogleApi,
     key: String
 ) =
-    produce(CoroutinesContextProvider.io) {
+    CoroutineScope(CoroutinesContextProvider.io).produce {
         getIso(
             travelMode,
             origin,
@@ -51,7 +52,7 @@ internal fun getIso(
     googleApi: GoogleApi,
     key: String
 ) =
-    produce(CoroutinesContextProvider.io) {
+    CoroutineScope(CoroutinesContextProvider.io).produce {
         val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
         if (originGeocode is Result.Success) {
             originGeocode.content.toLocation()?.let {
@@ -165,7 +166,7 @@ private fun Matrix.associateAddresses2Values(distanceBased: Boolean): Pair<Array
                         false -> {
                             when { // For isochrone
                                 it.durationInTraffic != null -> results[i] = it.durationInTraffic.value /
-                                        60f.toDouble()
+                                    60f.toDouble()
                                 else -> results[i] = it.duration.value / 60f.toDouble()
                             }
                         }
@@ -200,7 +201,7 @@ private fun getBearing(origin: Location, destination: Location): Double {
     var bearing = atan2(
         sin((destination.lng - origin.lng) * PI / 180) * cos(destination.lat * PI / 180f),
         cos(origin.lat * PI / 180f) * sin(destination.lat * PI / 180f) -
-                sin(origin.lat * PI / 180f) * cos(destination.lat * PI / 180f) * cos((destination.lng - origin.lng) * PI / 180f)
+            sin(origin.lat * PI / 180f) * cos(destination.lat * PI / 180f) * cos((destination.lng - origin.lng) * PI / 180f)
     )
     bearing = bearing * 180f / PI
     bearing = (bearing + 360f) % 360f
