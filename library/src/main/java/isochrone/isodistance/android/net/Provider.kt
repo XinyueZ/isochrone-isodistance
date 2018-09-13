@@ -1,7 +1,7 @@
 package isochrone.isodistance.android.net
 
 import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import isochrone.isodistance.android.api.GoogleApi
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

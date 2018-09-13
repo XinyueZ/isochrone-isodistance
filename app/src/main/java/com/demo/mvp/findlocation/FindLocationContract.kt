@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
 import isochrone.isodistance.android.algorithm.TravelMode
-import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.Job
 
 interface FindLocationContract {
     interface Viewer : BaseViewer<Presenter> {

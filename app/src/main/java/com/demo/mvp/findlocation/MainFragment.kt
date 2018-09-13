@@ -24,7 +24,7 @@ import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
 import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.TravelMode
-import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.Job
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 

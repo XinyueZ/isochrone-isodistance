@@ -22,10 +22,10 @@ import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.channels.ReceiveChannel
-import kotlinx.coroutines.experimental.channels.consumeEach
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.launch
 
 /**
  * The desired interval for location updates. Inexact. Updates may be more or less frequent.

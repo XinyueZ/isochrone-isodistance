@@ -27,7 +27,7 @@ buildscript {
         retrofit = "2+"
         curl = "0.1"
 
-        coroutine = "0.26.0" // Current I use this version: https://stackoverflow.com/a/51579257/1835650
+        coroutine = "0.25.2-eap13" // Current I use this version: https://stackoverflow.com/a/51579257/1835650
         retrofit_coroutine = "0.9.1"
 
         maps_utils = "0.5"

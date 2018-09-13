@@ -22,8 +22,8 @@ import isochrone.isodistance.android.domain.geocode.ResultsItem
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.net.getResult
-import kotlinx.coroutines.experimental.Deferred
-import kotlinx.coroutines.experimental.runBlocking
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull

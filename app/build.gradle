@@ -85,10 +85,4 @@ dependencies {
     androidTestImplementation "io.kotlintest:kotlintest-runner-junit5:$kotlin_test"
 }
 
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-
 apply from: "ci.gradle"

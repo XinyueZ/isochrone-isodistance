@@ -5,8 +5,8 @@ import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
-import kotlinx.coroutines.experimental.channels.ProducerScope
-import kotlinx.coroutines.experimental.channels.produce
+import kotlinx.coroutines.channels.ProducerScope
+import kotlinx.coroutines.channels.produce
 import java.lang.Math.PI
 import java.lang.Math.asin
 import java.lang.Math.atan2

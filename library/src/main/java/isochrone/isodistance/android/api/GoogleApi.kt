@@ -2,7 +2,7 @@ package isochrone.isodistance.android.api
 
 import isochrone.isodistance.android.domain.geocode.Geocode
 import isochrone.isodistance.android.domain.matrix.Matrix
-import kotlinx.coroutines.experimental.Deferred
+import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

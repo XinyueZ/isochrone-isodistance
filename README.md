@@ -75,15 +75,7 @@ In order to use isochrone & isodistance the [Google's Distance Matrix API](https
 
 # Coroutines
 
-Don't forget in client application:
-
-```
-kotlin {
-    experimental {
-        coroutines "enable"
-    }
-}
-```
+supported
 
 # Code robust & healthy with klint support
  
