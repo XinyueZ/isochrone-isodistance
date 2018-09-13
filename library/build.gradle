@@ -4,7 +4,10 @@ apply plugin: 'java-library'
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
 
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}"
+    api ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin_version}") {
+        exclude module: 'kotlin-reflect'
+    }
+    api "org.jetbrains.kotlin:kotlin-reflect:${kotlin_reflect}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutine}"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:${coroutine}"
 
