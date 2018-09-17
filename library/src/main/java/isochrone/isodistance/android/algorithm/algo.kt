@@ -4,10 +4,9 @@ import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
-import isochrone.isodistance.android.utils.CoroutinesContextProvider
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.ProducerScope
 import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.currentScope
 import java.lang.Math.PI
 import java.lang.Math.asin
 import java.lang.Math.atan2
@@ -16,7 +15,7 @@ import java.lang.Math.toRadians
 import kotlin.math.cos
 import kotlin.math.sin
 
-internal fun getIso(
+internal suspend fun getIso(
     travelMode: TravelMode,
     origin: Location,
     value: Int,
@@ -26,8 +25,8 @@ internal fun getIso(
     distanceBased: Boolean,
     googleApi: GoogleApi,
     key: String
-) =
-    CoroutineScope(CoroutinesContextProvider.io).produce {
+) = currentScope {
+    produce {
         getIso(
             travelMode,
             origin,
@@ -40,8 +39,9 @@ internal fun getIso(
             key
         )
     }
+}
 
-internal fun getIso(
+internal suspend fun getIso(
     travelMode: TravelMode,
     originAddress: String,
     value: Int,
@@ -51,8 +51,8 @@ internal fun getIso(
     distanceBased: Boolean,
     googleApi: GoogleApi,
     key: String
-) =
-    CoroutineScope(CoroutinesContextProvider.io).produce {
+) = currentScope {
+    produce {
         val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
         if (originGeocode is Result.Success) {
             originGeocode.content.toLocation()?.let {
@@ -70,6 +70,7 @@ internal fun getIso(
             }
         }
     }
+}
 
 internal suspend fun ProducerScope<Array<Location>>.getIso(
     travelMode: TravelMode,

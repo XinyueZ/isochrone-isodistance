@@ -3,7 +3,7 @@ package isochrone.isodistance.android.algorithm
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.net.provideApi
 
-fun getIsodistance(
+suspend fun getIsodistance(
     key: String,
     travelMode: TravelMode,
     origin: Location,
@@ -23,7 +23,7 @@ fun getIsodistance(
     key
 )
 
-fun getIsodistance(
+suspend fun getIsodistance(
     key: String,
     travelMode: TravelMode,
     originAddress: String,
