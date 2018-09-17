@@ -24,7 +24,6 @@ import com.google.android.gms.maps.model.Polygon
 import com.google.android.gms.maps.model.PolygonOptions
 import isochrone.isodistance.android.algorithm.TAG
 import isochrone.isodistance.android.algorithm.TravelMode
-import kotlinx.coroutines.Job
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
 
@@ -44,10 +43,8 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
             TravelMode.WALKING to getColor(requireContext(), R.color.c_walking)
         )
     }
-    private var job: Job? = null
 
     override fun onDestroyView() {
-        job?.cancel()
         presenter?.release()
         super.onDestroyView()
     }
@@ -145,7 +142,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
 
                     // Move last isochones polygons
                     polygons.values.forEach { polygon -> polygon?.remove() }
-                    job = it.findIsochrone(requireContext(), target.toLocation())
+                    it.findIsochrone(requireContext(), target.toLocation())
                 }
             }
         }

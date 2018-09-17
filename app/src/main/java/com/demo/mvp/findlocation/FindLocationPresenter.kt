@@ -21,12 +21,13 @@ import isochrone.isodistance.android.algorithm.getIsochrone
 import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.domain.geocode.Location
-import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.android.Main
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -58,7 +59,7 @@ class FindLocationPresenter(
     ),
     private val localReq: LocationRequest = LocationRequest.create(),
     private val localCallback: LocationCallback = FindCallback(view)
-) : FindLocationContract.Presenter {
+) : FindLocationContract.Presenter, CoroutineScope {
     init {
         view.setPresenter(this)
         localReq.interval = UPDATE_INTERVAL
@@ -67,7 +68,9 @@ class FindLocationPresenter(
         localReq.maxWaitTime = MAX_WAIT_TIME
     }
 
-    private var channel: ReceiveChannel<Array<Location>>? = null
+    private val job = Job()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     @Volatile
     private var findingIsochroneInProgress = false
@@ -110,14 +113,14 @@ class FindLocationPresenter(
     }
 
     override fun release() {
-        channel?.cancel()
+        job.cancel()
         localClient.flushLocations()
         localClient.removeLocationUpdates(localCallback)
     }
 
-    override fun findIsochrone(context: Context, target: Location): Job? {
-        if (findingIsochroneInProgress) return null
-        return CoroutineScope(CoroutinesContextProvider.io).launch(CoroutinesContextProvider.main) {
+    override fun findIsochrone(context: Context, target: Location) {
+        if (findingIsochroneInProgress) return
+        launch {
             mainPresenter.travelModes.forEach { travelModel ->
                 findingIsochroneInProgress = true
                 mainPresenter.runFindLocationProgress()
@@ -144,8 +147,7 @@ class FindLocationPresenter(
                         tolerance = 0.005
                     )
                 }.let { receiveChannel ->
-                    channel = receiveChannel
-                    channel?.consumeEach {
+                    receiveChannel.consumeEach {
                         Log.d(TAG, "rad1: ${it.pretty()}")
                         view.showPolygon(travelModel, it)
                         mainPresenter.finishFindLocationProgress()

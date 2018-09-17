@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
 import isochrone.isodistance.android.algorithm.TravelMode
-import kotlinx.coroutines.Job
 
 interface FindLocationContract {
     interface Viewer : BaseViewer<Presenter> {
@@ -24,7 +23,7 @@ interface FindLocationContract {
     }
 
     interface Presenter : BasePresenter {
-        fun findIsochrone(context: Context, target: isochrone.isodistance.android.domain.geocode.Location): Job?
+        fun findIsochrone(context: Context, target: isochrone.isodistance.android.domain.geocode.Location)
 
         fun findLocation()
 
