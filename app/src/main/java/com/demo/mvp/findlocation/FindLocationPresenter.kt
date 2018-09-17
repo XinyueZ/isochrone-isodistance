@@ -21,10 +21,9 @@ import isochrone.isodistance.android.algorithm.getIsochrone
 import isochrone.isodistance.android.algorithm.getIsodistance
 import isochrone.isodistance.android.algorithm.pretty
 import isochrone.isodistance.android.domain.geocode.Location
+import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.android.Main
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
@@ -70,7 +69,7 @@ class FindLocationPresenter(
 
     private val job = Job()
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = CoroutinesContextProvider.main + job
 
     @Volatile
     private var findingIsochroneInProgress = false
