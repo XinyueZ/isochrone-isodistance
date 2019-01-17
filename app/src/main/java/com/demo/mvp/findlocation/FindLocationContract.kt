@@ -1,8 +1,8 @@
 package com.demo.mvp.findlocation
 
+import android.app.Activity
 import android.content.Context
 import android.location.Location
-import android.support.v4.app.FragmentActivity
 import com.demo.mvp.BasePresenter
 import com.demo.mvp.BaseViewer
 import isochrone.isodistance.android.algorithm.TravelMode
@@ -17,7 +17,7 @@ interface FindLocationContract {
 
         fun getViewContext(): Context
 
-        fun getViewActivity(): FragmentActivity
+        fun getViewActivity(): Activity
 
         fun showPolygon(travelMode: TravelMode, points: Array<isochrone.isodistance.android.domain.geocode.Location>)
     }

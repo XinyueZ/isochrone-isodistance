@@ -2,6 +2,7 @@ package com.demo.mvp.findlocation
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.location.Location
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat.getColor
@@ -126,7 +127,7 @@ class MainFragment : SupportMapFragment(), FindLocationContract.Viewer,
 
     override fun getViewContext() = requireContext()
 
-    override fun getViewActivity() = requireActivity()
+    override fun getViewActivity(): Activity = requireActivity()
 
     private fun GoogleMap.moveToMarker(
         latLng: LatLng,
