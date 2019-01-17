@@ -33,7 +33,7 @@ getIsochrone(
              /*API-KEY for matrix and geocode APIs*/, 
              "walking", // Travel mode 
              "Address or lat-lng", //Target location, for "current location" is a good use-case. 
-             120).consumeEach { // 120 minutes to target.
+             120).let { // 120 minutes to target.
                         Log.d(TAG, "rad1: ${it.pretty()}")
                         // You can draw all points based on an Array<LatLng> .
                     }
@@ -47,7 +47,7 @@ getIsodistance(
              /*API-KEY for matrix and geocode APIs*/,
              "walking", // Travel mode
              "Address or lat-lng", //Target location, for "current location" is a good use-case.
-             120).consumeEach { // 120 meters to target.
+             120).let { // 120 meters to target.
                         Log.d(TAG, "rad1: ${it.pretty()}")
                         // You can draw all points based on an Array<LatLng> .
                     }
