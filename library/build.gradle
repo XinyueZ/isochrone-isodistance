@@ -15,7 +15,7 @@ dependencies {
 
     api "com.squareup.retrofit2:retrofit:${retrofit}"
     api "com.squareup.retrofit2:converter-gson:${retrofit}"
-    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:${retrofit_coroutine}"
+    api "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${retrofit_coroutine}"
 
     api "com.github.grapesnberries:curlloggerinterceptor:${curl}"
 
