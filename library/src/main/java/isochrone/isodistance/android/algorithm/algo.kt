@@ -4,9 +4,6 @@ import isochrone.isodistance.android.api.GoogleApi
 import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.domain.matrix.Matrix
 import isochrone.isodistance.android.net.Result
-import kotlinx.coroutines.channels.ProducerScope
-import kotlinx.coroutines.channels.produce
-import kotlinx.coroutines.currentScope
 import java.lang.Math.PI
 import java.lang.Math.asin
 import java.lang.Math.atan2
@@ -25,21 +22,17 @@ internal suspend fun getIso(
     distanceBased: Boolean,
     googleApi: GoogleApi,
     key: String
-) = currentScope {
-    produce {
-        getIso(
-            travelMode,
-            origin,
-            numberOfAngles,
-            value,
-            tolerance,
-            sortResult,
-            distanceBased,
-            googleApi,
-            key
-        )
-    }
-}
+) = getIsoLocations(
+    travelMode,
+    origin,
+    numberOfAngles,
+    value,
+    tolerance,
+    sortResult,
+    distanceBased,
+    googleApi,
+    key
+)
 
 internal suspend fun getIso(
     travelMode: TravelMode,
@@ -51,28 +44,28 @@ internal suspend fun getIso(
     distanceBased: Boolean,
     googleApi: GoogleApi,
     key: String
-) = currentScope {
-    produce {
-        val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
-        if (originGeocode is Result.Success) {
-            originGeocode.content.toLocation()?.let {
-                getIso(
-                    travelMode,
-                    it,
-                    numberOfAngles,
-                    value,
-                    tolerance,
-                    sortResult,
-                    distanceBased,
-                    googleApi,
-                    key
-                )
-            }
-        }
+): Array<Location> {
+    val originGeocode = queryGeocodeAddress(originAddress, googleApi, key)
+    return if (originGeocode is Result.Success) {
+        originGeocode.content.toLocation()?.let {
+            getIso(
+                travelMode,
+                it,
+                numberOfAngles,
+                value,
+                tolerance,
+                sortResult,
+                distanceBased,
+                googleApi,
+                key
+            )
+        } ?: run { emptyArray<Location>() }
+    } else {
+        emptyArray()
     }
 }
 
-internal suspend fun ProducerScope<Array<Location>>.getIso(
+internal suspend fun getIsoLocations(
     travelMode: TravelMode,
     origin: Location,
     numberOfAngles: Int,
@@ -82,7 +75,7 @@ internal suspend fun ProducerScope<Array<Location>>.getIso(
     distanceBased: Boolean,
     googleApi: GoogleApi,
     key: String
-) {
+): Array<Location> {
     var rad1 = Array(numberOfAngles) { value / 12f.toDouble() }
     val phi1 = Array(numberOfAngles) { it * 360f.toDouble() / numberOfAngles }
     val data0 = Array(numberOfAngles) { "" }
@@ -129,7 +122,7 @@ internal suspend fun ProducerScope<Array<Location>>.getIso(
             }
         }
     }
-    when (sortResult) {
+    return when (sortResult) {
         true -> isoData?.let { isoD ->
             // TODO There's a potential crash when sorting, plz. check it out. java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
             (0 until numberOfAngles).forEach {
@@ -138,10 +131,10 @@ internal suspend fun ProducerScope<Array<Location>>.getIso(
                     iso[it] = result.content.toLocation() ?: Location(0f.toDouble(), 0f.toDouble())
                 }
             }
-            send(sortPoints(origin, iso))
-        }
+            sortPoints(origin, iso)
+        } ?: run { emptyArray<Location>() }
         else -> {
-            send(iso)
+            iso
         }
     }
 }
@@ -167,7 +160,7 @@ private fun Matrix.associateAddresses2Values(distanceBased: Boolean): Pair<Array
                         false -> {
                             when { // For isochrone
                                 it.durationInTraffic != null -> results[i] = it.durationInTraffic.value /
-                                    60f.toDouble()
+                                        60f.toDouble()
                                 else -> results[i] = it.duration.value / 60f.toDouble()
                             }
                         }
@@ -202,7 +195,7 @@ private fun getBearing(origin: Location, destination: Location): Double {
     var bearing = atan2(
         sin((destination.lng - origin.lng) * PI / 180) * cos(destination.lat * PI / 180f),
         cos(origin.lat * PI / 180f) * sin(destination.lat * PI / 180f) -
-            sin(origin.lat * PI / 180f) * cos(destination.lat * PI / 180f) * cos((destination.lng - origin.lng) * PI / 180f)
+                sin(origin.lat * PI / 180f) * cos(destination.lat * PI / 180f) * cos((destination.lng - origin.lng) * PI / 180f)
     )
     bearing = bearing * 180f / PI
     bearing = (bearing + 360f) % 360f

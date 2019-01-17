@@ -24,8 +24,6 @@ import isochrone.isodistance.android.domain.geocode.Location
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.ObsoleteCoroutinesApi
-import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
 
 /**
@@ -117,8 +115,6 @@ class FindLocationPresenter(
         localClient.removeLocationUpdates(localCallback)
     }
 
-    @ObsoleteCoroutinesApi
-    @kotlinx.coroutines.ExperimentalCoroutinesApi
     override fun findIsochrone(context: Context, target: Location) {
         if (findingIsochroneInProgress) return
         viewModelScope.launch {
@@ -147,13 +143,11 @@ class FindLocationPresenter(
                         numberOfAngles = 12,
                         tolerance = 0.005
                     )
-                }.let { receiveChannel ->
-                    receiveChannel.consumeEach {
-                        Log.d(TAG, "rad1: ${it.pretty()}")
-                        view.showPolygon(travelModel, it)
-                        mainPresenter.finishFindLocationProgress()
-                        findingIsochroneInProgress = false
-                    }
+                }.let {
+                    Log.d(TAG, "rad1: ${it.pretty()}")
+                    view.showPolygon(travelModel, it)
+                    mainPresenter.finishFindLocationProgress()
+                    findingIsochroneInProgress = false
                 }
             }
         }
