@@ -24,9 +24,9 @@ import isochrone.isodistance.android.domain.geocode.Location
 import isochrone.isodistance.android.utils.CoroutinesContextProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
 /**
  * The desired interval for location updates. Inexact. Updates may be more or less frequent.
@@ -58,7 +58,7 @@ class FindLocationPresenter(
     ),
     private val localReq: LocationRequest = LocationRequest.create(),
     private val localCallback: LocationCallback = FindCallback(view)
-) : FindLocationContract.Presenter, CoroutineScope {
+) : FindLocationContract.Presenter {
     init {
         view.setPresenter(this)
         localReq.interval = UPDATE_INTERVAL
@@ -67,9 +67,9 @@ class FindLocationPresenter(
         localReq.maxWaitTime = MAX_WAIT_TIME
     }
 
-    private val job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = CoroutinesContextProvider.main + job
+    private val viewModelJob = Job()
+
+    private val viewModelScope = CoroutineScope(CoroutinesContextProvider.main + viewModelJob)
 
     @Volatile
     private var findingIsochroneInProgress = false
@@ -112,14 +112,16 @@ class FindLocationPresenter(
     }
 
     override fun release() {
-        job.cancel()
+        viewModelJob.cancel()
         localClient.flushLocations()
         localClient.removeLocationUpdates(localCallback)
     }
 
+    @ObsoleteCoroutinesApi
+    @kotlinx.coroutines.ExperimentalCoroutinesApi
     override fun findIsochrone(context: Context, target: Location) {
         if (findingIsochroneInProgress) return
-        launch {
+        viewModelScope.launch {
             mainPresenter.travelModes.forEach { travelModel ->
                 findingIsochroneInProgress = true
                 mainPresenter.runFindLocationProgress()
